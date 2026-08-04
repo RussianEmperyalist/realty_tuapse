@@ -1,0 +1,494 @@
+/**
+	* HabraAlert 0.2
+	* author DeerUA
+	* version 0.2.0 01.12.2009
+	* license as-is PL
+	* include <script type="text/javascript" scr="alert.js"></script> after <body> or before, as u wish
+	
+    message("all good"); (5 ���.)
+    error("attention"); (7 ���.)
+    warning("something wrong"); (10 ���.)
+
+	*/
+
+initHA = function() {
+
+	var is_ie6 = (window.external && typeof window.XMLHttpRequest == "undefined");
+	var styles = "div#messages{position:fixed;top:50px;right:0px;width:250px;margin:0px;padding:7px;background:transparent;z-index:2}"+
+	"div#messages div{cursor: pointer;color:#fff;padding:7px;margin-bottom:7px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;opacity:0.65;background:#888;font: normal 12px 'Georgia'}"+
+	"div#messages div.error{background:#98001b}	div#messages div.message{background:#0d8529}div#messages div.warning{background:#dd6; color:#333}";
+	var iestyles = "body{position:relative}div#messages{position:absolute; -ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=65)'; filter: alpha(opacity=65)}div#messages div{cursor: hand}";
+
+	addLoadEvent = function(func) {
+	  var oldonload = window.onload;
+	  if (typeof window.onload != 'function') { window.onload = func;} 
+	  else {window.onload = function() { if (oldonload) {oldonload();}func();}}
+	}
+	
+	import_style = function(src){ 
+		if ((src == null || src == undefined)) return;
+		var imprt = document.createElement('style');
+		imprt.setAttribute("type", "text/css");
+		if (imprt.styleSheet) imprt.styleSheet.cssText = src;
+		else imprt.appendChild(document.createTextNode(src));
+		document.getElementsByTagName('head')[0].appendChild(imprt);
+	}
+	
+	addAll = function() {
+		var messageBox = document.createElement ('div');
+		messageBox.id = "messages";
+		if (document.body.firstChild) document.body.insertBefore(messageBox, document.body.firstChild);
+		else document.body.appendChild(messageBox);
+		import_style(styles);
+		if (is_ie6) import_style(iestyles);
+	}	
+	
+	
+	if (document.body == null) return addLoadEvent(function() {addAll();}); 
+	addAll();	
+}
+
+initHA();
+message = function (mtext, mtype, howlong) {
+
+	var mtype = mtype || 'message';
+	var howlong = howlong || 5000;
+
+	if (document.getElementById('messages') == null) {
+		setTimeout(function(){message (mtext, mtype, howlong)}, 100);
+		return;
+	}
+
+	var alarm = document.createElement ('div');
+	alarm.className = mtype;
+	alarm.innerHTML = mtext;
+	
+	alarm.onclick = function () {
+		alarm.style.display = "none";
+	};
+
+	alarm.del = function () {
+		document.getElementById('messages').removeChild (alarm);
+	};
+	
+	document.getElementById('messages').appendChild (alarm);
+	setTimeout (alarm.del, howlong);
+}
+
+error = function (mtext, howlong) {
+	var howlong = howlong || 10000;
+	message(mtext,"error",howlong);
+}
+
+warning = function (mtext, howlong) {
+	var howlong = howlong || 7000;
+	message(mtext,"warning",howlong);
+}/*jslint browser: true */ /*global jQuery: true */
+
+/**
+ * jQuery Cookie plugin
+ *
+ * Copyright (c) 2010 Klaus Hartl (stilbuero.de)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ */
+
+// TODO JsDoc
+
+/**
+ * Create a cookie with the given key and value and other optional parameters.
+ *
+ * @example $.cookie('the_cookie', 'the_value');
+ * @desc Set the value of a cookie.
+ * @example $.cookie('the_cookie', 'the_value', { expires: 7, path: '/', domain: 'jquery.com', secure: true });
+ * @desc Create a cookie with all available options.
+ * @example $.cookie('the_cookie', 'the_value');
+ * @desc Create a session cookie.
+ * @example $.cookie('the_cookie', null);
+ * @desc Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain
+ *       used when the cookie was set.
+ *
+ * @param String key The key of the cookie.
+ * @param String value The value of the cookie.
+ * @param Object options An object literal containing key/value pairs to provide optional cookie attributes.
+ * @option Number|Date expires Either an integer specifying the expiration date from now on in days or a Date object.
+ *                             If a negative value is specified (e.g. a date in the past), the cookie will be deleted.
+ *                             If set to null or omitted, the cookie will be a session cookie and will not be retained
+ *                             when the the browser exits.
+ * @option String path The value of the path atribute of the cookie (default: path of page that created the cookie).
+ * @option String domain The value of the domain attribute of the cookie (default: domain of page that created the cookie).
+ * @option Boolean secure If true, the secure attribute of the cookie will be set and the cookie transmission will
+ *                        require a secure protocol (like HTTPS).
+ * @type undefined
+ *
+ * @name $.cookie
+ * @cat Plugins/Cookie
+ * @author Klaus Hartl/klaus.hartl@stilbuero.de
+ */
+
+/**
+ * Get the value of a cookie with the given key.
+ *
+ * @example $.cookie('the_cookie');
+ * @desc Get the value of a cookie.
+ *
+ * @param String key The key of the cookie.
+ * @return The value of the cookie.
+ * @type String
+ *
+ * @name $.cookie
+ * @cat Plugins/Cookie
+ * @author Klaus Hartl/klaus.hartl@stilbuero.de
+ */
+jQuery.cookie = function (key, value, options) {
+
+    // key and value given, set cookie...
+    if (arguments.length > 1 && (value === null || typeof value !== "object")) {
+        options = jQuery.extend({}, options);
+
+        if (value === null) {
+            options.expires = -1;
+        }
+
+        if (typeof options.expires === 'number') {
+            var days = options.expires, t = options.expires = new Date();
+            t.setDate(t.getDate() + days);
+        }
+
+        return (document.cookie = [
+            encodeURIComponent(key), '=',
+            options.raw ? String(value) : encodeURIComponent(String(value)),
+            options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+            options.path ? '; path=' + options.path : '',
+            options.domain ? '; domain=' + options.domain : '',
+            options.secure ? '; secure' : '',
+            options.sameSite ? '; sameSite=' + options.sameSite : 'Lax'
+        ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || {};
+    var result, decode = options.raw ? function (s) { return s; } : decodeURIComponent;
+    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
+};
+function getOffset(elem) {
+	if (elem.getBoundingClientRect) {
+		// "правильный" вариант
+		return getOffsetRect(elem)
+	} else {
+		// пусть работает хоть как-то
+		return getOffsetSum(elem)
+	}
+}
+
+function getOffsetSum(elem) {
+	var top=0, left=0
+	while(elem) {
+		top = top + parseInt(elem.offsetTop)
+		left = left + parseInt(elem.offsetLeft)
+		elem = elem.offsetParent
+	}
+
+	return {top: top, left: left}
+}
+
+function getOffsetRect(elem) {
+	// (1)
+	var box = elem.getBoundingClientRect()
+
+	// (2)
+	var body = document.body
+	var docElem = document.documentElement
+
+	// (3)
+	var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop
+	var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft
+
+	// (4)
+	var clientTop = docElem.clientTop || body.clientTop || 0
+	var clientLeft = docElem.clientLeft || body.clientLeft || 0
+
+	// (5)
+	var top  = box.top +  scrollTop - clientTop
+	var left = box.left + scrollLeft - clientLeft
+
+	return { top: Math.round(top), left: Math.round(left) }
+}
+
+function scrollto(id){
+	var pos = getOffset(document.getElementById(id));
+	window.scrollTo(0, pos.top);
+}/*
+ * Copyright (C) 2012 PrimeBox (info@primebox.co.uk)
+ * 
+ * This work is licensed under the Creative Commons
+ * Attribution 3.0 Unported License. To view a copy
+ * of this license, visit
+ * http://creativecommons.org/licenses/by/3.0/.
+ * 
+ * Documentation available at:
+ * http://www.primebox.co.uk/projects/cookie-bar/
+ * 
+ * When using this software you use it at your own risk. We hold
+ * no responsibility for any damage caused by using this plugin
+ * or the documentation provided.
+ */
+(function($){
+	$.cookieBar = function(options,val){
+		if(options=='cookies'){
+			var doReturn = 'cookies';
+		}else if(options=='set'){
+			var doReturn = 'set';
+		}else{
+			var doReturn = false;
+		}
+		var defaults = {
+			message: 'We use cookies to track usage and preferences.', //Message displayed on bar
+			acceptButton: true, //Set to true to show accept/enable button
+			acceptText: 'I Understand', //Text on accept/enable button
+			acceptFunction: function(cookieValue){if(cookieValue!='enabled' && cookieValue!='accepted') window.location = window.location.href;}, //Function to run after accept
+			declineButton: false, //Set to true to show decline/disable button
+			declineText: 'Disable Cookies', //Text on decline/disable button
+			declineFunction: function(cookieValue){if(cookieValue=='enabled' || cookieValue=='accepted') window.location = window.location.href;}, //Function to run after decline
+			policyButton: false, //Set to true to show Privacy Policy button
+			policyText: 'Privacy Policy', //Text on Privacy Policy button
+			policyURL: '/privacy-policy/', //URL of Privacy Policy
+			autoEnable: true, //Set to true for cookies to be accepted automatically. Banner still shows
+			acceptOnContinue: false, //Set to true to accept cookies when visitor moves to another page
+			acceptOnScroll: false, //Set to true to accept cookies when visitor scrolls X pixels up or down
+			acceptAnyClick: false, //Set to true to accept cookies when visitor clicks anywhere on the page
+			expireDays: 365, //Number of days for cookieBar cookie to be stored for
+			renewOnVisit: false, //Renew the cookie upon revisit to website
+			forceShow: false, //Force cookieBar to show regardless of user cookie preference
+			effect: 'slide', //Options: slide, fade, hide
+			element: 'body', //Element to append/prepend cookieBar to. Remember "." for class or "#" for id.
+			append: false, //Set to true for cookieBar HTML to be placed at base of website. Actual position may change according to CSS
+			fixed: false, //Set to true to add the class "fixed" to the cookie bar. Default CSS should fix the position
+			bottom: false, //Force CSS when fixed, so bar appears at bottom of website
+			zindex: '', //Can be set in CSS, although some may prefer to set here
+			domain: String(window.location.hostname), //Location of privacy policy
+			referrer: String(document.referrer) //Where visitor has come from
+		};
+		var options = $.extend(defaults,options);
+		
+		//Sets expiration date for cookie
+		var expireDate = new Date();
+		expireDate.setTime(expireDate.getTime()+(options.expireDays*86400000));
+		expireDate = expireDate.toGMTString();
+		
+		var cookieEntry = 'cb-enabled={value}; expires='+expireDate+'; path=/; sameSite=Lax';
+		
+		//Retrieves current cookie preference
+		var i,cookieValue='',aCookie,aCookies=document.cookie.split('; ');
+		for (i=0;i<aCookies.length;i++){
+			aCookie = aCookies[i].split('=');
+			if(aCookie[0]=='cb-enabled'){
+    			cookieValue = aCookie[1];
+			}
+		}
+		//Sets up default cookie preference if not already set
+		if(cookieValue=='' && doReturn!='cookies' && options.autoEnable){
+			cookieValue = 'enabled';
+			document.cookie = cookieEntry.replace('{value}','enabled');
+		}else if((cookieValue=='accepted' || cookieValue=='declined') && doReturn!='cookies' && options.renewOnVisit){
+			document.cookie = cookieEntry.replace('{value}',cookieValue);
+		}
+		if(options.acceptOnContinue){
+			if(options.referrer.indexOf(options.domain)>=0 && String(window.location.href).indexOf(options.policyURL)==-1 && doReturn!='cookies' && doReturn!='set' && cookieValue!='accepted' && cookieValue!='declined'){
+				doReturn = 'set';
+				val = 'accepted';
+			}
+		}
+		if(doReturn=='cookies'){
+			//Returns true if cookies are enabled, false otherwise
+			if(cookieValue=='enabled' || cookieValue=='accepted'){
+				return true;
+			}else{
+				return false;
+			}
+		}else if(doReturn=='set' && (val=='accepted' || val=='declined')){
+			//Sets value of cookie to 'accepted' or 'declined'
+			document.cookie = cookieEntry.replace('{value}',val);
+			if(val=='accepted'){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			//Sets up enable/accept button if required
+			var message = options.message.replace('{policy_url}',options.policyURL);
+			
+			if(options.acceptButton){
+				var acceptButton = '<a href="" class="cb-enable">'+options.acceptText+'</a>';
+			}else{
+				var acceptButton = '';
+			}
+			//Sets up disable/decline button if required
+			if(options.declineButton){
+				var declineButton = '<a href="" class="cb-disable">'+options.declineText+'</a>';
+			}else{
+				var declineButton = '';
+			}
+			//Sets up privacy policy button if required
+			if(options.policyButton){
+				var policyButton = '<a href="'+options.policyURL+'" class="cb-policy">'+options.policyText+'</a>';
+			}else{
+				var policyButton = '';
+			}
+			//Whether to add "fixed" class to cookie bar
+			if(options.fixed){
+				if(options.bottom){
+					var fixed = ' class="fixed bottom"';
+				}else{
+					var fixed = ' class="fixed"';
+				}
+			}else{
+				var fixed = '';
+			}
+			if(options.zindex!=''){
+				var zindex = ' style="z-index:'+options.zindex+';"';
+			}else{
+				var zindex = '';
+			}
+			
+			//Displays the cookie bar if arguments met
+			if(options.forceShow || cookieValue=='enabled' || cookieValue==''){
+				if(options.append){
+					$(options.element).append('<div id="cookie-bar"'+fixed+zindex+'><p>'+message+acceptButton+declineButton+policyButton+'</p></div>');
+				}else{
+					$(options.element).prepend('<div id="cookie-bar"'+fixed+zindex+'><p>'+message+acceptButton+declineButton+policyButton+'</p></div>');
+				}
+			}
+			
+			var removeBar = function(func){
+				if(options.acceptOnScroll) $(document).off('scroll');
+				if(typeof(func)==='function') func(cookieValue);
+				if(options.effect=='slide'){
+					$('#cookie-bar').slideUp(300,function(){$('#cookie-bar').remove();});
+				}else if(options.effect=='fade'){
+					$('#cookie-bar').fadeOut(300,function(){$('#cookie-bar').remove();});
+				}else{
+					$('#cookie-bar').hide(0,function(){$('#cookie-bar').remove();});
+				}
+				$(document).unbind('click',anyClick);
+			};
+			var cookieAccept = function(){
+				document.cookie = cookieEntry.replace('{value}','accepted');
+				removeBar(options.acceptFunction);
+			};
+			var cookieDecline = function(){
+				var deleteDate = new Date();
+				deleteDate.setTime(deleteDate.getTime()-(864000000));
+				deleteDate = deleteDate.toGMTString();
+				aCookies=document.cookie.split('; ');
+				for (i=0;i<aCookies.length;i++){
+					aCookie = aCookies[i].split('=');
+					if(aCookie[0].indexOf('_')>=0){
+						document.cookie = aCookie[0]+'=0; expires='+deleteDate+'; domain='+options.domain.replace('www','')+'; path=/';
+					}else{
+						document.cookie = aCookie[0]+'=0; expires='+deleteDate+'; path=/';
+					}
+				}
+				document.cookie = cookieEntry.replace('{value}','declined');
+				removeBar(options.declineFunction);
+			};
+			var anyClick = function(e){
+				if(!$(e.target).hasClass('cb-policy')) cookieAccept();
+			};
+			
+			$('#cookie-bar .cb-enable').click(function(){cookieAccept();return false;});
+			$('#cookie-bar .cb-disable').click(function(){cookieDecline();return false;});
+			if(options.acceptOnScroll){
+				var scrollStart = $(document).scrollTop(),scrollNew,scrollDiff;
+				$(document).on('scroll',function(){
+					scrollNew = $(document).scrollTop();
+					if(scrollNew>scrollStart){
+						scrollDiff = scrollNew - scrollStart;
+					}else{
+						scrollDiff = scrollStart - scrollNew;
+					}
+					if(scrollDiff>=Math.round(options.acceptOnScroll)) cookieAccept();
+				});
+			}
+			if(options.acceptAnyClick){
+				$(document).bind('click',anyClick);
+			}
+		}
+	};
+})(jQuery);$(document).ready(function () {
+
+    $(document).ajaxSend(function () {
+        $("#loading").show();
+        /*$("#overlay-content").show();
+         $("#loading-blocks").show();*/
+    }).ajaxComplete(function () {
+        $("#loading").hide();
+        /*$("#overlay-content").hide();
+         $("#loading-blocks").hide();*/
+    });
+
+    $('.btn').on('click', function () {
+        var color = $(this).find('input').attr('id');
+        $('body').attr('class', color);
+    });
+
+    $("#search_tab a").click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $("#hot_tabs_link a").click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+        //mSlinkyInit();
+    });
+
+    // $(".mobilemenu .chevrond").click(function () {
+    //     $(this).siblings(".collapsible").toggle();
+    //     $(this).toggleClass("hided");
+    //     $(this).parent().next().toggleClass("in");
+    // });
+    $.fn.clickToggle = function (func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function () {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+
+    $(".slinky").slinky();
+// side nav
+    $(function () {
+        var menuToggle = $('.mobile-button .btn-main-menu');
+        var menuToggle2 = $('.mobile-button .btn-search');
+        var sideNavOverlay = $('.side-nav-overlay');
+
+        menuToggle2.on('click', function (e) {
+            e.preventDefault();
+            $('html').toggleClass('filter-open');
+        });
+
+        menuToggle.on('click', function (e) {
+            e.preventDefault();
+            $('html').toggleClass('nav-open');
+
+            //   fixScroll.onOpen();
+        });
+        $('.close_btn_slide').on('click', function () {
+            $('html').removeClass('nav-open');
+            $('html').removeClass('filter-open');
+        });
+        sideNavOverlay.on('click', function () {
+            $('html').removeClass('filter-open');
+            $('html').removeClass('nav-open');
+
+            //   fixScroll.onClose();
+        });
+    });
+});

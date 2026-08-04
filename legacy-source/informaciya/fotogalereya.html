@@ -1,0 +1,996 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link rel="canonical" href="fotogalereya.html">
+<link rel="stylesheet" type="text/css" href="../common/js/cookiebar/jquery.cookiebar.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/css/ui/jquery-ui.multiselect.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/css/redmond/jquery-ui-1.7.1.custom.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/css/ui.slider.extras.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/js/sumoselect/sumoselect.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/css/form.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/jquery.accordion.menu.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/js/mscrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/pretty-checkbox.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/js/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/js/slinky/slinky.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/js/slinky/slide_menu.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/style.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/media-queries.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/style_img.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="../assets/a6b31464/src/select2.css">
+<link rel="stylesheet" type="text/css" href="../assets/e0d915dc/style.css">
+<link rel="stylesheet" type="text/css" href="../assets/8dcfd5a5/jquery.fancybox-1.3.4.css">
+<title>Фотогалерея</title>
+<meta name="description" content="Недвижимость Туапсе">
+<meta name="keywords" content="Недвижимость Туапсе">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+<link href="../css?family=Roboto:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic" rel="stylesheet">
+</head>
+<body class="inner_page "><link rel="stylesheet" type="text/css" href="../themes/dolphin/js/mscrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/css/pretty-checkbox.min.css">
+<link rel="stylesheet" type="text/css" href="../themes/dolphin/assets/js/slinky/slinky.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/e0d915dc/style.css">
+<link rel="stylesheet" type="text/css" href="../min/serve/g-8?g=5cbcbee3e0edf1cef4df9d99e2579de9&amp;lm=1565119522">
+<link rel="stylesheet" type="text/css" href="../min/serve/g-1?g=46285bae853e8be6bced7d39b3b099fd&amp;lm=1565119522" media="screen">
+<link rel="stylesheet" type="text/css" href="../min/serve/g-6?g=a129d67d3c0140eb9174b66363a314b7&amp;lm=1733089595">
+<script src="../assets/e0622829/jquery.min.js"></script>
+<script src="../assets/e0622829/jui/js/jquery-ui.min.js"></script>
+<script src="../assets/e0622829/jui/js/jquery-ui-i18n.min.js"></script>
+<script src="../themes/dolphin/js/mscrollbar/jquery.mCustomScrollbar.min.js"></script>
+<script src="../themes/dolphin/assets/js/bootstrap.min.js"></script>
+<script src="../themes/dolphin/assets/js/slinky/slinky.min.js"></script>
+<script src="../themes/dolphin/assets/js/slick/slick.min.js"></script>
+<script src="../min/serve/g-3?g=469d8be629b1c2d6e0dc7edfb6b51684&amp;lm=1745191143"></script>
+<div class="sidebar">
+<div class="sidebar_inner">
+<div class="logo text-center">
+<a href="../index.htm">
+<div class="logo-img"><img src="../themes/dolphin/assets/images/logo.png" alt="Агенство недвижимости &quot;Туапсе&quot;"></div>
+<div class="logo-text slow">Агенство недвижимости &quot;Туапсе&quot;</div>
+</a>
+</div>
+<div class="search_index">
+<div class="h3 fint">Поиск</div>
+<form id="search-form" class="forma" action="/search" method="get">
+<div class="search_content">
+<div class="index-header-form" id="search_form">
+<div>
+<div class="form-group">
+<div class="">
+<select class="width289 searchField less-opacity-control" id="city" name="city[]">
+<option value="0">Выберите город</option>
+<option value="9">Туапсе</option>
+<option value="10">Туапсинский район</option>
+</select>        </div>
+</div>
+</div>
+<div id="metro-block" style="display: none; ">
+<div class="form-group">
+<div class="  less-opacity-control">
+<select id="metro" class=" searchField" multiple="multiple" name="metro[]">
+</select><script>$('#metro').SumoSelect({captionFormat: 'Выбрано {0}', selectAlltext: 'Выбрать все', csvDispCount:1, placeholder: 'Выберите станции метро', filter: true, filterText: 'Введите первые буквы названия'});</script>        </div>
+</div>
+</div><div>
+<div class="form-group">
+<select class="form-control searchField" name="apType" id="apType">
+<option value="0">Искать в разделе</option>
+<option value="1">Аренда</option>
+<option value="2">Продажа</option>
+</select>
+</div>
+</div>
+<div class="">
+<div class="block-type form-group">
+<select class="form-control searchField" name="objType" id="objType">
+<option value="0" selected="selected">Тип недвижимости</option>
+<option value="1">квартира</option>
+<option value="3">комната</option>
+<option value="2">дом</option>
+<option value="4">земельный участок</option>
+<option value="5">новостройка</option>
+<option value="6">гостиница</option>
+<option value="8">гараж</option>
+<option value="9">коммерция</option>
+</select>    </div>
+</div>
+<div class="">
+<div class="pricebox row">
+<div class="col-md-6 col-sm-6 col-xs-6">
+<div class="form-group">
+<input onblur="changeSearch();" type="number" id="priceMin" name="price_min" class="form-control searchField" placeholder="Цена от" value="">
+</div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6">
+<div class="form-group">
+<input onblur="changeSearch();" type="number" id="priceMax" name="price_max" class="form-control searchField" placeholder="Цена до" value="">
+</div>
+</div>
+</div>
+</div>
+<div class="">
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-6">
+<div class="form-group">
+<input onblur="changeSearch();" type="number" id="squareMin" name="square_min" class="form-control searchField" placeholder="Площадь от" value="">
+</div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6">
+<div class="form-group">
+<input onblur="changeSearch();" type="number" id="squareMax" name="square_max" class="form-control searchField" placeholder="Площадь до" value="">
+</div>
+</div>
+</div>
+</div>
+<div class="">
+<div class="form-group">
+<div class="search">
+<select class="form-control searchField searchField" name="rooms" id="rooms">
+<option value="0" selected="selected">Количество комнат</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4 и более</option>
+</select>            </div>
+</div>
+</div>
+<div class="">
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-6">
+<div class="form-group">
+<input onblur="changeSearch();" type="number" id="floorMin" name="floor_min" class="form-control searchField" placeholder="Этаж от" value="">
+</div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6">
+<div class="form-group">
+<input onblur="changeSearch();" type="number" id="floorMax" name="floor_max" class="form-control searchField" placeholder="Этаж до" value="">
+</div>
+</div>
+</div>
+</div>
+<div class="">
+<div class="form-group">
+<div class="input-group mb-3 search-term ">
+<input class="textbox form-control searchField" id="search_term_text" maxlength="50" placeholder="Поиск по описанию или адресу" type="text" value="" name="term">            <div class="input-group-btn">
+<button class="search-icon btn btn-outline-secondary" onclick="prepareSearch(); return false;"><i class="fas fa-search"></i></button>
+</div>
+</div>
+<input type="hidden" value="0" id="do-term-search" name="do-term-search">
+</div>
+</div>
+<div class="">
+<div class="form-group">
+<input class="form-control searchField" onchange="changeSearch();" placeholder="№ объявления" type="number" value="" name="sApId" id="sApId">    </div>
+</div>
+<div class="">
+<div class="form-group">
+<div class="search">
+<select class="form-control searchField searchField" name="ot" id="ot">
+<option value="">Объявление от</option>
+<option value="1">Частное лицо</option>
+<option value="2">Агентство</option>
+</select>        </div>
+</div>
+</div>
+<div class="">
+<div class="">
+<div class="form-group">
+<div class="pretty p-default">
+<input class="search-input-new searchField" id="search_with_photo" type="checkbox" value="1" name="wp">                <div class="state p-success">
+<label for="search_with_photo">
+Только с фото                    </label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="btn-search">
+<div class="btn-search-bl">
+<a id="btnleft" href="javascript: void(0);" onclick="doSearchAction();" class="btn btn-primary btn-lg search_btn slow">
+<i class="fas fa-search"></i> Найти                </a>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+<button type="button" class="close_btn_slide btn"><i class="far fa-times-circle"></i></button>
+</div>
+<div class="col_right">
+<div class="header-wrapper">
+<div class="wrapper_top_link">
+<div class="visible-xs">
+<div class="logo text-center">
+<a href="../index.htm">
+<div class="logo-img"><img src="../themes/dolphin/assets/images/logo.png" alt="Агенство недвижимости &quot;Туапсе&quot;"></div>
+<div class="logo-text slow">Агенство недвижимости &quot;Туапсе&quot;</div>
+</a>
+</div>
+</div>
+<div class="row hidden-xs">
+<div class="top_link_bl top_link_bl1">
+<div class="compare_block">
+<div style="display: none" id="comparison_top">
+<a href="../index.htm" class="btn btn-primary">
+<i class="fa fa-list"></i>
+0 в списке сравнения                            </a>
+</div>
+</div>
+<ul class="list-inline">
+<li class="currency_block currency_block__header">
+</li>
+<li class="btn-group language_block language_block__header">
+</li>
+<li class="personal_cabinet personal_cabinet__header">
+<div class="dropdown">
+<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<i class="fas fa-user-cog"></i> Личный кабинет <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" id="main_menu_nav_2">
+<li class="dropdown-item"><a class="slow" href="../login.html">Войти</a></li>
+<li class="dropdown-item"><a class="slow" href="../register.html">Зарегистрироваться</a></li>
+<li class="dropdown-item"><a class="slow" href="../recover.html">Забыли пароль?</a></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="top_menu top_link_bl">
+<ul class="nav navbar-nav" id="main_menu_nav_1">
+<li class="depth_zero depth_item_numb_0"><a class="slow" href="../contact-us.html">Связаться с нами</a></li>
+<li class="depth_zero depth_item_numb_1"><a class="slow" href="../guestad/add.html">Добавить объявление</a></li>
+</ul>            </div>
+</div>
+<div class="clear"></div>
+<div class="row">
+</div>
+</div>
+<div class="wrapper_main_menu">
+<div class="visible-sm hidden-xs">
+<div class="logo text-center">
+<a href="../index.htm">
+<div class="logo-img"><img src="../themes/dolphin/assets/images/logo.png" alt="Агенство недвижимости &quot;Туапсе&quot;"></div>
+<div class="logo-text slow">Агенство недвижимости &quot;Туапсе&quot;</div>
+</a>
+</div>
+</div>
+<div class="main_menu">
+<div class="mobile-button">
+<ul class="list-inline">
+<li>
+<button class="btn btn-primary btn-main-menu"><i class="fas fa-bars"></i><span>Меню</span>
+</button>
+</li>
+<li>
+<button class="btn btn-default btn-search"><i class="fas fa-search"></i><span>Поиск</span>
+</button>
+</li>
+</ul>
+</div>
+<ul class="nav nav-pills" id="main_menu_nav_3">
+<li class="dropdown"><a class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript: void(0);">Поиск<span class="caret"></span></a>
+<ul class="dropdown-menu">
+<li><a class="slow" href="../page/poisk-na-karte.html">Поиск на карте</a></li>
+<li><a class="slow" href="../page/prodazha.html">Продажа</a></li>
+<li><a class="slow" href="../page/novostrojki.html">Новостройки</a></li>
+<li><a class="slow" href="../page/arenda.html">Аренда</a></li>
+<li><a class="slow" href="../page/gostinicy.html">Гостиницы</a></li>
+</ul>
+</li>
+<li class="depth_zero depth_item_numb_1"><a class="slow" href="../review.html">Отзывы</a></li>
+<li class="depth_zero depth_item_numb_2"><a class="slow" href="../contacts.html">Контакты</a></li>
+<li class="depth_zero depth_item_numb_3"><a class="slow" href="../news.html">Новости</a></li>
+<li class="depth_zero depth_item_numb_4"><a class="slow" href="../favorites.html">Избранное</a></li>
+<li class="dropdown"><a onclick="javascript:location.href=&#039;/entries/main/view&#039;" class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="/entries/main/view">Информация<span class="caret"></span></a>
+<ul class="dropdown-menu">
+<li><a class="slow" href="fotogalereya.html">Фотогалерея</a></li>
+<li><a class="slow" href="../news.html">Новости</a></li>
+</ul>
+</li>
+<li class="dropdown"><a class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript: void(0);">Дополнительно<span class="caret"></span></a>
+<ul class="dropdown-menu">
+<li><a class="slow" href="../page/politika-konfidencialnosti.html">Политика конфиденциальности</a></li>
+<li><a class="slow" href="../page/polzovatelskoe-soglashenie.html">Пользовательское соглашение</a></li>
+<li><a class="slow" href="../faq.html">Вопросы-ответы</a></li>
+</ul>
+</li>
+</ul>        </div>
+</div>
+</div>
+<div class="main_content ">
+<div class="content_center box">
+<div class="in_row">
+<div class="property_block">
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a class="path" href="../index.htm">Главная</a></li><li class="breadcrumb-item"><a href="../informaciya.html">Информация</a></li><li class="breadcrumb-item"><a href="javascript: void(0);">Фотогалерея</a></li></ul>                    
+<div class="main-content-wrapper">
+<div class="content">
+<h1 class="fint l_fint">Фотогалерея</h1>
+<div class="clear"></div>
+<div class="block_new">
+<div class="entry-page-body">
+<h1 class="fint l_fint h3 title_property">&nbsp;</h1>
+<p><p>
+<style type="text/css">.slick-prev, .slick-next {
+font-size: 0;
+line-height: 0;
+position: absolute;
+top: 50%;
+width: 20px;
+height: 20px;
+padding: 0;
+transform: translate(0, -50%);
+cursor: pointer;
+border: none;
+outline: none;
+background: transparent;
+}
+.slick-prev, .slick-next{
+display:block;
+background-color:rgb(255, 255, 255);
+padding:23px 45px 23px 23px;
+opacity:0.84;
+-webkit-box-shadow:rgb(128, 128, 128) 0px 0px 6px 0px;
+-moz-box-shadow:rgb(128, 128, 128) 0px 0px 6px 0px;
+box-shadow:rgb(128, 128, 128) 0px 0px 6px 0px;
+}
+.slick-prev {
+left: 10px;
+z-index: 1;
+}
+.slick-prev:before {
+content: '←';
+font-size: 24px;
+color: #333;
+}
+.slick-next {
+right: 10px;
+}
+.slick-next:before {
+content: '→';
+font-size: 24px;
+color: #333;
+}
+.slick-dots {
+display: none;
+}
+.fancybox-button--arrow_left,
+.fancybox-button--arrow_right {
+display: block !important;
+visibility: visible !important;
+width: 50px;
+height: 50px;
+background: rgba(0, 0, 0, 0.5);
+color: #fff;
+border-radius: 50%;
+line-height: 50px;
+text-align: center;
+font-size: 24px;
+z-index: 9999;
+}
+</style>
+<script>
+$(function() {
+$('.image-slider').slick({
+infinite: false,
+slidesToShow: 4,
+slidesToScroll: 3,
+arrows: true, // Показать стрелки для прокрутки
+responsive: [
+{
+breakpoint: 768,
+settings: {
+slidesToShow: 3,
+slidesToScroll: 3,
+}
+},
+{
+breakpoint: 480,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1,
+}
+}
+]
+});
+$('[data-fancybox="gallery"]').fancybox({
+buttons: ["slideShow", "fullScreen", "thumbs", "close"],
+loop: true,
+infobar: true,
+arrows: true // Включить стрелки навигации
+});
+});
+</script></p>
+
+<h1 class="fint l_fint h3 title_property">&nbsp;</h1>
+<p><span style="color:#3498db;"><span style="font-size:16px;">Фотогалерея</span></span></p>
+<p>Агентство недвижимости &quot;Туапсе&quot; уже много лет успешно работает на рынке недвижимости города Туапсе и Туапсинского района.</p>
+<p>За это время мы накопили обширный опыт в сфере любых операций с объектами <strong>недвижимости в Туапсе</strong> самых разных категорий, в том числе элитной <strong>курортной недвижимости, земельных участков</strong>, коммерческих помещений. Нас выгодно отличает от конкурентов оперативность и широкоформатность наших услуг.</p>
+<div class="image-slider" id="gallery"><a data-caption="Новое фото 1" data-fancybox="gallery" href="../uploads/gallery/new/001.jpg" rel="fancybox-gallery"><img alt="Новое фото 1" src="../uploads/gallery/new/001_thumb.jpg"> </a> <a data-caption="Новое фото 2" data-fancybox="gallery" href="../uploads/gallery/new/002.jpg" rel="fancybox-gallery"> <img alt="Новое фото 2" src="../uploads/gallery/new/002_thumb.jpg"> </a> <a data-caption="Новое фото 3" data-fancybox="gallery" href="../uploads/gallery/new/003.jpg" rel="fancybox-gallery"> <img alt="Новое фото 3" src="../uploads/gallery/new/003_thumb.jpg"> </a> <a data-caption="Новое фото 4" data-fancybox="gallery" href="../uploads/gallery/new/004.jpg" rel="fancybox-gallery"> <img alt="Новое фото 4" src="../uploads/gallery/new/004_thumb.jpg"> </a> <a data-caption="Новое фото 5" data-fancybox="gallery" href="../uploads/gallery/new/005.jpg" rel="fancybox-gallery"> <img alt="Новое фото 5" src="../uploads/gallery/new/005_thumb.jpg"> </a> <a data-caption="Новое фото 6" data-fancybox="gallery" href="../uploads/gallery/new/006.jpg" rel="fancybox-gallery"> <img alt="Новое фото 6" src="../uploads/gallery/new/006_thumb.jpg"> </a> <a data-caption="Новое фото 7" data-fancybox="gallery" href="../uploads/gallery/new/007.jpg" rel="fancybox-gallery"> <img alt="Новое фото 7" src="../uploads/gallery/new/007_thumb.jpg"> </a> <a data-caption="Новое фото 8" data-fancybox="gallery" href="../uploads/gallery/new/008.jpg" rel="fancybox-gallery"> <img alt="Новое фото 8" src="../uploads/gallery/new/008_thumb.jpg"> </a> <a data-caption="Новое фото 9" data-fancybox="gallery" href="../uploads/gallery/new/009.jpg" rel="fancybox-gallery"> <img alt="Новое фото 9" src="../uploads/gallery/new/009_thumb.jpg"> </a> <a data-caption="Новое фото 10" data-fancybox="gallery" href="../uploads/gallery/new/010.jpg" rel="fancybox-gallery"> <img alt="Новое фото 10" src="../uploads/gallery/new/010_thumb.jpg"> </a> <a data-caption="Новое фото 11" data-fancybox="gallery" href="../uploads/gallery/new/011.jpg" rel="fancybox-gallery"> <img alt="Новое фото 11" src="../uploads/gallery/new/011_thumb.jpg"> </a> <a data-caption="Новое фото 12" data-fancybox="gallery" href="../uploads/gallery/new/012.jpg" rel="fancybox-gallery"> <img alt="Новое фото 12" src="../uploads/gallery/new/012_thumb.jpg"> </a> <a data-caption="Новое фото 13" data-fancybox="gallery" href="../uploads/gallery/new/013.jpg" rel="fancybox-gallery"> <img alt="Новое фото 13" src="../uploads/gallery/new/013_thumb.jpg"> </a> <a data-caption="Новое фото 14" data-fancybox="gallery" href="../uploads/gallery/new/014.jpg" rel="fancybox-gallery"> <img alt="Новое фото 14" src="../uploads/gallery/new/014_thumb.jpg"> </a> <a data-caption="Новое фото 15" data-fancybox="gallery" href="../uploads/gallery/new/015.jpg" rel="fancybox-gallery"> <img alt="Новое фото 15" src="../uploads/gallery/new/015_thumb.jpg"> </a> <a data-caption="Новое фото 16" data-fancybox="gallery" href="../uploads/gallery/new/016.jpg" rel="fancybox-gallery"> <img alt="Новое фото 16" src="../uploads/gallery/new/016_thumb.jpg"> </a> <a data-caption="Новое фото 17" data-fancybox="gallery" href="../uploads/gallery/new/017.jpg" rel="fancybox-gallery"> <img alt="Новое фото 17" src="../uploads/gallery/new/017_thumb.jpg"> </a> <a data-caption="Новое фото 18" data-fancybox="gallery" href="../uploads/gallery/new/018.jpg" rel="fancybox-gallery"> <img alt="Новое фото 18" src="../uploads/gallery/new/018_thumb.jpg"> </a> <a data-caption="Новое фото 19" data-fancybox="gallery" href="../uploads/gallery/new/019.jpg" rel="fancybox-gallery"> <img alt="Новое фото 19" src="../uploads/gallery/new/019_thumb.jpg"> </a> <a data-caption="Новое фото 20" data-fancybox="gallery" href="../uploads/gallery/new/020.jpg" rel="fancybox-gallery"> <img alt="Новое фото 20" src="../uploads/gallery/new/020_thumb.jpg"> </a> <a data-caption="Новое фото 21" data-fancybox="gallery" href="../uploads/gallery/new/021.jpg" rel="fancybox-gallery"> <img alt="Новое фото 21" src="../uploads/gallery/new/021_thumb.jpg"> </a> <a data-caption="Новое фото 22" data-fancybox="gallery" href="../uploads/gallery/new/022.jpg" rel="fancybox-gallery"> <img alt="Новое фото 22" src="../uploads/gallery/new/022_thumb.jpg"> </a> <a data-caption="Новое фото 23" data-fancybox="gallery" href="../uploads/gallery/new/023.jpg" rel="fancybox-gallery"> <img alt="Новое фото 23" src="../uploads/gallery/new/023_thumb.jpg"> </a> <a data-caption="Новое фото 24" data-fancybox="gallery" href="../uploads/gallery/new/024.jpg" rel="fancybox-gallery"> <img alt="Новое фото 24" src="../uploads/gallery/new/024_thumb.jpg"> </a> <a data-caption="Новое фото 25" data-fancybox="gallery" href="../uploads/gallery/new/025.jpg" rel="fancybox-gallery"> <img alt="Новое фото 25" src="../uploads/gallery/new/025_thumb.jpg"> </a> <a data-caption="Новое фото 26" data-fancybox="gallery" href="../uploads/gallery/new/026.jpg" rel="fancybox-gallery"> <img alt="Новое фото 26" src="../uploads/gallery/new/026_thumb.jpg"> </a> <a data-caption="Новое фото 27" data-fancybox="gallery" href="../uploads/gallery/new/027.jpg" rel="fancybox-gallery"> <img alt="Новое фото 27" src="../uploads/gallery/new/027_thumb.jpg"> </a> <a data-caption="Новое фото 28" data-fancybox="gallery" href="../uploads/gallery/new/028.jpg" rel="fancybox-gallery"> <img alt="Новое фото 28" src="../uploads/gallery/new/028_thumb.jpg"> </a> <a data-caption="Новое фото 29" data-fancybox="gallery" href="../uploads/gallery/new/029.jpg" rel="fancybox-gallery"> <img alt="Новое фото 29" src="../uploads/gallery/new/029_thumb.jpg"> </a> <a data-caption="Новое фото 30" data-fancybox="gallery" href="../uploads/gallery/new/030.jpg" rel="fancybox-gallery"> <img alt="Новое фото 30" src="../uploads/gallery/new/030_thumb.jpg"> </a> <a data-caption="Новое фото 31" data-fancybox="gallery" href="../uploads/gallery/new/031.jpg" rel="fancybox-gallery"> <img alt="Новое фото 31" src="../uploads/gallery/new/031_thumb.jpg"> </a> <a data-caption="Новое фото 32" data-fancybox="gallery" href="../uploads/gallery/new/032.jpg" rel="fancybox-gallery"> <img alt="Новое фото 32" src="../uploads/gallery/new/032_thumb.jpg"> </a> <a data-caption="Новое фото 33" data-fancybox="gallery" href="../uploads/gallery/new/033.jpg" rel="fancybox-gallery"> <img alt="Новое фото 33" src="../uploads/gallery/new/033_thumb.jpg"> </a> <a data-caption="Новое фото 34" data-fancybox="gallery" href="../uploads/gallery/new/034.jpg" rel="fancybox-gallery"> <img alt="Новое фото 34" src="../uploads/gallery/new/034_thumb.jpg"> </a> <a data-caption="Новое фото 35" data-fancybox="gallery" href="../uploads/gallery/new/035.jpg" rel="fancybox-gallery"> <img alt="Новое фото 35" src="../uploads/gallery/new/035_thumb.jpg"> </a> <a data-caption="Новое фото 36" data-fancybox="gallery" href="../uploads/gallery/new/036.jpg" rel="fancybox-gallery"> <img alt="Новое фото 36" src="../uploads/gallery/new/036_thumb.jpg"> </a> <a data-caption="Новое фото 37" data-fancybox="gallery" href="../uploads/gallery/new/037.jpg" rel="fancybox-gallery"> <img alt="Новое фото 37" src="../uploads/gallery/new/037_thumb.jpg"> </a> <a data-caption="Новое фото 38" data-fancybox="gallery" href="../uploads/gallery/new/038.jpg" rel="fancybox-gallery"> <img alt="Новое фото 38" src="../uploads/gallery/new/038_thumb.jpg"> </a> <a data-caption="Новое фото 39" data-fancybox="gallery" href="../uploads/gallery/new/039.jpg" rel="fancybox-gallery"> <img alt="Новое фото 39" src="../uploads/gallery/new/039_thumb.jpg"> </a> <a data-caption="Новое фото 40" data-fancybox="gallery" href="../uploads/gallery/new/040.jpg" rel="fancybox-gallery"> <img alt="Новое фото 40" src="../uploads/gallery/new/040_thumb.jpg"> </a> <a data-caption="Новое фото 41" data-fancybox="gallery" href="../uploads/gallery/new/041.jpg" rel="fancybox-gallery"> <img alt="Новое фото 41" src="../uploads/gallery/new/041_thumb.jpg"> </a> <a data-caption="Новое фото 42" data-fancybox="gallery" href="../uploads/gallery/new/042.jpg" rel="fancybox-gallery"> <img alt="Новое фото 42" src="../uploads/gallery/new/042_thumb.jpg"> </a> <a data-caption="Новое фото 43" data-fancybox="gallery" href="../uploads/gallery/new/043.jpg" rel="fancybox-gallery"> <img alt="Новое фото 43" src="../uploads/gallery/new/043_thumb.jpg"> </a> <a data-caption="Новое фото 44" data-fancybox="gallery" href="../uploads/gallery/new/044.jpg" rel="fancybox-gallery"> <img alt="Новое фото 44" src="../uploads/gallery/new/044_thumb.jpg"> </a> <a data-caption="Новое фото 45" data-fancybox="gallery" href="../uploads/gallery/new/045.jpg" rel="fancybox-gallery"> <img alt="Новое фото 45" src="../uploads/gallery/new/045_thumb.jpg"> </a> <a data-caption="Новое фото 46" data-fancybox="gallery" href="../uploads/gallery/new/046.jpg" rel="fancybox-gallery"> <img alt="Новое фото 46" src="../uploads/gallery/new/046_thumb.jpg"> </a> <a data-caption="Новое фото 47" data-fancybox="gallery" href="../uploads/gallery/new/047.jpg" rel="fancybox-gallery"> <img alt="Новое фото 47" src="../uploads/gallery/new/047_thumb.jpg"> </a> <a data-caption="Новое фото 48" data-fancybox="gallery" href="../uploads/gallery/new/048.jpg" rel="fancybox-gallery"> <img alt="Новое фото 48" src="../uploads/gallery/new/048_thumb.jpg"> </a> <a data-caption="Новое фото 49" data-fancybox="gallery" href="../uploads/gallery/new/049.jpg" rel="fancybox-gallery"> <img alt="Новое фото 49" src="../uploads/gallery/new/049_thumb.jpg"> </a> <a data-caption="Новое фото 50" data-fancybox="gallery" href="../uploads/gallery/new/050.jpg" rel="fancybox-gallery"> <img alt="Новое фото 50" src="../uploads/gallery/new/050_thumb.jpg"> </a> <a data-caption="Новое фото 51" data-fancybox="gallery" href="../uploads/gallery/new/051.jpg" rel="fancybox-gallery"> <img alt="Новое фото 51" src="../uploads/gallery/new/051_thumb.jpg"> </a> <a data-caption="Новое фото 52" data-fancybox="gallery" href="../uploads/gallery/new/052.jpg" rel="fancybox-gallery"> <img alt="Новое фото 52" src="../uploads/gallery/new/052_thumb.jpg"> </a> <a data-caption="Новое фото 53" data-fancybox="gallery" href="../uploads/gallery/new/053.jpg" rel="fancybox-gallery"> <img alt="Новое фото 53" src="../uploads/gallery/new/053_thumb.jpg"> </a> <a data-caption="Новое фото 54" data-fancybox="gallery" href="../uploads/gallery/new/054.jpg" rel="fancybox-gallery"> <img alt="Новое фото 54" src="../uploads/gallery/new/054_thumb.jpg"> </a> <a data-caption="Новое фото 55" data-fancybox="gallery" href="../uploads/gallery/new/055.jpg" rel="fancybox-gallery"> <img alt="Новое фото 55" src="../uploads/gallery/new/055_thumb.jpg"> </a> <a data-caption="Новое фото 56" data-fancybox="gallery" href="../uploads/gallery/new/056.jpg" rel="fancybox-gallery"> <img alt="Новое фото 56" src="../uploads/gallery/new/056_thumb.jpg"> </a> <a data-caption="Новое фото 57" data-fancybox="gallery" href="../uploads/gallery/new/057.jpg" rel="fancybox-gallery"> <img alt="Новое фото 57" src="../uploads/gallery/new/057_thumb.jpg"> </a> <a data-caption="Новое фото 58" data-fancybox="gallery" href="../uploads/gallery/new/058.jpg" rel="fancybox-gallery"> <img alt="Новое фото 58" src="../uploads/gallery/new/058_thumb.jpg"> </a> <a data-caption="Новое фото 59" data-fancybox="gallery" href="../uploads/gallery/new/059.jpg" rel="fancybox-gallery"> <img alt="Новое фото 59" src="../uploads/gallery/new/059_thumb.jpg"> </a> <a data-caption="Новое фото 60" data-fancybox="gallery" href="../uploads/gallery/new/060.jpg" rel="fancybox-gallery"> <img alt="Новое фото 60" src="../uploads/gallery/new/060_thumb.jpg"> </a> <a data-caption="Новое фото 61" data-fancybox="gallery" href="../uploads/gallery/new/061.jpg" rel="fancybox-gallery"> <img alt="Новое фото 61" src="../uploads/gallery/new/061_thumb.jpg"> </a> <a data-caption="Новое фото 62" data-fancybox="gallery" href="../uploads/gallery/new/062.jpg" rel="fancybox-gallery"> <img alt="Новое фото 62" src="../uploads/gallery/new/062_thumb.jpg"> </a> <a data-caption="Новое фото 63" data-fancybox="gallery" href="../uploads/gallery/new/063.jpg" rel="fancybox-gallery"> <img alt="Новое фото 63" src="../uploads/gallery/new/063_thumb.jpg"> </a> <a data-caption="Новое фото 64" data-fancybox="gallery" href="../uploads/gallery/new/064.jpg" rel="fancybox-gallery"> <img alt="Новое фото 64" src="../uploads/gallery/new/064_thumb.jpg"> </a> <a data-caption="Новое фото 65" data-fancybox="gallery" href="../uploads/gallery/new/065.jpg" rel="fancybox-gallery"> <img alt="Новое фото 65" src="../uploads/gallery/new/065_thumb.jpg"> </a> <a data-caption="Новое фото 66" data-fancybox="gallery" href="../uploads/gallery/new/066.jpg" rel="fancybox-gallery"> <img alt="Новое фото 66" src="../uploads/gallery/new/066_thumb.jpg"> </a> <a data-caption="Новое фото 67" data-fancybox="gallery" href="../uploads/gallery/new/067.jpg" rel="fancybox-gallery"> <img alt="Новое фото 67" src="../uploads/gallery/new/067_thumb.jpg"> </a> <a data-caption="Новое фото 68" data-fancybox="gallery" href="../uploads/gallery/new/068.jpg" rel="fancybox-gallery"> <img alt="Новое фото 68" src="../uploads/gallery/new/068_thumb.jpg"> </a> <a data-caption="Новое фото 69" data-fancybox="gallery" href="../uploads/gallery/new/069.jpg" rel="fancybox-gallery"> <img alt="Новое фото 69" src="../uploads/gallery/new/069_thumb.jpg"> </a> <a data-caption="Новое фото 70" data-fancybox="gallery" href="../uploads/gallery/new/070.jpg" rel="fancybox-gallery"> <img alt="Новое фото 70" src="../uploads/gallery/new/070_thumb.jpg"> </a> <a data-caption="Новое фото 71" data-fancybox="gallery" href="../uploads/gallery/new/071.jpg" rel="fancybox-gallery"> <img alt="Новое фото 71" src="../uploads/gallery/new/071_thumb.jpg"> </a> <a data-caption="Новое фото 72" data-fancybox="gallery" href="../uploads/gallery/new/072.jpg" rel="fancybox-gallery"> <img alt="Новое фото 72" src="../uploads/gallery/new/072_thumb.jpg"> </a> <a data-caption="Новое фото 73" data-fancybox="gallery" href="../uploads/gallery/new/073.jpg" rel="fancybox-gallery"> <img alt="Новое фото 73" src="../uploads/gallery/new/073_thumb.jpg"> </a> <a data-caption="Новое фото 74" data-fancybox="gallery" href="../uploads/gallery/new/074.jpg" rel="fancybox-gallery"> <img alt="Новое фото 74" src="../uploads/gallery/new/074_thumb.jpg"> </a> <a data-caption="Новое фото 75" data-fancybox="gallery" href="../uploads/gallery/new/075.jpg" rel="fancybox-gallery"> <img alt="Новое фото 75" src="../uploads/gallery/new/075_thumb.jpg"> </a> <a data-caption="Новое фото 76" data-fancybox="gallery" href="../uploads/gallery/new/076.jpg" rel="fancybox-gallery"> <img alt="Новое фото 76" src="../uploads/gallery/new/076_thumb.jpg"> </a></div>
+<p>&nbsp;</p>
+<p><span style="font-size:16px;"><strong><span style="color:#3498db;">Туапсе и Туапсинский район</span></strong></span></p>
+<p>У каждого города, как и у человека, есть своя биография. Наш город носит имя реки Туапсе, которая берет свое начало из слияния двух рек Чилипси и Пшенахо, что в переводе с адыгского означает &quot;Туа&quot; - две, &quot;псе&quot;- воды.</p>
+<p>12 мая 1838 года к устью реки Туапсе подошла эскадра Черноморского флота под командованием адмирала Лазарева М.П. Было построено Вельяминовское укрепление. В строительстве принимали участие десанты русских войск генерала Раевского Н.Н.</p>
+<p>В 1864 году, после окончательного присоединения Западного Кавказа к России, возникло новое поселение, где живут русские, армяне, греки, чехи, поляки, немцы, молдаване и другие национальности.</p>
+<p>С 1898 года в посаде вводится общественное управление (первый староста Кривенко А.Н.).</p>
+<p>В конце XIX в. через Туапсе прошло шоссе Новороссийск - Сухуми.</p>
+<p>&nbsp;</p>
+<div class="image-slider" id="gallery"><a data-caption="Старое фото 1" data-fancybox="gallery" href="../uploads/gallery/old/001.jpg" rel="fancybox-gallery"><img alt="Старое фото 1" src="../uploads/gallery/old/001_thumb.jpg"> </a> <a data-caption="Старое фото 2" data-fancybox="gallery" href="../uploads/gallery/old/002.jpg" rel="fancybox-gallery"> <img alt="Старое фото 2" src="../uploads/gallery/old/002_thumb.jpg"> </a> <a data-caption="Старое фото 3" data-fancybox="gallery" href="../uploads/gallery/old/003.jpg" rel="fancybox-gallery"> <img alt="Старое фото 3" src="../uploads/gallery/old/003_thumb.jpg"> </a> <a data-caption="Старое фото 4" data-fancybox="gallery" href="../uploads/gallery/old/004.jpg" rel="fancybox-gallery"> <img alt="Старое фото 4" src="../uploads/gallery/old/004_thumb.jpg"> </a> <a data-caption="Старое фото 5" data-fancybox="gallery" href="../uploads/gallery/old/005.jpg" rel="fancybox-gallery"> <img alt="Старое фото 5" src="../uploads/gallery/old/005_thumb.jpg"> </a> <a data-caption="Старое фото 6" data-fancybox="gallery" href="../uploads/gallery/old/006.jpg" rel="fancybox-gallery"> <img alt="Старое фото 6" src="../uploads/gallery/old/006_thumb.jpg"> </a> <a data-caption="Старое фото 7" data-fancybox="gallery" href="../uploads/gallery/old/007.jpg" rel="fancybox-gallery"> <img alt="Старое фото 7" src="../uploads/gallery/old/007_thumb.jpg"> </a> <a data-caption="Старое фото 8" data-fancybox="gallery" href="../uploads/gallery/old/008.jpg" rel="fancybox-gallery"> <img alt="Старое фото 8" src="../uploads/gallery/old/008_thumb.jpg"> </a> <a data-caption="Старое фото 9" data-fancybox="gallery" href="../uploads/gallery/old/009.jpg" rel="fancybox-gallery"> <img alt="Старое фото 9" src="../uploads/gallery/old/009_thumb.jpg"> </a> <a data-caption="Старое фото 10" data-fancybox="gallery" href="../uploads/gallery/old/010.jpg" rel="fancybox-gallery"> <img alt="Старое фото 10" src="../uploads/gallery/old/010_thumb.jpg"> </a> <a data-caption="Старое фото 11" data-fancybox="gallery" href="../uploads/gallery/old/011.jpg" rel="fancybox-gallery"> <img alt="Старое фото 11" src="../uploads/gallery/old/011_thumb.jpg"> </a> <a data-caption="Старое фото 12" data-fancybox="gallery" href="../uploads/gallery/old/012.jpg" rel="fancybox-gallery"> <img alt="Старое фото 12" src="../uploads/gallery/old/012_thumb.jpg"> </a> <a data-caption="Старое фото 13" data-fancybox="gallery" href="../uploads/gallery/old/013.jpg" rel="fancybox-gallery"> <img alt="Старое фото 13" src="../uploads/gallery/old/013_thumb.jpg"> </a> <a data-caption="Старое фото 14" data-fancybox="gallery" href="../uploads/gallery/old/014.jpg" rel="fancybox-gallery"> <img alt="Старое фото 14" src="../uploads/gallery/old/014_thumb.jpg"> </a> <a data-caption="Старое фото 15" data-fancybox="gallery" href="../uploads/gallery/old/015.jpg" rel="fancybox-gallery"> <img alt="Старое фото 15" src="../uploads/gallery/old/015_thumb.jpg"> </a> <a data-caption="Старое фото 16" data-fancybox="gallery" href="../uploads/gallery/old/016.jpg" rel="fancybox-gallery"> <img alt="Старое фото 16" src="../uploads/gallery/old/016_thumb.jpg"> </a></div>
+<p>&nbsp;</p>
+<p>Сегодня Туапсе - город с динамично развивающейся экономикой, в которой наряду с традиционной промышленной составляющей существуют и развиваются элементы туристической индустрии. Сравнительно небольшой Туапсе занимает заметное место в экономике края и уверенно смотрит в будущее.</p>
+<p>Большое внимание в нашем городе уделяется благоустройству и озеленению. Преобразились многие улицы. На центральной аллее появился фонтан. В 2002 году фонтан украсила скульптурная группа &quot;Дельфин и русалка&quot;. На Приморском бульваре открылись 3 фонтана. Город, под руководством главы города, оформляется в едином стиле, аллеи города уложены красивой плиткой, оформляются витрины магазинов и прилегающая к ним территория.</p>
+<p>&nbsp;</p>
+<div class="image-slider" id="gallery"><a data-caption="Фото 1" data-fancybox="gallery" href="../uploads/gallery/we/001.jpg" rel="fancybox-gallery"><img alt="Image 1" src="../uploads/gallery/we/001_thumb.jpg"> </a> <a data-caption="Фото 2" data-fancybox="gallery" href="../uploads/gallery/we/002.jpg" rel="fancybox-gallery"> <img alt="Image 2" src="../uploads/gallery/we/002_thumb.jpg"> </a> <a data-caption="Фото 3" data-fancybox="gallery" href="../uploads/gallery/we/003.jpg" rel="fancybox-gallery"> <img alt="Image 3" src="../uploads/gallery/we/003_thumb.jpg"> </a> <a data-caption="Фото 4" data-fancybox="gallery" href="../uploads/gallery/we/004.jpg" rel="fancybox-gallery"> <img alt="Image 4" src="../uploads/gallery/we/004_thumb.jpg"> </a>
+<a data-caption="Фото 5" data-fancybox="gallery" href="../uploads/gallery/we/005.jpg" rel="fancybox-gallery"> <img alt="Image 5" src="../uploads/gallery/we/005_thumb.jpg"> </a> <a data-caption="Фото 6" data-fancybox="gallery" href="../uploads/gallery/we/006.jpg" rel="fancybox-gallery"> <img alt="Image 6" src="../uploads/gallery/we/006_thumb.jpg"> </a> <a data-caption="Фото 7" data-fancybox="gallery" href="../uploads/gallery/we/007.jpg" rel="fancybox-gallery"> <img alt="Image 7" src="../uploads/gallery/we/007_thumb.jpg"> </a> <a data-caption="Фото 8" data-fancybox="gallery" href="../uploads/gallery/we/008.jpg" rel="fancybox-gallery"> <img alt="Image 8" src="../uploads/gallery/we/008_thumb.jpg"> </a> <a data-caption="Фото 9" data-fancybox="gallery" href="../uploads/gallery/we/009.jpg" rel="fancybox-gallery"> <img alt="Image 9" src="../uploads/gallery/we/009_thumb.jpg"> </a> <a data-caption="Фото 10" data-fancybox="gallery" href="../uploads/gallery/we/010.jpg" rel="fancybox-gallery"> <img alt="Image 10" src="../uploads/gallery/we/010_thumb.jpg"> </a> <a data-caption="Фото 11" data-fancybox="gallery" href="../uploads/gallery/we/011.jpg" rel="fancybox-gallery"> <img alt="Image 11" src="../uploads/gallery/we/011_thumb.jpg"> </a> <a data-caption="Фото 12" data-fancybox="gallery" href="../uploads/gallery/we/012.jpg" rel="fancybox-gallery"> <img alt="Image 12" src="../uploads/gallery/we/012_thumb.jpg"> </a> <a data-caption="Фото 13" data-fancybox="gallery" href="../uploads/gallery/we/013.jpg" rel="fancybox-gallery"> <img alt="Image 13" src="../uploads/gallery/we/013_thumb.jpg"> </a> <a data-caption="Фото 14" data-fancybox="gallery" href="../uploads/gallery/we/014.jpg" rel="fancybox-gallery"> <img alt="Image 14" src="../uploads/gallery/we/014_thumb.jpg"> </a> <a data-caption="Фото 15" data-fancybox="gallery" href="../uploads/gallery/we/015.jpg" rel="fancybox-gallery"> <img alt="Image 15" src="../uploads/gallery/we/015_thumb.jpg"> </a> <a data-caption="Фото 16" data-fancybox="gallery" href="../uploads/gallery/we/016.jpg" rel="fancybox-gallery"> <img alt="Image 16" src="../uploads/gallery/we/016_thumb.jpg"> </a> <a data-caption="Фото 17" data-fancybox="gallery" href="../uploads/gallery/we/017.jpg" rel="fancybox-gallery"> <img alt="Image 17" src="../uploads/gallery/we/017_thumb.jpg"> </a> <a data-caption="Фото 18" data-fancybox="gallery" href="../uploads/gallery/we/018.jpg" rel="fancybox-gallery"> <img alt="Image 18" src="../uploads/gallery/we/018_thumb.jpg"> </a> <a data-caption="Фото 19" data-fancybox="gallery" href="../uploads/gallery/we/019.jpg" rel="fancybox-gallery"> <img alt="Image 19" src="../uploads/gallery/we/019_thumb.jpg"> </a> <a data-caption="Фото 20" data-fancybox="gallery" href="../uploads/gallery/we/020.jpg" rel="fancybox-gallery"> <img alt="Image 20" src="../uploads/gallery/we/020_thumb.jpg"> </a> <a data-caption="Фото 21" data-fancybox="gallery" href="../uploads/gallery/we/021.jpg" rel="fancybox-gallery"> <img alt="Image 21" src="../uploads/gallery/we/021_thumb.jpg"> </a> <a data-caption="Фото 22" data-fancybox="gallery" href="../uploads/gallery/we/022.jpg" rel="fancybox-gallery"> <img alt="Image 22" src="../uploads/gallery/we/022_thumb.jpg"> </a> <a data-caption="Фото 23" data-fancybox="gallery" href="../uploads/gallery/we/023.jpg" rel="fancybox-gallery"> <img alt="Image 23" src="../uploads/gallery/we/023_thumb.jpg"> </a> <a data-caption="Фото 24" data-fancybox="gallery" href="../uploads/gallery/we/024.jpg" rel="fancybox-gallery"> <img alt="Image 24" src="../uploads/gallery/we/024_thumb.jpg"> </a> <a data-caption="Фото 25" data-fancybox="gallery" href="../uploads/gallery/we/025.jpg" rel="fancybox-gallery"> <img alt="Image 25" src="../uploads/gallery/we/025_thumb.jpg"> </a> <a data-caption="Фото 26" data-fancybox="gallery" href="../uploads/gallery/we/026.jpg" rel="fancybox-gallery"> <img alt="Image 26" src="../uploads/gallery/we/026_thumb.jpg"> </a> <a data-caption="Фото 27" data-fancybox="gallery" href="../uploads/gallery/we/027.jpg" rel="fancybox-gallery"> <img alt="Image 27" src="../uploads/gallery/we/027_thumb.jpg"> </a> <a data-caption="Фото 28" data-fancybox="gallery" href="../uploads/gallery/we/028.jpg" rel="fancybox-gallery"> <img alt="Image 28" src="../uploads/gallery/we/028_thumb.jpg"> </a> <a data-caption="Фото 29" data-fancybox="gallery" href="../uploads/gallery/we/029.jpg" rel="fancybox-gallery"> <img alt="Image 29" src="../uploads/gallery/we/029_thumb.jpg"> </a> <a data-caption="Фото 30" data-fancybox="gallery" href="../uploads/gallery/we/030.jpg" rel="fancybox-gallery"> <img alt="Image 30" src="../uploads/gallery/we/030_thumb.jpg"> </a> <a data-caption="Фото 31" data-fancybox="gallery" href="../uploads/gallery/we/031.jpg" rel="fancybox-gallery"> <img alt="Image 31" src="../uploads/gallery/we/031_thumb.jpg"> </a> <a data-caption="Фото 32" data-fancybox="gallery" href="../uploads/gallery/we/032.jpg" rel="fancybox-gallery"> <img alt="Image 32" src="../uploads/gallery/we/032_thumb.jpg"> </a> <a data-caption="Фото 33" data-fancybox="gallery" href="../uploads/gallery/we/033.jpg" rel="fancybox-gallery"> <img alt="Image 33" src="../uploads/gallery/we/033_thumb.jpg"> </a> <a data-caption="Фото 34" data-fancybox="gallery" href="../uploads/gallery/we/034.jpg" rel="fancybox-gallery"> <img alt="Image 34" src="../uploads/gallery/we/034_thumb.jpg"> </a> <a data-caption="Фото 35" data-fancybox="gallery" href="../uploads/gallery/we/035.jpg" rel="fancybox-gallery"> <img alt="Image 35" src="../uploads/gallery/we/035_thumb.jpg"> </a> <a data-caption="Фото 36" data-fancybox="gallery" href="../uploads/gallery/we/036.jpg" rel="fancybox-gallery"> <img alt="Image 36" src="../uploads/gallery/we/036_thumb.jpg"> </a> <a data-caption="Фото 37" data-fancybox="gallery" href="../uploads/gallery/we/037.jpg" rel="fancybox-gallery"> <img alt="Image 37" src="../uploads/gallery/we/037_thumb.jpg"> </a> <a data-caption="Фото 38" data-fancybox="gallery" href="../uploads/gallery/we/038.jpg" rel="fancybox-gallery"> <img alt="Image 38" src="../uploads/gallery/we/038_thumb.jpg"> </a> <a data-caption="Фото 39" data-fancybox="gallery" href="../uploads/gallery/we/039.jpg" rel="fancybox-gallery"> <img alt="Image 39" src="../uploads/gallery/we/039_thumb.jpg"> </a> <a data-caption="Фото 40" data-fancybox="gallery" href="../uploads/gallery/we/040.jpg" rel="fancybox-gallery"> <img alt="Image 40" src="../uploads/gallery/we/040_thumb.jpg"> </a> <a data-caption="Фото 41" data-fancybox="gallery" href="../uploads/gallery/we/041.jpg" rel="fancybox-gallery"> <img alt="Image 41" src="../uploads/gallery/we/041_thumb.jpg"> </a> <a data-caption="Фото 42" data-fancybox="gallery" href="../uploads/gallery/we/042.jpg" rel="fancybox-gallery"> <img alt="Image 42" src="../uploads/gallery/we/042_thumb.jpg"> </a> <a data-caption="Фото 43" data-fancybox="gallery" href="../uploads/gallery/we/043.jpg" rel="fancybox-gallery"> <img alt="Image 43" src="../uploads/gallery/we/043_thumb.jpg"> </a> <a data-caption="Фото 44" data-fancybox="gallery" href="../uploads/gallery/we/044.jpg" rel="fancybox-gallery"> <img alt="Image 44" src="../uploads/gallery/we/044_thumb.jpg"> </a> <a data-caption="Фото 45" data-fancybox="gallery" href="../uploads/gallery/we/045.jpg" rel="fancybox-gallery"> <img alt="Image 45" src="../uploads/gallery/we/045_thumb.jpg"> </a> <a data-caption="Фото 46" data-fancybox="gallery" href="../uploads/gallery/we/046.jpg" rel="fancybox-gallery"> <img alt="Image 46" src="../uploads/gallery/we/046_thumb.jpg"> </a> <a data-caption="Фото 47" data-fancybox="gallery" href="../uploads/gallery/we/047.jpg" rel="fancybox-gallery"> <img alt="Image 47" src="../uploads/gallery/we/047_thumb.jpg"> </a> <a data-caption="Фото 48" data-fancybox="gallery" href="../uploads/gallery/we/048.jpg" rel="fancybox-gallery"> <img alt="Image 48" src="../uploads/gallery/we/048_thumb.jpg"> </a> <a data-caption="Фото 49" data-fancybox="gallery" href="../uploads/gallery/we/049.jpg" rel="fancybox-gallery"> <img alt="Image 49" src="../uploads/gallery/we/049_thumb.jpg"> </a> <a data-caption="Фото 50" data-fancybox="gallery" href="../uploads/gallery/we/050.jpg" rel="fancybox-gallery"> <img alt="Image 50" src="../uploads/gallery/we/050_thumb.jpg"> </a> <a data-caption="Фото 51" data-fancybox="gallery" href="../uploads/gallery/we/051.jpg" rel="fancybox-gallery"> <img alt="Image 51" src="../uploads/gallery/we/051_thumb.jpg"> </a> <a data-caption="Фото 52" data-fancybox="gallery" href="../uploads/gallery/we/052.jpg" rel="fancybox-gallery"> <img alt="Image 52" src="../uploads/gallery/we/052_thumb.jpg"> </a> <a data-caption="Фото 53" data-fancybox="gallery" href="../uploads/gallery/we/053.jpg" rel="fancybox-gallery"> <img alt="Image 53" src="../uploads/gallery/we/053_thumb.jpg"> </a> <a data-caption="Фото 54" data-fancybox="gallery" href="../uploads/gallery/we/054.jpg" rel="fancybox-gallery"> <img alt="Image 54" src="../uploads/gallery/we/054_thumb.jpg"> </a> <a data-caption="Фото 55" data-fancybox="gallery" href="../uploads/gallery/we/055.jpg" rel="fancybox-gallery"> <img alt="Image 55" src="../uploads/gallery/we/055_thumb.jpg"> </a> <a data-caption="Фото 56" data-fancybox="gallery" href="../uploads/gallery/we/056.jpg" rel="fancybox-gallery"> <img alt="Image 56" src="../uploads/gallery/we/056_thumb.jpg"> </a> <a data-caption="Фото 57" data-fancybox="gallery" href="../uploads/gallery/we/057.jpg" rel="fancybox-gallery"> <img alt="Image 57" src="../uploads/gallery/we/057_thumb.jpg"> </a> <a data-caption="Фото 58" data-fancybox="gallery" href="../uploads/gallery/we/058.jpg" rel="fancybox-gallery"> <img alt="Image 58" src="../uploads/gallery/we/058_thumb.jpg"> </a> <a data-caption="Фото 59" data-fancybox="gallery" href="../uploads/gallery/we/059.jpg" rel="fancybox-gallery"> <img alt="Image 59" src="../uploads/gallery/we/059_thumb.jpg"> </a> <a data-caption="Фото 60" data-fancybox="gallery" href="../uploads/gallery/we/060.jpg" rel="fancybox-gallery"> <img alt="Image 60" src="../uploads/gallery/we/060_thumb.jpg"> </a> <a data-caption="Фото 61" data-fancybox="gallery" href="../uploads/gallery/we/061.jpg" rel="fancybox-gallery"> <img alt="Image 61" src="../uploads/gallery/we/061_thumb.jpg"> </a>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/realty-tuapse.ru\/informaciya\/fotogalereya"},"headline":"\u0424\u043e\u0442\u043e\u0433\u0430\u043b\u0435\u0440\u0435\u044f","datePublished":"2024-04-03T09:52:26+00:00","dateModified":"2025-01-09T02:02:17+00:00","author":{"@type":"Person","name":"ironcp"},"publisher":{"@type":"Organization","name":"\u0410\u0433\u0435\u043d\u0441\u0442\u0432\u043e \u043d\u0435\u0434\u0432\u0438\u0436\u0438\u043c\u043e\u0441\u0442\u0438 &quot;\u0422\u0443\u0430\u043f\u0441\u0435&quot;","logo":{"@type":"ImageObject","url":"https:\/\/realty-tuapse.ru\/themes\/dolphin\/images\/pages\/logo-open-ore.png","width":276,"height":60}},"description":"&nbsp;\r\n\r\n{customHtml-1}\r\n\r\n&nbsp;\r\n\r\n\u0424\u043e\u0442\u043e\u0433\u0430\u043b\u0435\u0440\u0435\u044f\r\n\r\n\u0410\u0433\u0435\u043d\u0442\u0441\u0442\u0432\u043e \u043d\u0435\u0434\u0432\u0438\u0436\u0438\u043c\u043e\u0441\u0442\u0438 &quot;\u0422\u0443\u0430\u043f\u0441\u0435&quot; \u0443\u0436\u0435 \u043c\u043d\u043e\u0433\u043e \u043b\u0435\u0442 \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u043d\u0430 \u0440\u044b\u043d\u043a\u0435 \u043d\u0435\u0434\u0432\u0438\u0436\u0438\u043c\u043e\u0441\u0442\u0438 \u0433\u043e\u0440\u043e\u0434\u0430 \u0422\u0443\u0430\u043f\u0441\u0435 \u0438 \u0422\u0443\u0430\u043f\u0441\u0438\u043d\u0441\u043a\u043e\u0433\u043e \u0440\u0430\u0439\u043e\u043d\u0430.\r\n\r\n\u0417\u0430 \u044d\u0442\u043e \u0432\u0440\u0435\u043c\u044f \u043c\u044b \u043d\u0430\u043a\u043e\u043f\u0438\u043b\u0438 \u043e\u0431\u0448\u0438\u0440\u043d\u044b\u0439 \u043e\u043f\u044b\u0442 \u0432 \u0441\u0444\u0435\u0440\u0435 \u043b\u044e\u0431\u044b\u0445 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439 \u0441 \u043e\u0431\u044a\u0435\u043a\u0442\u0430\u043c\u0438 \u043d\u0435\u0434\u0432\u0438\u0436\u0438\u043c\u043e\u0441\u0442\u0438 \u0432 \u0422\u0443\u0430\u043f\u0441\u0435 \u0441\u0430\u043c\u044b\u0445 \u0440\u0430\u0437\u043d\u044b\u0445 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0439, \u0432 \u0442\u043e\u043c \u0447\u0438\u0441\u043b\u0435 \u044d\u043b\u0438\u0442\u043d\u043e\u0439 \u043a\u0443\u0440\u043e\u0440\u0442\u043d\u043e\u0439 \u043d\u0435\u0434\u0432\u0438\u0436\u0438\u043c\u043e\u0441\u0442\u0438, \u0437\u0435\u043c\u0435\u043b\u044c\u043d\u044b\u0445 \u0443\u0447\u0430\u0441\u0442\u043a\u043e\u0432, \u043a\u043e\u043c\u043c\u0435\u0440\u0447\u0435\u0441\u043a\u0438\u0445 \u043f\u043e\u043c\u0435\u0449\u0435\u043d\u0438\u0439. \u041d\u0430\u0441 \u0432\u044b\u0433\u043e\u0434\u043d\u043e \u043e\u0442\u043b\u0438\u0447\u0430\u0435\u0442 \u043e\u0442 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432 \u043e\u043f\u0435\u0440\u0430\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c \u0438 \u0448\u0438\u0440\u043e\u043a\u043e\u0444\u043e\u0440\u043c\u0430\u0442\u043d\u043e\u0441\u0442\u044c \u043d\u0430\u0448\u0438\u0445 \u0443\u0441\u043b\u0443\u0433.\r\n\r\n\r\n                                                                                                                                                                                                                                  \r\n\r\n\r\n&nbsp;\r\n\r\n\u0422\u0443\u0430\u043f\u0441\u0435 \u0438 \u0422\u0443\u0430\u043f\u0441\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\r\n\r\n\u0423 \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u0433\u043e\u0440\u043e\u0434\u0430, \u043a\u0430\u043a \u0438 \u0443 \u0447\u0435\u043b\u043e\u0432\u0435\u043a\u0430, \u0435\u0441\u0442\u044c \u0441\u0432\u043e\u044f \u0431\u0438\u043e\u0433\u0440\u0430\u0444\u0438\u044f. \u041d\u0430\u0448 \u0433\u043e\u0440\u043e\u0434 \u043d\u043e\u0441\u0438\u0442 \u0438\u043c\u044f \u0440\u0435\u043a\u0438 \u0422\u0443\u0430\u043f\u0441\u0435, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0431\u0435\u0440\u0435\u0442 \u0441\u0432\u043e\u0435 \u043d\u0430\u0447\u0430\u043b\u043e \u0438\u0437 \u0441\u043b\u0438\u044f\u043d\u0438\u044f \u0434\u0432\u0443\u0445 \u0440\u0435\u043a \u0427\u0438\u043b\u0438\u043f\u0441\u0438 \u0438 \u041f\u0448\u0435\u043d\u0430\u0445\u043e, \u0447\u0442\u043e \u0432 \u043f\u0435\u0440\u0435\u0432\u043e\u0434\u0435 \u0441 \u0430\u0434\u044b\u0433\u0441\u043a\u043e\u0433\u043e \u043e\u0437\u043d\u0430\u0447\u0430\u0435\u0442 &quot;\u0422\u0443\u0430&quot; - \u0434\u0432\u0435, &quot;\u043f\u0441\u0435&quot;- \u0432\u043e\u0434\u044b.\r\n\r\n12 \u043c\u0430\u044f 1838 \u0433\u043e\u0434\u0430 \u043a \u0443\u0441\u0442\u044c\u044e \u0440\u0435\u043a\u0438 \u0422\u0443\u0430\u043f\u0441\u0435 \u043f\u043e\u0434\u043e\u0448\u043b\u0430 \u044d\u0441\u043a\u0430\u0434\u0440\u0430 \u0427\u0435\u0440\u043d\u043e\u043c\u043e\u0440\u0441\u043a\u043e\u0433\u043e \u0444\u043b\u043e\u0442\u0430 \u043f\u043e\u0434 \u043a\u043e\u043c\u0430\u043d\u0434\u043e\u0432\u0430\u043d\u0438\u0435\u043c \u0430\u0434\u043c\u0438\u0440\u0430\u043b\u0430 \u041b\u0430\u0437\u0430\u0440\u0435\u0432\u0430 \u041c.\u041f. \u0411\u044b\u043b\u043e \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u043e \u0412\u0435\u043b\u044c\u044f\u043c\u0438\u043d\u043e\u0432\u0441\u043a\u043e\u0435 \u0443\u043a\u0440\u0435\u043f\u043b\u0435\u043d\u0438\u0435. \u0412 \u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0435 \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u043b\u0438 \u0443\u0447\u0430\u0441\u0442\u0438\u0435 \u0434\u0435\u0441\u0430\u043d\u0442\u044b \u0440\u0443\u0441\u0441\u043a\u0438\u0445 \u0432\u043e\u0439\u0441\u043a \u0433\u0435\u043d\u0435\u0440\u0430\u043b\u0430 \u0420\u0430\u0435\u0432\u0441\u043a\u043e\u0433\u043e \u041d.\u041d.\r\n\r\n\u0412 1864 \u0433\u043e\u0434\u0443, \u043f\u043e\u0441\u043b\u0435 \u043e\u043a\u043e\u043d\u0447\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0433\u043e \u043f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u044f \u0417\u0430\u043f\u0430\u0434\u043d\u043e\u0433\u043e \u041a\u0430\u0432\u043a\u0430\u0437\u0430 \u043a \u0420\u043e\u0441\u0441\u0438\u0438, \u0432\u043e\u0437\u043d\u0438\u043a\u043b\u043e \u043d\u043e\u0432\u043e\u0435 \u043f\u043e\u0441\u0435\u043b\u0435\u043d\u0438\u0435, \u0433\u0434\u0435 \u0436\u0438\u0432\u0443\u0442 \u0440\u0443\u0441\u0441\u043a\u0438\u0435, \u0430\u0440\u043c\u044f\u043d\u0435, \u0433\u0440\u0435\u043a\u0438, \u0447\u0435\u0445\u0438, \u043f\u043e\u043b\u044f\u043a\u0438, \u043d\u0435\u043c\u0446\u044b, \u043c\u043e\u043b\u0434\u0430\u0432\u0430\u043d\u0435 \u0438 \u0434\u0440\u0443\u0433\u0438\u0435 \u043d\u0430\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438.\r\n\r\n\u0421 1898 \u0433\u043e\u0434\u0430 \u0432 \u043f\u043e\u0441\u0430\u0434\u0435 \u0432\u0432\u043e\u0434\u0438\u0442\u0441\u044f \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0435 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 (\u043f\u0435\u0440\u0432\u044b\u0439 \u0441\u0442\u0430\u0440\u043e\u0441\u0442\u0430 \u041a\u0440\u0438\u0432\u0435\u043d\u043a\u043e \u0410.\u041d.).\r\n\r\n\u0412 \u043a\u043e\u043d\u0446\u0435 XIX \u0432. \u0447\u0435\u0440\u0435\u0437 \u0422\u0443\u0430\u043f\u0441\u0435 \u043f\u0440\u043e\u0448\u043b\u043e \u0448\u043e\u0441\u0441\u0435 \u041d\u043e\u0432\u043e\u0440\u043e\u0441\u0441\u0438\u0439\u0441\u043a - \u0421\u0443\u0445\u0443\u043c\u0438.\r\n\r\n&nbsp;\r\n\r\n\r\n                                              \r\n\r\n\r\n&nbsp;\r\n\r\n\u0421\u0435\u0433\u043e\u0434\u043d\u044f \u0422\u0443\u0430\u043f\u0441\u0435 - \u0433\u043e\u0440\u043e\u0434 \u0441 \u0434\u0438\u043d\u0430\u043c\u0438\u0447\u043d\u043e \u0440\u0430\u0437\u0432\u0438\u0432\u0430\u044e\u0449\u0435\u0439\u0441\u044f \u044d\u043a\u043e\u043d\u043e\u043c\u0438\u043a\u043e\u0439, \u0432 \u043a\u043e\u0442\u043e\u0440\u043e\u0439 \u043d\u0430\u0440\u044f\u0434\u0443 \u0441 \u0442\u0440\u0430\u0434\u0438\u0446\u0438\u043e\u043d\u043d\u043e\u0439 \u043f\u0440\u043e\u043c\u044b\u0448\u043b\u0435\u043d\u043d\u043e\u0439 \u0441\u043e\u0441\u0442\u0430\u0432\u043b\u044f\u044e\u0449\u0435\u0439 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0442 \u0438 \u0440\u0430\u0437\u0432\u0438\u0432\u0430\u044e\u0442\u0441\u044f \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u044b \u0442\u0443\u0440\u0438\u0441\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u0438\u043d\u0434\u0443\u0441\u0442\u0440\u0438\u0438. \u0421\u0440\u0430\u0432\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e \u043d\u0435\u0431\u043e\u043b\u044c\u0448\u043e\u0439 \u0422\u0443\u0430\u043f\u0441\u0435 \u0437\u0430\u043d\u0438\u043c\u0430\u0435\u0442 \u0437\u0430\u043c\u0435\u0442\u043d\u043e\u0435 \u043c\u0435\u0441\u0442\u043e \u0432 \u044d\u043a\u043e\u043d\u043e\u043c\u0438\u043a\u0435 \u043a\u0440\u0430\u044f \u0438 \u0443\u0432\u0435\u0440\u0435\u043d\u043d\u043e \u0441\u043c\u043e\u0442\u0440\u0438\u0442 \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u0435.\r\n\r\n\u0411\u043e\u043b\u044c\u0448\u043e\u0435 \u0432\u043d\u0438\u043c\u0430\u043d\u0438\u0435 \u0432 \u043d\u0430\u0448\u0435\u043c \u0433\u043e\u0440\u043e\u0434\u0435 \u0443\u0434\u0435\u043b\u044f\u0435\u0442\u0441\u044f \u0431\u043b\u0430\u0433\u043e\u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0443 \u0438 \u043e\u0437\u0435\u043b\u0435\u043d\u0435\u043d\u0438\u044e. \u041f\u0440\u0435\u043e\u0431\u0440\u0430\u0437\u0438\u043b\u0438\u0441\u044c \u043c\u043d\u043e\u0433\u0438\u0435 \u0443\u043b\u0438\u0446\u044b. \u041d\u0430 \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439 \u0430\u043b\u043b\u0435\u0435 \u043f\u043e\u044f\u0432\u0438\u043b\u0441\u044f \u0444\u043e\u043d\u0442\u0430\u043d. \u0412 2002 \u0433\u043e\u0434\u0443 \u0444\u043e\u043d\u0442\u0430\u043d \u0443\u043a\u0440\u0430\u0441\u0438\u043b\u0430 \u0441\u043a\u0443\u043b\u044c\u043f\u0442\u0443\u0440\u043d\u0430\u044f \u0433\u0440\u0443\u043f\u043f\u0430 &quot;\u0414\u0435\u043b\u044c\u0444\u0438\u043d \u0438 \u0440\u0443\u0441\u0430\u043b\u043a\u0430&quot;. \u041d\u0430 \u041f\u0440\u0438\u043c\u043e\u0440\u0441\u043a\u043e\u043c \u0431\u0443\u043b\u044c\u0432\u0430\u0440\u0435 \u043e\u0442\u043a\u0440\u044b\u043b\u0438\u0441\u044c 3 \u0444\u043e\u043d\u0442\u0430\u043d\u0430. \u0413\u043e\u0440\u043e\u0434, \u043f\u043e\u0434 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0441\u0442\u0432\u043e\u043c \u0433\u043b\u0430\u0432\u044b \u0433\u043e\u0440\u043e\u0434\u0430, \u043e\u0444\u043e\u0440\u043c\u043b\u044f\u0435\u0442\u0441\u044f \u0432 \u0435\u0434\u0438\u043d\u043e\u043c \u0441\u0442\u0438\u043b\u0435, \u0430\u043b\u043b\u0435\u0438 \u0433\u043e\u0440\u043e\u0434\u0430 \u0443\u043b\u043e\u0436\u0435\u043d\u044b \u043a\u0440\u0430\u0441\u0438\u0432\u043e\u0439 \u043f\u043b\u0438\u0442\u043a\u043e\u0439, \u043e\u0444\u043e\u0440\u043c\u043b\u044f\u044e\u0442\u0441\u044f \u0432\u0438\u0442\u0440\u0438\u043d\u044b \u043c\u0430\u0433\u0430\u0437\u0438\u043d\u043e\u0432 \u0438 \u043f\u0440\u0438\u043b\u0435\u0433\u0430\u044e\u0449\u0430\u044f \u043a \u043d\u0438\u043c \u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u044f.\r\n\r\n&nbsp;\r\n\r\n\r\n          \r\n                                                                                                                                                                           \r\n\r\n"}</script>                    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer">
+<div class="row">
+<div class="col-md-6 col-sm-6 footer_bl1">
+<div class="h3 fint">О нас</div>
+<div class="footer_content">
+<div class="row">
+<div class="col-md-6 logo_footer">
+<div class="logo">
+<a href="../index.htm">
+<div class="logo-img"><img src="../themes/dolphin/assets/images/logo.png" alt="Агенство недвижимости &quot;Туапсе&quot;"></div>
+<div class="logo-text">Агенство недвижимости &quot;Туапсе&quot;</div>
+</a>
+</div>
+</div>
+<div class="col-md-6 contact_footer">
+<ul class="list-unstyled">
+<li>
+<i class="fas fa-envelope"></i> <span class="email" id="e644307905">[javascript protected email address]</span><script>/*<![CDATA[*/eval("var a=\"JtmAG4uUYb5a2eXTgM9cpnB@Z-o3Orv_.KifH6xQVs0dICzhLPSWDF7yjwN8qR1+lEk\";var b=a.split(\"\").sort().join(\"\");var c=\"qRsj8CtqRsj8CeFsPDmNR\";var d=\"\";for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));document.getElementById(\"e644307905\").innerHTML=\"<a href=\\\"mailto:\"+d+\"\\\">\"+d+\"</a>\"")/*]]>*/</script>                            </li>
+<li> 						<ul style="list-style: none; padding: 0; margin-top:15px; display: flex; flex-wrap: wrap; gap: 15px; max-width: 300px;">
+<li style="flex: 1 1 45%;"><a href="tel:+78616725555"><i class="fas fa-phone"></i> +7 (86167) 25555</a></li>
+<li style="flex: 1 1 45%;"><a href="tel:+78616737777"><i class="fas fa-phone"></i> +7 (86167) 37777</a></li>
+<li style="flex: 1 1 45%;"><a href="tel:+78616747777"><i class="fas fa-phone"></i> +7 (86167) 47777</a></li>
+<li style="flex: 1 1 45%;"><a href="tel:+79183727777"><i class="fas fa-phone"></i> +7 (918) 3727777</a></li>
+<li style="flex: 1 1 45%;"><a href="tel:+79184337777"><i class="fas fa-phone"></i> +7 (918) 4337777</a></li>
+<li style="flex: 1 1 45%;"><a href="tel:+79884177777"><i class="fas fa-phone"></i> +7 (988) 4177777</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="about_product">
+<p>Агентство недвижимости Туапсе – Ваш проводник в мир выбора идеального жилья. Мы видим в каждом клиенте уникальную личность, стремимся понять ваши запросы и мечты, чтобы найти жилище, отвечающее именно вашим представлениям об идеале.</p>
+</div>
+</div>
+</div>
+<div class="col-md-3 col-sm-3 footer_bl2">
+<div class="h3 fint">Полезная информация</div>
+<div class="footer_content">
+<ul class="list-unstyled" id="main_menu_nav">
+<li class="depth_zero depth_item_numb_0"><a class="slow" href="../guestad/add.html">Добавить объявление</a></li>
+<li class="depth_zero depth_item_numb_1"><a class="slow" href="../review.html">Отзывы</a></li>
+<li class="depth_zero depth_item_numb_2"><a class="slow" href="../news.html">Новости</a></li>
+<li class="depth_zero depth_item_numb_3"><a class="slow" href="../sitemap.html">Карта сайта</a></li>
+<li class="depth_zero depth_item_numb_4"><a class="slow" href="../callback.html">Заказать обратный звонок</a></li>
+</ul>                </div>
+</div>
+<div class="col-md-3 col-sm-3 footer_bl3 text-right">
+<div class="h3 fint"></div>
+<div class="footer_content">
+<ul class="list-unstyled">
+<li><a href="../booking/request.html" class="slow btn btn-default fancy">Оставить заявку</a></li>
+<li class="plus"><a href="../guestad/add.html" class="slow btn btn-primary">Добавить объявление</a></li>
+<li class="lk"><a href="../login.html" class="slow btn btn-default">Личный кабинет</a>
+</li>
+</ul>
+</div>
+<div class='footer_share'><ul class="way2blogging-social way2blogging-cssanime way2blogging-size24">
+<li style="background-image:url(../assets/e0d915dc/images/24px/vk.png);"><a rel="nofollow" target="_blank" href="http://vk.com/share.php?url=https%3A%2F%2Frealty-tuapse.ru%2Finformaciya%2Ffotogalereya&title=%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F"><strong>VK.com</strong></a></li>
+<li style="background-image:url(../assets/e0d915dc/images/24px/odnoklassniki.png);"><a rel="nofollow" target="_blank" href="https://connect.ok.ru/offer?url=https%3A%2F%2Frealty-tuapse.ru%2Finformaciya%2Ffotogalereya&title=%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F"><strong>Odnoklassniki</strong></a></li>
+<li style="background-image:url(../assets/e0d915dc/images/24px/facebook.png);"><a rel="nofollow" target="_blank" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Frealty-tuapse.ru%2Finformaciya%2Ffotogalereya&t=%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F"><strong>Facebook</strong></a></li>
+<li style="background-image:url(../assets/e0d915dc/images/24px/twitter.png);"><a rel="nofollow" target="_blank" href="http://twitter.com/intent/tweet?url=https%3A%2F%2Frealty-tuapse.ru%2Finformaciya%2Ffotogalereya&text=%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F"><strong>Twitter</strong></a></li></ul></div>        </div>
+</div>
+</div>
+<div class="footer_bottom">
+<div class="row">
+<div class="col-md-6 col-sm-6">&copy; Агенство недвижимости &quot;Туапсе&quot;,
+2011—2026            &nbsp;<img src="../themes/dolphin/images/icons8-dolphin-26.png" alt="Dolphin theme" title="Dolphin theme"> β
+</div>
+<div class="col-md-6 col-sm-6 text-right">
+</div>
+</div>
+</div>
+<div id="loading" style="display:none;">Загрузка содержимого...</div>
+<div id="loading-blocks" style="display:none;"></div>
+<div id="overlay-content" style="display:none;"></div>
+<div id="toTop"><i class="fas fa-arrow-alt-circle-up"></i></div>
+</div>
+<div class="side-nav" id="side-nav">
+<div class="wrapper-side" id="wrapper-side">
+<button type="button" class="close_btn_slide btn"><i class="far fa-times-circle"></i></button>
+<div class="slinky">
+<ul id="slinky">
+<li class="depth_zero depth_item_numb_0"><a href="#">Поиск</a>
+<ul class="xpopdroplevels sub_menu_dropdown">
+<li><a href="../page/poisk-na-karte.html">Поиск на карте</a></li>
+<li><a href="../page/prodazha.html">Продажа</a></li>
+<li><a href="../page/novostrojki.html">Новостройки</a></li>
+<li><a href="../page/arenda.html">Аренда</a></li>
+<li><a href="../page/gostinicy.html">Гостиницы</a></li>
+</ul>
+</li>
+<li class="depth_zero depth_item_numb_1"><a href="../review.html">Отзывы</a></li>
+<li class="depth_zero depth_item_numb_2"><a href="../contacts.html">Контакты</a></li>
+<li class="depth_zero depth_item_numb_3"><a href="../news.html">Новости</a></li>
+<li class="depth_zero depth_item_numb_4"><a href="../favorites.html">Избранное</a></li>
+<li class="depth_zero depth_item_numb_5"><a href="#">Информация</a>
+<ul class="xpopdroplevels sub_menu_dropdown">
+<li><a href="fotogalereya.html">Фотогалерея</a></li>
+<li><a href="../news.html">Новости</a></li>
+</ul>
+</li>
+<li class="depth_zero depth_item_numb_6"><a href="#">Дополнительно</a>
+<ul class="xpopdroplevels sub_menu_dropdown">
+<li><a href="../page/politika-konfidencialnosti.html">Политика конфиденциальности</a></li>
+<li><a href="../page/polzovatelskoe-soglashenie.html">Пользовательское соглашение</a></li>
+<li><a href="../faq.html">Вопросы-ответы</a></li>
+</ul>
+</li>
+</ul>        </div>
+<div class="visible-xs">
+<div class="top_link_bl top_link_bl1 top_link_bl1__main">
+<div class="top_link_bl compare_block">
+<div style="display: none" id="comparison_top_header">
+<a href="../index.htm" class="btn btn-primary">
+<i class="fa fa-list"></i>
+0 в списке сравнения                            </a>
+</div>
+</div>
+<ul class="list-inline list-inline__main text-left">
+<li class="currency_block btn-group language_block currency_block__main">
+</li>
+<li class="btn-group language_block language_block__main">
+</li>
+</ul>
+<ul class="list-inline list-inline__main text-left">
+<li class="personal_cabinet personal_cabinet__main">
+<div class="dropdown">
+<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2Main" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<i class="fas fa-user-cog"></i> Личный кабинет <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" id="main_menu_nav_main_2">
+<li class="dropdown-item"><a class="slow" href="../login.html">Войти</a></li>
+<li class="dropdown-item"><a class="slow" href="../register.html">Зарегистрироваться</a></li>
+<li class="dropdown-item"><a class="slow" href="../recover.html">Забыли пароль?</a></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="top_menu top_link_bl">
+<ul class="nav navbar-nav" id="main_menu_nav_main_1">
+<li class="depth_zero depth_item_numb_0"><a class="slow" href="../contact-us.html">Связаться с нами</a></li>
+<li class="depth_zero depth_item_numb_1"><a class="slow" href="../guestad/add.html">Добавить объявление</a></li>
+</ul>            </div>
+</div>
+</div>
+</div>
+<div class="side-nav-overlay"></div>
+<script src="../min/serve/g-4?g=6e54b59239ef3c8d642b2bbe61314810&amp;lm=1711021310"></script>
+<script>if(typeof jQuery != "undefined"){ 
+$.ajaxPrefilter(function(options, originalOptions, jqXHR){ if(originalOptions.type){ var type = originalOptions.type.toLowerCase(); } else { var type = ""; } if(type == "post" && typeof originalOptions.data === "object"){ options.data = $.extend(originalOptions.data, { "YII_CSRF_TOKEN": "VUFPTzIyZUhZWjZxM2wxNk5iMXllMFlIM1BYVWI1Wm2zHQg_HZ2Rw_Zm40DgrPF4q3saAJ2prbIrvXMd_7TmcQ==" }); options.data = $.param(options.data); } }); 
+}
+jQuery('body').on('change','#city',function(){$("#city").removeClass("less-opacity-control");jQuery.ajax({'type':'GET','url':'\x2FmetroStations\x2Fmain\x2FgetMetroStations','data':"city="+$("#city").val()+"&type=0&onlyWithAds=1",'dataType':'json','success':function(result){
+if (result.dropdownMetro) { 
+$("#metro-block").show(); 
+$("#metro").removeAttr("disabled");
+$("#metro").html(result.dropdownMetro);
+$("#metro")[0].sumo.reload();
+$("#metro").parent().parent().removeClass("less-opacity-control");
+} 
+else { 
+$("#metro-block").hide(); 
+$("#metro").attr("disabled", "disabled");
+$("#metro").html("");
+$("#metro")[0].sumo.reload();
+}
+$("#ap_district").removeClass("less-opacity-control");
+$("#ap_district").html(result.districts);
+$("#ap_district").select2().trigger("change");
+},'cache':false});return false;});
+$('#city').select2([]);
+var sumoMetroSelectCaptionFormat = '\u0412\u044B\u0431\u0440\u0430\u043D\u043E\x20\x7B0\x7D';
+var sumoMetroSelectAlltext = '\u0412\u044B\u0431\u0440\u0430\u0442\u044C\x20\u0432\u0441\u0435';
+var sumoMetroSelectPlaceholder = '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435\x20\u0441\u0442\u0430\u043D\u0446\u0438\u0438\x20\u043C\u0435\u0442\u0440\u043E';
+var sumoMetroFilterText = '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\x20\u043F\u0435\u0440\u0432\u044B\u0435\x20\u0431\u0443\u043A\u0432\u044B\x20\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F';
+var sliderRangeFields = false;
+var cityField = false;
+var loc = 0;
+var enableMetro = 1;
+var countFiled = 11;
+if (enableMetro)
+countFiled = countFiled + 1;
+var isInner = 0;
+var heightField = 54;
+var advancedIsOpen = 0;
+var compact = 0;
+var minHeight = isInner ? 80 : 360;
+var searchCache = [[]];
+var objType = 0;
+var useSearchCache = false;
+if (useDatePicker === undefined) {
+var useDatePicker = false;
+}
+function doSearchAction() {
+if($("#search_term_text").length){
+var term = $(".search-term input#search_term_text").val();
+if (term.length < 4 || term == '\u041F\u043E\u0438\u0441\u043A\x20\u043F\u043E\x20\u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044E\x20\u0438\u043B\u0438\x20\u0430\u0434\u0440\u0435\u0441\u0443') {
+$(".search-term input#search_term_text").attr("disabled", "disabled");
+}
+}
+$('#search-form input, #search-form select').each(function() {
+var val = $(this).val();
+var disable = (!val || val == null || val == 0);
+if(disable){
+$(this).prop('disabled', 'disabled');
+}
+});
+$("#search-form").submit();
+}
+var search = {
+init: function(){
+if(sliderRangeFields){
+$.each(sliderRangeFields, function() {
+search.initSliderRange(this.params);
+});
+}
+if(countFiled <= 8){
+if(advancedIsOpen){
+if(isInner){
+search.innerSetAdvanced();
+}else{
+search.indexSetNormal();
+//$('#more-options-link').hide();
+}
+} else if(!isInner){
+//$('#more-options-link').hide();
+}
+} else {
+if(advancedIsOpen){
+if(isInner){
+search.innerSetAdvanced();
+} else {
+search.indexSetAdvanced();
+}
+}
+}
+if(useDatePicker){
+//fix https://stackoverflow.com/questions/3961963/beforeshow-event-not-firing-on-jqueryui-datepicker
+(function ($) {
+$.extend($.datepicker, {
+// Reference the orignal function so we can override it and call it later
+_inlineDatepicker2: $.datepicker._inlineDatepicker,
+// Override the _inlineDatepicker method
+_inlineDatepicker: function (target, inst) {
+// Call the original
+this._inlineDatepicker2(target, inst);
+var beforeShow = $.datepicker._get(inst, "beforeShow");
+extendRemove(inst.settings, (beforeShow ? beforeShow.apply(target, [target, inst]) : {}));
+}
+});
+}(jQuery));
+jQuery.each(useDatePicker, function(id, options) {
+options.beforeShow = function(input, inst) {
+$(".hasDatepicker.eval_period").each(function(index, elm){
+if (index == 0) from = elm;
+if (index == 1) to = elm;
+})
+if (to.id == input.id) to = null;
+if (from.id == input.id) from = null;
+if (to) {
+maxDate = $(to).val();
+if (maxDate)
+$(inst.input).datepicker("option", "maxDate", maxDate);
+} 
+if (from) {
+minDate = $(from).val();
+if (minDate)
+$(inst.input).datepicker("option", "minDate", minDate);
+}
+$("#ui-datepicker-div").css("clip", "auto");
+};
+jQuery('#' + id).datepicker('destroy');
+jQuery('#' + id).datepicker(jQuery.extend({
+showMonthAfterYear: false
+}, jQuery.datepicker.regional['ru'], options));
+});
+}
+if($("#search_term_text").length){
+search.initTerm();
+}
+// themes/dolphin/views/site/search/location/select.php
+if (loc) {
+mSetLocation();
+}
+},
+initTerm: function(){
+$(".search-term input#search_term_text").keypress(function(e) {
+var code = (e.keyCode ? e.keyCode : e.which);
+if(code == 13) { // Enter keycode
+prepareSearch();
+return false;
+}
+});
+},
+initSliderRange: function(sliderParams){
+$( "#slider-range-"+sliderParams.field ).slider({
+range: true,
+min: sliderParams.min,
+max: sliderParams.max,
+values: [ sliderParams.min_sel , sliderParams.max_sel ],
+step: sliderParams.step,
+slide: function( e, ui ) {
+$( "#"+sliderParams.field+"_min_val" ).html( Math.floor(ui.values[ 0 ]) );
+$( "#"+sliderParams.field+"_min" ).val( Math.floor(ui.values[ 0 ]) );
+$( "#"+sliderParams.field+"_max_val" ).html( Math.ceil(ui.values[ 1 ]) );
+$( "#"+sliderParams.field+"_max" ).val( Math.ceil(ui.values[ 1 ]) );
+},
+stop: function(e, ui) {  changeSearch(); }
+});
+},
+indexSetNormal: function(){
+$('fieldset.main_field').toggle(400);
+$('fieldset.additional_field').toggle(400);
+$('#more-options-link').toggleClass('next prev');
+$('#more-options-link span').text('\u041C\u0435\u043D\u044C\u0448\u0435\x20\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432');
+advancedIsOpen = 0;
+},
+indexSetAdvanced: function(){
+$('fieldset.main_field').toggle(400);
+$('fieldset.additional_field').toggle(400);
+$('#more-options-link').toggleClass('next prev');
+$('#more-options-link span').text('\u0411\u043E\u043B\u044C\u0448\u0435\x20\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432');
+advancedIsOpen = 1;
+},
+innerSetNormal: function(){
+$("#search-form div.additional_hidden_fields").hide();
+$("#more-options-link").html("<i class='fas fa-1x fa-angle-double-down'></i> " + '\u0411\u043E\u043B\u044C\u0448\u0435\x20\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432');
+advancedIsOpen = 0;
+},
+innerSetAdvanced: function(){
+$("#search-form div.additional_hidden_fields").show();
+$("#more-options-link").html("<i class='fas fa-1x fa-angle-double-up'></i> " + '\u041C\u0435\u043D\u044C\u0448\u0435\x20\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432');
+advancedIsOpen = 1;
+},
+getHeight: function(){
+var height = isInner ? parseInt(countFiled / 3) * heightField + 30 : countFiled * heightField;
+if(height < minHeight){
+return minHeight;
+}
+return height;
+},
+renderForm: function(obj_type_id, ap_type_id){
+$('#search_form').html(searchCache[obj_type_id][ap_type_id].html);
+sliderRangeFields = searchCache[obj_type_id][ap_type_id].sliderRangeFields;
+cityField = searchCache[obj_type_id][ap_type_id].cityField;
+countFiled = searchCache[obj_type_id][ap_type_id].countFiled + (loc ? 2 : 0) + (enableMetro ? 1 : 0);
+search.init();
+if(!useSearchCache){
+delete(searchCache[obj_type_id][ap_type_id]);
+}
+changeSearch();
+if (loc) {
+$('#country').select2([]);
+$('#region').select2([]);
+}
+$('#city').select2([]);
+if (enableMetro) {
+$('#metro').SumoSelect({captionFormat: sumoMetroSelectCaptionFormat, selectAlltext: sumoMetroSelectAlltext, csvDispCount:1, placeholder: sumoMetroSelectPlaceholder, filter: true, filterText: sumoMetroFilterText});
+}
+},
+reloadForm: function(){
+var obj_type_id = $('#objType').val();
+var ap_type_id = $('#apType').val();
+if(typeof searchCache[obj_type_id] == 'undefined' || typeof searchCache[obj_type_id][ap_type_id] == 'undefined'){
+$.ajax({
+url: '/quicksearch/main/loadForm' + '?' + $('#search-form').serialize(),
+dataType: 'json',
+type: 'GET',
+data: { is_inner: 0, compact: advancedIsOpen ? 0 : 1 },
+success: function(data){
+if(data.status == 'ok'){
+searchCache[obj_type_id] = [];
+searchCache[obj_type_id][ap_type_id] = [];
+searchCache[obj_type_id][ap_type_id].html = data.html;
+searchCache[obj_type_id][ap_type_id].sliderRangeFields = data.sliderRangeFields;
+searchCache[obj_type_id][ap_type_id].cityField = data.cityField;
+searchCache[obj_type_id][ap_type_id].countFiled = data.countFiled;
+search.renderForm(obj_type_id, ap_type_id);
+}
+}
+})
+} else {
+search.renderForm(obj_type_id, ap_type_id);
+}
+}
+}
+$(function(){
+search.init();
+$('#search-form').on('change', '#objType,#apType', function() {
+setTabSearch();
+search.reloadForm();
+});
+$("#search-form").on('click', '#more-options-link', function(){
+if(advancedIsOpen){
+search.indexSetNormal();
+} else {
+search.indexSetAdvanced();
+}
+});
+if(isInner && !compact){
+search.innerSetAdvanced();
+}
+});
+function prepareSearch() {
+var term = $(".search-term input#search_term_text").val();
+if (term != '\u041F\u043E\u0438\u0441\u043A\x20\u043F\u043E\x20\u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044E\x20\u0438\u043B\u0438\x20\u0430\u0434\u0440\u0435\u0441\u0443') {
+if (term.length >= 4) {
+term = term.split(" ");
+term = term.join("+");
+$("#do-term-search").val(1);
+window.location.replace("https://realty-tuapse.ru/search?term="+term+"&do-term-search=1");
+} else {
+alert('\u041C\u0438\u043D\u0438\u043C\u0443\u043C\x204\x20\u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432');
+}
+}
+}
+function setSearchType(type) {
+$('input:hidden[id="apType"]').val(type);
+$('select#apType').val(type).change();
+$('ul#search_tab li').removeClass('active');
+$('#li-search-type-' + type).addClass('active');
+}
+function setTabSearch() {
+var type = $('select#apType').val();
+$('ul#search_tab li').removeClass('active');
+$('#li-search-type-' + type).addClass('active');
+}
+$('.main_content').on("click", ".compare-check", function() {
+var apId = $(this).attr("data-id");
+var isChecked = $('input.compare_check_'+apId).attr("checked") == "checked";
+if(isChecked){
+deleteCompare(apId);
+} else {
+addCompare(apId, this);
+}
+});
+function addCompare(apId, el) {
+$.ajax({
+type: "POST",
+url: '/comparisonList/main/add',
+data: {apId: apId, isJson: 1},
+dataType: 'json',
+success: function(data){
+if (data.status == "ok") {
+showCompareBar(data);
+compareAnimate(apId, el);
+$('.compare-label-'+apId).html('\u0412\x20\u0441\u043F\u0438\u0441\u043A\u0435\x20\u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044F').prop("href", "/comparisonList"); //.attr("data-rel-compare", "true");
+$('input.compare_check_'+apId).attr("checked", "checked");
+}
+else {
+$('input.compare_check_'+apId).removeAttr("checked");
+if (data.error == "max_limit") {
+error('\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C\x3A\x206\x20\u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0439');
+//$('.compare-label-'+apId).html('\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C\x3A\x206\x20\u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0439');
+}
+else {
+error('\u041E\u0448\u0438\u0431\u043A\u0430');
+//$('.compare-label-'+apId).html('\u041E\u0448\u0438\u0431\u043A\u0430');
+}
+}
+}
+});
+}
+function deleteCompare(apId) {
+$.ajax({
+type: "POST",
+url: "/comparisonList/main/del",
+data: {apId: apId, isJson: 1},
+dataType: 'json',
+success: function(data){
+if (data.status == "ok") {
+showCompareBar(data);
+$('.compare-label-'+apId).html('\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C\x20\u043A\x20\u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044E');
+$('.compare-label-'+apId).prop("href", "javascript:void(0);");
+$('input.compare_check_'+apId).removeAttr("checked");
+}
+else {
+$('input.compare_check_'+apId).attr("checked", "checked");
+error('\u041E\u0448\u0438\u0431\u043A\u0430');
+}
+}
+});
+}
+function compareAnimate(apId, el) {
+if($(el).attr('data-notAnimate') == 1){
+return;
+}  
+if(el){
+var that = $(el).parents('.apartment_item').find('img.slick-active');
+} else {
+var that = $('.ore-ap-'+apId).find('img.slick-active');
+}
+var bascket = $("#comparison_top");
+var w = that.width();
+that.clone()
+.css({
+'width': '100px',
+'height': '80px',
+'position': 'absolute',
+'z-index': '9999',
+top: that.offset().top,
+left: that.offset().left
+})
+.appendTo("body")
+.animate({
+opacity: 0.05,
+left: bascket.offset()['left'],
+top: bascket.offset()['top'],
+width: 20
+}, 1000, function () {
+$(this).remove();
+});
+}
+function showCompareBar(data) {
+if(data.count > 0){
+$('#comparison_top a, #comparison_top_header a').html(data.countString);
+$('#comparison_top, #comparison_top_header').show();
+} else {
+$('#comparison_top, #comparison_top_header').hide();
+}
+}
+$('a.fancy').fancybox({'ajax':{'data':'isFancy\x3Dtrue'},'titlePosition':'inside','onClosed':function(){
+var capClick = $(".get-new-ver-code");
+if(typeof capClick !== "undefined")	{ 
+capClick.click(); 
+}
+}});
+jQuery(function($) {
+$.cookie("test_cookie", "cookie_value", {sameSite: "Lax", path: "/"});
+if ($.cookie("test_cookie") != "cookie_value") {
+$.fancybox(
+'\x3Cdiv\x20id\x3D\x22cookiesDisabledAlert\x22\x20class\x3D\x22white\x2Dpopup\x2Dblock\x22\x3E\x0D\x0A\x20\x20\x20\x20\x3Cdiv\x20class\x3D\x22title\x20highlight\x2Dleft\x2Dright\x22\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x3Cdiv\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3Ch1\x3ECookies\x20\u0437\u0430\u043F\u0440\u0435\u0449\u0435\u043D\u044B\x3C\x2Fh1\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x2Fdiv\x3E\x0D\x0A\x20\x20\x20\x20\x3C\x2Fdiv\x3E\x0D\x0A\x20\x20\x20\x20\x3Cdiv\x20class\x3D\x22clear\x22\x3E\x3C\x2Fdiv\x3E\x0D\x0A\x20\x20\x20\x20\x3Cbr\x2F\x3E\x0D\x0A\x0D\x0A\x20\x20\x20\x20\x3Cdiv\x20class\x3D\x22cookies\x2Ddisabled\x2D\x2Dbody\x22\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430,\x20\u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u0435\x20Cookies\x20\u0432\x20\u0432\u0430\u0448\u0435\u043C\x20\u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435.\x20\x20\x20\x20\x3C\x2Fdiv\x3E\x0D\x0A\x3C\x2Fdiv\x3E',
+{
+"autoDimensions": false,
+"width" : 350,
+"height" :"auto",
+"transitionIn" : "none",
+"transitionOut" : "none",
+"modal" : true
+}
+);
+}
+focusSubmit($("select#objType"));
+focusSubmit($("input#priceMin"));
+focusSubmit($("input#priceMax"));
+focusSubmit($("input#floorMin"));
+focusSubmit($("input#floorMax"));
+focusSubmit($("select#rooms"));
+focusSubmit($("input#sApId"));
+$("#callback-block-url").click(function(e){
+e.preventDefault();
+});
+$.cookieBar({/*acceptOnContinue:false, */ fixed: true, bottom: true, message: '\u0410\u0433\u0435\u043D\u0441\u0442\u0432\u043E\x20\u043D\u0435\u0434\u0432\u0438\u0436\u0438\u043C\u043E\u0441\u0442\u0438\x20\x26quot\x3B\u0422\u0443\u0430\u043F\u0441\u0435\x26quot\x3B\x20\u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\x20cookie,\x20\x3Ca\x20href\x3D\x22https\x3A\x2F\x2Frealty\x2Dtuapse.ru\x2Fpage\x2Fpolitika\x2Dkonfidencialnosti\x22\x20target\x3D\x22_blank\x22\x3E\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430\x20\u043A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u0438\x3C\x2Fa\x3E', acceptText : 'X'});
+});</script>
+</body>
+</html>

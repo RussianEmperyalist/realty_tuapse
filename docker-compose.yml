@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: realty-tuapse-app
+    restart: unless-stopped
+    working_dir: /var/www
+    ports:
+      - "8080:80"
+    volumes:
+      - ./.env:/var/www/.env:ro
+      - ./storage:/var/www/storage
+      - ./public:/var/www/public
+      - ./legacy-source:/var/www/legacy-source:ro
+      - ./database:/var/www/database
+    networks:
+      - realty-network
+
+networks:
+  realty-network:
+    driver: bridge

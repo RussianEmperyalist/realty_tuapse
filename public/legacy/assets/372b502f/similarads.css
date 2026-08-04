@@ -1,0 +1,32 @@
+.similar-ads-in-home .owl-carousel{
+
+}
+.owl-similar-ads .item{
+    margin-top: 0px;
+}
+.properties__details{
+    background: #fff;
+    padding: 15px 20px;
+}
+.title_owl{
+    margin-bottom: 15px;
+}
+.properties__details .h4 a{
+    font-size: 15px;
+    font-weight: 500;
+}
+.similar-price{
+    font-size: 15px;
+}
+.similar-price{
+    color: #fa8500;
+    font-weight: bold;
+}
+.properties__details .btn-primary{
+
+
+
+}
+.properties__details .btn-primary:hover{
+
+}

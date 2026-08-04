@@ -1,0 +1,28 @@
+div.logo a {
+    /*background: url('../images/logo-open-ore-bg.png') no-repeat 77px top;*/
+}
+
+div.logo_footer .logo a {
+    background: url('../images/logo-open-ore-bg-white.png') no-repeat 77px top;
+}
+
+.slider__img {
+    background: url("../images/ajax-loader.gif") no-repeat center center;
+}
+
+.slider--wide .slider__img {
+    background: url("../images/ajax-loader.gif") no-repeat center center;
+}
+
+.slider--dots .slider__img {
+    background: url("../images/ajax-loader.gif") no-repeat center center;
+}
+
+.slick-loading .slick-list {
+    background: #fff url('../images/ajax-loader.gif') center center no-repeat;
+}
+
+.entries-image img {
+    max-width: 400px;
+    width: 100%;
+}

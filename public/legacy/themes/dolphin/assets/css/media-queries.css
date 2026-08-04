@@ -1,0 +1,596 @@
+@media only screen and (max-width: 1600px) {
+    .logo {
+    }
+
+    .sidebar {
+        width: 20%;
+    }
+
+    .col_right {
+        width: 80%;
+        left: 20%;
+    }
+
+    .top_link_bl {
+        padding: 0px 9px;
+    }
+
+    .item_obj .text {
+        padding: 10px;
+    }
+
+    .catalog .apartment_item {
+        width: 33.33333333%;
+    }
+
+    .catalog .more_info .btn {
+        font-size: 9px;
+    }
+
+    .search_index .formalabel {
+        font-size: 12px;
+    }
+
+    .footer .fint {
+        font-size: 22px;
+    }
+
+    .side-nav {
+        width: 20%;
+        left: -20%;
+    }
+
+    .item-city {
+        width: 330px
+    }
+
+    .item-city.slick-center {
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .map_wrapper, .feedback_wrapper {
+        width: 50%;
+        height: 500px;
+    }
+
+    #contactMap {
+        height: 100%;
+    }
+
+    .sidebar_inner {
+        padding: 30px 0px;
+    }
+
+    .sidebar {
+        width: 30%;
+    }
+
+    .side-nav {
+        width: 30%;
+        left: -30%;
+    }
+
+    .mobile-button {
+        display: block;
+        float: none;
+        text-align: center;
+    }
+
+    .mobile-button button i {
+        display: table-cell;
+        padding-right: 5px;
+    }
+
+    .footer_bl1 {
+        width: 70%;
+    }
+
+    .footer_bl2 {
+        width: 30%;
+    }
+
+    .footer_bl3 {
+        width: 100%;
+    }
+
+    .footer_content ul li {
+        display: inline-block;
+    }
+
+    .item_news {
+        width: 50%;
+    }
+
+    .catalog .apartment_item {
+        width: 50%;
+    }
+
+    .city-slick .item-city {
+    }
+
+    .city-slick .item-city img {
+    }
+
+    .mobile-button button {
+        margin: 0px auto;
+    }
+
+    .col_right {
+        width: 70%;
+        left: 30%;
+    }
+
+    .top_menu .navbar-nav > li > a {
+        padding: 0px 10px;
+    }
+
+    #main_menu_nav_3 {
+        display: none;
+    }
+
+    .mobile-button button span {
+        display: table-cell;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+
+}
+
+@media screen and (max-width: 800px) {
+    /**** start resp-easy TABS ****/
+    .resp-tabs-container {
+        margin-bottom: 20px;
+    }
+
+    ul.resp-tabs-list {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .resp-tabs-list li {
+        font-weight: 600;
+        font-size: 13px;
+        display: inline-block;
+        padding: 13px 10px;
+        margin: 0;
+        list-style: none;
+        cursor: pointer;
+        float: left;
+    }
+
+    .resp-tabs-container {
+        padding: 0px;
+        background-color: #fff;
+        clear: left;
+    }
+
+    h2.resp-accordion {
+        cursor: pointer;
+        padding: 5px;
+        display: none;
+    }
+
+    .tab2_2.resp-tab-content,
+    .tab2_3.resp-tab-content {
+        overflow: hidden;
+    }
+
+    .resp-tab-content {
+        display: none;
+    }
+
+    .resp-tab-active {
+        border: 1px solid #c1c1c1;
+        border-bottom: none;
+        margin-bottom: -1px !important;
+        padding: 12px 14px 14px 14px !important;
+    }
+
+    .resp-tab-active {
+        border-bottom: none;
+        background-color: #fff;
+    }
+
+    .resp-content-active, .resp-accordion-active {
+        display: block;
+    }
+
+    .resp-tab-content {
+        border: 1px solid #c1c1c1;
+    }
+
+    h2.resp-accordion {
+        font-size: 13px;
+        border: 1px solid #c1c1c1;
+        margin: 0px;
+        padding: 10px 15px;
+    }
+
+    h2.resp-tab-active {
+        border-bottom: 0px solid #c1c1c1 !important;
+        margin-bottom: 0px !important;
+        padding: 10px 15px !important;
+    }
+
+    h2.resp-tab-title:last-child {
+        border-bottom: 12px solid #c1c1c1 !important;
+        background: blue;
+    }
+
+    /*-----------Vertical tabs-----------*/
+    .resp-vtabs ul.resp-tabs-list {
+        float: left;
+        width: 30%;
+    }
+
+    .resp-vtabs .resp-tabs-list li {
+        display: block;
+        padding: 15px 15px !important;
+        margin: 0;
+        cursor: pointer;
+        float: none;
+    }
+
+    .resp-vtabs .resp-tabs-container {
+        padding: 0px;
+        background-color: #fff;
+        border: 1px solid #c1c1c1;
+        float: left;
+        width: 68%;
+        min-height: 250px;
+        border-radius: 4px;
+        clear: none;
+    }
+
+    .resp-vtabs .resp-tab-content {
+        border: none;
+    }
+
+    .resp-vtabs li.resp-tab-active {
+        border: 1px solid #c1c1c1;
+        border-right: none;
+        background-color: #fff;
+        position: relative;
+        z-index: 1;
+        margin-right: -1px !important;
+        padding: 14px 15px 15px 14px !important;
+    }
+
+    .resp-arrow {
+        width: 0;
+        height: 0;
+        float: right;
+        margin-top: 3px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 12px solid #c1c1c1;
+    }
+
+    h2.resp-tab-active span.resp-arrow {
+        border: none;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 12px solid #9B9797;
+    }
+
+    /*-----------Accordion styles-----------*/
+    h2.resp-tab-active {
+        background: #DBDBDB !important;
+    }
+
+    .resp-easy-accordion h2.resp-accordion {
+        display: block;
+    }
+
+    .resp-easy-accordion .resp-tab-content {
+        border: 1px solid #c1c1c1;
+    }
+
+    .resp-easy-accordion .resp-tab-content:last-child {
+        border-bottom: 1px solid #c1c1c1 !important;
+    }
+
+    .resp-jfit {
+        width: 100%;
+        margin: 0px;
+    }
+
+    .resp-tab-content-active {
+        display: block;
+    }
+
+    h2.resp-accordion:first-child {
+        border-top: 1px solid #c1c1c1 !important;
+    }
+
+    ul.resp-tabs-list {
+        display: none;
+    }
+
+    h2.resp-accordion {
+        display: block;
+    }
+
+    .resp-vtabs .resp-tab-content {
+        border: 1px solid #C1C1C1;
+    }
+
+    .resp-vtabs .resp-tabs-container {
+        border: none;
+        float: none;
+        width: 100%;
+        min-height: inherit;
+        clear: none;
+    }
+
+    .resp-accordion-closed {
+        display: none !important;
+    }
+
+    .resp-vtabs .resp-tab-content:last-child {
+        border-bottom: 1px solid #c1c1c1 !important;
+    }
+
+    .resptabscont + .resptabscont {
+        margin-top: 25px !important;
+    }
+
+    .tab-content > .tab-pane.resp-tab-content.resp-tab-content-active {
+        overflow: visible !important;
+        height: auto !important;
+        display: block !important;
+        padding: 15px;
+    }
+
+    .tab-content > .tab-pane.resp-tab-content.resp-tab-content-active.resp-accordion-closed {
+        overflow: hidden !important;
+        height: 0 !important;
+        display: none !important;
+        padding: 0;
+    }
+
+    /**** end resp-easy TABS ****/
+    .seasonal-prices-add-block {
+        width: auto;
+        min-width: auto;
+        border: 1px solid #4F81BD;
+        padding: 5px;
+    }
+
+    .yiiTab ul.tabs li {
+        display: inline-block !important;
+        margin-bottom: 10px !important;
+    }
+
+    .grid-view#apartment-seasonal-prices-grid table.items th,
+    .grid-view#apartment-seasonal-prices-grid.items td {
+        padding: 0 !important;
+    }
+
+    .inline.form-control {
+        display: inline;
+    }
+
+    .width175,
+    .width200,
+    .width240,
+    .width250,
+    .width285,
+    .width290,
+    .width300,
+    .width450,
+    .width460,
+    .width500,
+    .select2-container.span3.form-control{
+        width: 100% !important;
+    }
+    #Apartment-form .form-control {
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    body {
+        margin-bottom: 0;
+    }
+    .map_wrapper, .feedback_wrapper {
+        height: 550px;
+    }
+
+    .f-bl .h4 {
+        font-size: 20px;
+    }
+
+    .f-bl {
+        padding: 20px;
+    }
+
+    .f-bl .icon img {
+        max-height: 65px;
+        width: auto;
+    }
+
+    .side-nav .compare_block {
+        position: static;
+    }
+
+    .search_index .h3 {
+        display: block;
+    }
+
+    .sidebar .logo {
+        display: none;
+    }
+
+    .header-wrapper .btn-search {
+        display: block;
+    }
+
+    .mobile-button button i {
+        padding-right: 10px;
+    }
+
+    .sidebar {
+        left: -60%;
+        width: 60%;
+        z-index: 9200;
+    }
+
+    .col_right {
+        width: 100%;
+        left: 0;
+    }
+
+    .side-nav {
+        width: 60%;
+        left: -60%;
+        z-index: 9200;
+    }
+
+    .side-nav .visible-xs {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .top_link_bl .list-inline__main {
+        display: block;
+        width: 100%;
+    }
+
+    .top_menu .navbar-nav > li > a {
+        background: #f1f1f1;
+    }
+
+    .side-nav .top_link_bl, .top_link_bl1 ul {
+        float: left;
+        float: none;
+    }
+
+    .side-nav .compare_block {
+        padding: 10px 0 10px 0 !important;
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .side-nav {
+        width: 80%;
+        left: -80%;
+    }
+
+    .sidebar {
+        left: -80%;
+        width: 80%;
+    }
+
+    .main-table-additional-tab tr,
+    .main-table-general-tab tr {
+        display: grid;
+    }
+
+    .main-table-additional-tab tr > td:nth-child(1),
+    .main-table-general-tab tr > td:nth-child(1) {
+        padding-bottom: 0
+    }
+    .main-table-additional-tab tr > td:nth-child(2),
+    .main-table-general-tab tr > td:nth-child(2) {
+        border-top: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .my-listing-blocks {
+        padding: 0;
+    }
+
+    .my-listing-blocks-item {
+        padding: 10px;
+        border: 1px dotted #cccccc;
+    }
+
+    #my-listing-blocks .summary {
+        padding: 30px 25px 0;
+    }
+
+    .form_tip {
+        font-size: 75%;
+    }
+
+    .summary-ap-description .ap-paid-services {
+        display: none;
+    }
+
+    .mobile-button button {
+        display: block;
+    }
+
+    .f-bl {
+        height: auto !important;
+    }
+
+    .map_wrapper, .feedback_wrapper {
+        width: 100%;
+    }
+
+    .feedback_wrapper {
+        padding-right: 15px;
+    }
+
+    .map_wrapper {
+        padding-left: 15px;
+    }
+
+    .item-city, .item-city.slick-center {
+        width: 355px;
+    }
+
+    .sidebar .logo {
+        display: none;
+    }
+
+    .item_news {
+        width: 100%;
+    }
+
+    .item-city.slick-center .text {
+        padding: 0px 50px;
+    }
+
+    .col_right {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .header-wrapper .logo {
+        margin-bottom: 0px;
+    }
+
+    .side-nav .compare_block {
+        margin-bottom: 5px;
+    }
+
+    .side-nav .top_link_bl1 li {
+        margin-bottom: 5px;
+    }
+
+
+
+    .catalog .apartment_item {
+        width: 100%;
+    }
+
+    .footer_bl1, .footer_bl2 {
+        width: 100%;
+    }
+
+    .footer_bl3, .footer_bottom {
+        text-align: center;
+    }
+
+    #location-select .modal-body {
+        padding: 5px;
+    }
+}

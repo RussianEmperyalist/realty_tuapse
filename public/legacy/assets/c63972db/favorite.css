@@ -1,0 +1,76 @@
+.fav-wrapper {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    z-index: 3;
+}
+.fa-heart {
+    text-shadow: 0 0 3px #000;
+}
+
+.flexbox {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.fav-btn {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes favme-anime {
+    0% {
+        opacity: 1;
+        font-size: ms(0);
+        -webkit-text-stroke-color: transparent;
+    }
+    25% {
+        opacity: 0.6;
+        color: #fff;
+        font-size: ms(-2);
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #dc3232;
+    }
+    75% {
+        opacity: 0.6;
+        color: #fff;
+        font-size: ms(3);
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #dc3232;
+    }
+    100% {
+        opacity: 1;
+        font-size: ms(2);
+        -webkit-text-stroke-color: transparent;
+    }
+}
+@keyframes favme-hover {
+    from {
+        font-size: ms(3);
+    }
+    80% {
+        font-size: ms(2);
+    }
+}
+.favme {
+    display: block;
+    font-size: ms(2);
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    box-shadow: none;
+    transition: all 0.2s ease;
+    color: #cbcdce;
+    margin: 0;
+}
+.favme.active {
+    color: #dc3232 !important;
+}
+.favme:hover {
+    animation: favme-hover 0.3s infinite alternate;
+}
+.favme.is_animating {
+    animation: favme-anime 0.3s;
+}
