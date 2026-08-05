@@ -39,6 +39,12 @@ RUN rm -f /etc/nginx/sites-enabled/default
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# php-fpm listens on a unix socket (no TCP 9000)
+COPY docker/zz-php-fpm-socket.conf /usr/local/etc/php-fpm.d/zz-php-fpm-socket.conf
+
+# Ensure the runtime dir for the php-fpm socket exists
+RUN mkdir -p /run/php && chown -R www-data:www-data /run/php
+
 # Set working directory
 WORKDIR /var/www
 
