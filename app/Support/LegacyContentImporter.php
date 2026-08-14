@@ -150,11 +150,19 @@ class LegacyContentImporter
     {
         $albums = [
             [
+                'title' => 'Мы и наш город',
+                'slug' => 'gde-my-nahodimsya',
+                'directory' => 'we',
+                'description' => 'Фотографии офиса и ориентиров агентства недвижимости "Туапсе".',
+                'sort_order' => 1,
+                'item_title_prefix' => 'Мы и наш город',
+            ],
+            [
                 'title' => 'Туапсе и Туапсинский район',
                 'slug' => 'tuapse-i-tuapsinskiy-rayon',
                 'directory' => 'new',
                 'description' => 'Фотографии Туапсе и Туапсинского района из оригинальной фотогалереи.',
-                'sort_order' => 1,
+                'sort_order' => 2,
                 'item_title_prefix' => 'Туапсе и Туапсинский район',
             ],
             [
@@ -162,16 +170,8 @@ class LegacyContentImporter
                 'slug' => 'staryy-tuapse',
                 'directory' => 'old',
                 'description' => 'Исторические фотографии старого Туапсе.',
-                'sort_order' => 2,
-                'item_title_prefix' => 'Старый Туапсе',
-            ],
-            [
-                'title' => 'Где мы находимся',
-                'slug' => 'gde-my-nahodimsya',
-                'directory' => 'we',
-                'description' => 'Фотографии офиса и ориентиров агентства недвижимости "Туапсе".',
                 'sort_order' => 3,
-                'item_title_prefix' => 'Где мы находимся',
+                'item_title_prefix' => 'Старый Туапсе',
             ],
         ];
 

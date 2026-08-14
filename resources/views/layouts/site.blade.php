@@ -36,7 +36,7 @@
             --rt-radius: 18px;
             --rt-shadow: 0 16px 34px rgba(20, 48, 69, 0.08);
             --rt-surface: #ffffff;
-            --rt-page-bg: #f5f4f1;
+            --rt-page-bg: #ffffff;
             --rt-border: #e4ebf3;
             --rt-text: #1f2937;
             --rt-muted: #667085;
@@ -886,6 +886,7 @@
                     }
 
                     event.preventDefault();
+                    event.stopPropagation();
                     toggle.parentElement?.classList.toggle('open');
                 });
             });

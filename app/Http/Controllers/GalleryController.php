@@ -13,9 +13,9 @@ class GalleryController extends Controller
     public function index(): View
     {
         $legacyGallerySlugs = [
+            'gde-my-nahodimsya',
             'tuapse-i-tuapsinskiy-rayon',
             'staryy-tuapse',
-            'gde-my-nahodimsya',
         ];
         $legacyGalleryOrder = array_flip($legacyGallerySlugs);
 

@@ -37,6 +37,8 @@
             margin: 0 0 14px;
             text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.06);
             line-height: 1.3;
+            font-family: 'Bancodi', sans-serif;
+            letter-spacing: 0.05em;
         }
 
         .home-directions__banner-text {
