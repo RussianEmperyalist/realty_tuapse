@@ -21,41 +21,41 @@
         .home-directions__banner {
             background: #fff;
             border: 1px solid #e3ebf3;
-            border-left: 4px solid #4775af;
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin-top: 14px;
-            box-shadow: 0 2px 8px rgba(20, 48, 69, 0.06);
+            border-radius: 12px;
+            padding: 28px 30px 32px;
+            margin-top: 26px;
+            box-shadow: 0 16px 32px rgba(20, 48, 69, 0.08);
+            text-align: center;
         }
 
         .home-directions__banner-title {
-            color: #e31e25;
-            font-size: 18px;
-            font-weight: 900;
+            color: #ff0000;
+            font-size: 30px;
+            font-weight: 400;
             text-transform: uppercase;
             text-align: center;
-            margin: 0 0 14px;
-            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.06);
-            line-height: 1.3;
+            margin: 0 0 20px;
             font-family: 'Bancodi', sans-serif;
             letter-spacing: 0.05em;
+            line-height: 1.25;
         }
 
         .home-directions__banner-text {
             color: #333;
-            font-size: 14px;
-            line-height: 1.65;
+            font-size: 16px;
+            line-height: 1.7;
             margin: 0;
             text-align: justify;
         }
 
         .home-directions > .h3 {
             margin-top: 0;
-            margin-bottom: 14px;
-            color: #4775af;
-            text-align: left;
+            margin-bottom: 18px;
+            color: #4c78ab;
+            text-align: center;
             text-transform: uppercase;
             font-weight: 700;
+            font-size: clamp(20px, 2.4vw, 26px);
         }
 
         .home-city-slider {
@@ -69,18 +69,17 @@
         .home-city-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 0;
+            gap: 14px;
             overflow: hidden;
-            background: #0f2233;
         }
 
         .home-direction-card {
             position: relative;
             width: 100% !important;
-            height: 300px;
-            min-height: 300px;
+            height: 320px;
+            min-height: 320px;
             overflow: hidden;
-            border-radius: 0;
+            border-radius: 12px;
             background: #0f2233;
             transition: filter .45s ease;
         }
@@ -96,7 +95,7 @@
         .home-direction-card img {
             width: 100%;
             height: 100%;
-            min-height: 300px;
+            min-height: 320px;
             object-fit: cover;
             object-position: center center;
             display: block;
@@ -111,30 +110,41 @@
             transform: scale(1.12);
         }
 
+        .home-direction-card.is-center {
+            border: 3px solid #fff;
+            box-shadow: 0 18px 42px rgba(20, 48, 69, 0.35);
+        }
+
         .home-direction-card.is-side {
             filter: grayscale(60%) brightness(0.75);
+            transform: scale(0.94);
+        }
+
+        .home-direction-card.is-side .text {
+            opacity: 0.85;
         }
 
         .home-direction-card.is-side .text a {
             pointer-events: none;
-            opacity: 0.5;
         }
 
         .home-direction-card .text {
             position: absolute;
             left: 22px;
             right: 22px;
-            bottom: 30px;
+            bottom: 28px;
             z-index: 2;
             color: #fff;
+            transition: opacity .35s ease;
         }
 
         .home-direction-card .h3 {
-            font-size: 18px;
+            font-size: 24px;
             line-height: 1.2;
-            font-weight: 700;
+            font-weight: 900;
             margin-top: 0;
             margin-bottom: 10px;
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
         }
 
         .home-direction-card a {
@@ -142,10 +152,12 @@
             font-size: 15px;
             font-weight: 700;
             text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.55);
+            text-underline-offset: 3px;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
         }
 
-        .home-direction-card .h3 a { font-size: inherit; }
+        .home-direction-card .h3 a { font-size: inherit; text-decoration: none; text-shadow: inherit; }
         .home-direction-card .inactive-obj-type-url { opacity: 0.72; }
         .home-direction-card .list-inline { margin-bottom: 0; line-height: 1.55; }
 
@@ -157,13 +169,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22px;
-            height: 22px;
+            width: 44px;
+            height: 44px;
             border: none;
             border-radius: 50%;
             background: rgba(255,255,255,.88);
             color: #172033;
-            font-size: 13px;
+            font-size: 22px;
             line-height: 1;
             cursor: pointer;
             box-shadow: 0 4px 16px rgba(0,0,0,.3);
@@ -222,6 +234,19 @@
         @media (min-width: 768px) {
             .home-city-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .home-direction-card {
+                height: 380px;
+                min-height: 380px;
+            }
+
+            .home-direction-card img {
+                min-height: 380px;
+            }
+
+            .home-direction-card .h3 {
+                font-size: 28px;
             }
 
             .home-news-grid {
