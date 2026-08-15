@@ -127,11 +127,49 @@
             .rt-gallery-lightbox__btn--prev { left: 8px; }
             .rt-gallery-lightbox__btn--next { right: 8px; }
         }
+
+        /* Скрытие лишних фото в разделе + кнопка «Показать все / Свернуть» */
+        .gallery-hidden { display: none; }
+
+        .gallery-grid__item.is-revealing {
+            animation: rt-gallery-reveal .45s ease both;
+        }
+
+        @keyframes rt-gallery-reveal {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto 0;
+            padding: 11px 26px;
+            border: 1px solid #4c78ab;
+            border-radius: 999px;
+            background: #fff;
+            color: #4c78ab;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+        }
+
+        .gallery-toggle:hover,
+        .gallery-toggle:focus {
+            background: #4c78ab;
+            color: #fff;
+            border-color: #4c78ab;
+        }
+
+        .gallery-toggle[aria-expanded="true"] { background: #eef3f8; color: #4c78ab; }
     </style>
 @endpush
 
 @push('scripts')
     <script>
+        // Лайтбокс (существующий, работает по data-gallery-group)
         document.addEventListener('DOMContentLoaded', function () {
             const triggers = document.querySelectorAll('[data-gallery-group]');
             if (!triggers.length) return;
@@ -202,6 +240,45 @@
                 if (e.key === 'ArrowRight') show(current + 1);
             });
         });
+
+        // Лимит фото в разделе + кнопка «Показать все / Свернуть» (vanilla JS)
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('[data-gallery-limit]');
+            if (!sections.length) return;
+
+            sections.forEach(function (section) {
+                const hidden = section.querySelectorAll('.gallery-grid__item.gallery-hidden');
+                if (!hidden.length) return;
+
+                const toggle = document.createElement('button');
+                toggle.className = 'gallery-toggle';
+                toggle.type = 'button';
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.textContent = 'Показать все (' + hidden.length + ' фото)';
+
+                toggle.addEventListener('click', function () {
+                    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+                    hidden.forEach(function (item) {
+                        if (isOpen) {
+                            item.classList.remove('is-revealing');
+                            item.classList.add('gallery-hidden');
+                        } else {
+                            item.classList.remove('gallery-hidden');
+                            item.classList.add('is-revealing');
+                            setTimeout(function () {
+                                item.classList.remove('is-revealing');
+                            }, 450);
+                        }
+                    });
+                    toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+                    toggle.textContent = isOpen
+                        ? 'Показать все (' + hidden.length + ' фото)'
+                        : 'Свернуть';
+                });
+
+                section.insertAdjacentElement('afterend', toggle);
+            });
+        });
     </script>
 @endpush
 
@@ -214,7 +291,7 @@
                 @if ($album->description)
                     <p class="gallery-section__description">{{ $album->description }}</p>
                 @endif
-                <div class="gallery-grid">
+                <div class="gallery-grid" data-gallery-limit="8">
                     @foreach ($album->items as $item)
                         @php
                             $fullImageUrl = \App\Support\MediaPath::url($item->image_path);
@@ -222,7 +299,7 @@
                         @endphp
                         @if ($fullImageUrl && $thumbImageUrl)
                             <button
-                                class="gallery-grid__item"
+                                class="gallery-grid__item{{ $loop->index >= 8 ? ' gallery-hidden' : '' }}"
                                 type="button"
                                 data-gallery-group="{{ $album->slug }}"
                                 data-gallery-src="{{ $fullImageUrl }}"
