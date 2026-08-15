@@ -18,7 +18,12 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
-                    <input class="form-control" id="password" name="password" type="password" required>
+                    <div class="password-toggle-wrap">
+                        <input class="form-control" id="password" name="password" type="password" required>
+                        <button type="button" class="password-toggle" data-target="password" aria-label="Показать пароль">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" name="remember" value="1"> Запомнить меня</label>
@@ -27,4 +32,48 @@
             </form>
         </div>
     </div>
+@push('styles')
+    <style>
+        .password-toggle-wrap {
+            position: relative;
+        }
+        .password-toggle-wrap .form-control {
+            padding-right: 42px;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            padding: 8px 10px;
+            cursor: pointer;
+            color: #777;
+            font-size: 16px;
+            line-height: 1;
+        }
+        .password-toggle:hover {
+            color: #333;
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script>
+        (function () {
+            var buttons = document.querySelectorAll('.password-toggle');
+            buttons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var input = document.getElementById(button.getAttribute('data-target'));
+                    if (!input) return;
+                    var show = input.type === 'password';
+                    input.type = show ? 'text' : 'password';
+                    button.querySelector('i').className = show ? 'fa fa-eye-slash' : 'fa fa-eye';
+                    button.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль');
+                });
+            });
+        })();
+    </script>
+@endpush
 @endsection
