@@ -14,7 +14,7 @@
                 <li class="personal_cabinet personal_cabinet__header">
                     <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user-cog" style="margin-right: 6px;"></i> Личный кабинет <span class="caret"></span>
+                            <i class="fas fa-user-cog" style="margin-right: 6px;"></i> Личный кабинет <span class="caret" style="margin-left: 6px;"></span>
                         </button>
                         <ul class="dropdown-menu" id="main_menu_nav_2">
                             @auth
