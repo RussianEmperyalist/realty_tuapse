@@ -89,7 +89,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(5, 18, 31, 0.08), rgba(5, 18, 31, 0.78));
+            background: linear-gradient(180deg, rgba(5, 18, 31, 0.05), rgba(5, 18, 31, 0.55));
             pointer-events: none;
         }
 
@@ -100,11 +100,15 @@
             object-fit: cover;
             object-position: center center;
             display: block;
-            transition: transform 6s ease;
+            transition: transform 2s ease;
         }
 
         .home-direction-card.is-center img {
             transform: scale(1.06);
+        }
+
+        .home-direction-card:hover img {
+            transform: scale(1.12);
         }
 
         .home-direction-card.is-side {
@@ -153,13 +157,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 22px;
+            height: 22px;
             border: none;
             border-radius: 50%;
             background: rgba(255,255,255,.88);
             color: #172033;
-            font-size: 26px;
+            font-size: 13px;
             line-height: 1;
             cursor: pointer;
             box-shadow: 0 4px 16px rgba(0,0,0,.3);
@@ -260,6 +264,16 @@
             }
 
             apply();
+
+            cards.forEach(function (card, i) {
+                card.addEventListener('click', function (event) {
+                    if (event.target.closest('a')) return;
+                    if (i !== current) {
+                        current = i;
+                        apply();
+                    }
+                });
+            });
 
             slider.querySelector('.home-city-arrow--prev').addEventListener('click', function () {
                 current = (current - 1 + total) % total;
