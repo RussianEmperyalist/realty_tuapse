@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>{{ trim($__env->yieldContent('title', 'Админ-панель')) }} | {{ config('realty.company_name') }}</title>
+    <title>{{ trim($__env->yieldContent('title', 'Личный кабинет')) }} | {{ config('realty.company_name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('legacy/themes/dolphin/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('legacy/themes/dolphin/assets/css/fontawesome-all.min.css') }}">
@@ -26,6 +26,39 @@
         }
         .admin-sidebar .nav > li > a {
             padding: 12px 0;
+        }
+        .admin-brand {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 12px;
+            padding: 16px 10px 14px;
+        }
+        .admin-brand__label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 10px;
+        }
+        .admin-brand__inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .admin-brand__inner img {
+            width: 150px;
+            max-width: 100%;
+        }
+        .admin-brand__name {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: #fff;
         }
         .admin-content {
             padding: 30px;
@@ -119,9 +152,12 @@
 <body>
     <div class="admin-shell">
         <aside class="admin-sidebar">
-            <div style="margin-bottom: 24px;">
-                <div class="h3" style="margin-top: 0;">Админ-панель</div>
-                <div>{{ config('realty.company_name') }}</div>
+            <div class="admin-brand" style="margin-bottom: 24px;">
+                <span class="admin-brand__label">Личный кабинет</span>
+                <div class="admin-brand__inner">
+                    <img src="{{ asset('legacy/themes/dolphin/assets/images/logo.png') }}" alt="{{ config('realty.company_display_name') }}">
+                    <span class="admin-brand__name">{{ config('realty.company_display_name') }}</span>
+                </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
                 <li class="@if(request()->routeIs('admin.dashboard')) active @endif"><a href="{{ route('admin.dashboard') }}">Дашборд</a></li>
