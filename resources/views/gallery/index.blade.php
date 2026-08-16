@@ -288,10 +288,7 @@
         @forelse ($albums as $album)
             <section class="box gallery-section">
                 <div class="h3 fint l_fint">{{ $album->title }}</div>
-                @if ($album->description)
-                    <p class="gallery-section__description">{{ $album->description }}</p>
-                @endif
-                <div class="gallery-grid" data-gallery-limit="8">
+                <div class="gallery-grid" data-gallery-limit="4">
                     @foreach ($album->items as $item)
                         @php
                             $fullImageUrl = \App\Support\MediaPath::url($item->image_path);
@@ -299,7 +296,7 @@
                         @endphp
                         @if ($fullImageUrl && $thumbImageUrl)
                             <button
-                                class="gallery-grid__item{{ $loop->index >= 8 ? ' gallery-hidden' : '' }}"
+                                class="gallery-grid__item{{ $loop->index >= 4 ? ' gallery-hidden' : '' }}"
                                 type="button"
                                 data-gallery-group="{{ $album->slug }}"
                                 data-gallery-src="{{ $fullImageUrl }}"

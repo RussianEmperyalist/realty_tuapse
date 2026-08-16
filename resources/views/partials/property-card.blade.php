@@ -184,49 +184,6 @@
                 width: 100%;
                 border-radius: 10px;
             }
-            .property-card-map {
-                margin-top: 8px;
-                margin-bottom: 10px;
-                border-radius: 8px;
-                overflow: hidden;
-                border: 1px solid #d0dbe8;
-                height: 140px;
-                background: #f0f4f8;
-                position: relative;
-                cursor: pointer;
-                transition: box-shadow .2s ease, border-color .2s ease;
-            }
-            .property-card-map:hover {
-                border-color: #43b3dd;
-                box-shadow: 0 4px 12px rgba(67, 179, 221, 0.18);
-            }
-            .property-card-map img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-            }
-            .property-card-map-overlay {
-                position: absolute;
-                top: 6px;
-                right: 6px;
-                z-index: 2;
-                background: rgba(255,255,255,0.92);
-                border-radius: 6px;
-                padding: 4px 8px;
-                font-size: 11px;
-                line-height: 1.3;
-                color: #1f2937;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-                pointer-events: none;
-                display: flex;
-                align-items: center;
-                gap: 4px;
-            }
-            .property-card-map-overlay i {
-                color: #d9534f;
-                font-size: 12px;
-            }
             .rt-photo-lightbox {
                 position: fixed;
                 inset: 0;
@@ -395,19 +352,6 @@
     @endpush
 
     @push('scripts')
-        @php
-            $mapsApiKey = config('services.yandex.maps_key', '38c8767e-6b9b-452a-a56b-f7c8b927ea10');
-        @endphp
-        <script>
-        // Загружаем Яндекс.Карты API только если ещё не загружен
-        (function() {
-            if (typeof ymaps !== 'undefined') return;
-            var script = document.createElement('script');
-            script.src = 'https://api-maps.yandex.ru/2.1/?apikey={{ $mapsApiKey }}&lang=ru_RU';
-            script.type = 'text/javascript';
-            document.head.appendChild(script);
-        })();
-        </script>
         <script>
         document.addEventListener('DOMContentLoaded', function () {
             /* ---------- Photo lightbox ---------- */
@@ -529,62 +473,6 @@
             });
         });
         </script>
-
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            /* ---------- Яндекс.Карты в карточках объектов ---------- */
-            var containers = document.querySelectorAll('.property-card-map');
-            if (containers.length === 0) return;
-
-            function initCardMaps() {
-                if (typeof ymaps === 'undefined') {
-                    setTimeout(initCardMaps, 300);
-                    return;
-                }
-
-                ymaps.ready(function () {
-                    containers.forEach(function (container) {
-                        var lat = parseFloat(container.getAttribute('data-card-lat'));
-                        var lng = parseFloat(container.getAttribute('data-card-lng'));
-                        if (isNaN(lat) || isNaN(lng)) return;
-
-                        var card = container.closest('.apartment_item');
-                        var link = card ? card.querySelector('.title_item a') : null;
-                        var href = link ? link.getAttribute('href') : '';
-
-                        try {
-                            var cardMap = new ymaps.Map(container, {
-                                center: [lat, lng],
-                                zoom: 15,
-                                controls: []
-                            }, {
-                                suppressMapOpenBlock: true,
-                                yandexMapDisablePoiInteractivity: true
-                            });
-
-                            var placemark = new ymaps.Placemark([lat, lng], {}, {
-                                preset: 'islands#redDotIcon',
-                                iconColor: '#d9534f'
-                            });
-
-                            cardMap.geoObjects.add(placemark);
-
-                            if (href) {
-                                container.style.cursor = 'pointer';
-                                container.addEventListener('click', function () {
-                                    window.location.href = href;
-                                });
-                            }
-                        } catch (e) {
-                            console.warn('Yandex card map init error:', e);
-                        }
-                    });
-                });
-            }
-
-            initCardMaps();
-        });
-        </script>
     @endpush
 @endonce
 <div class="apartment_item block col-md-4 col-sm-6">
@@ -622,13 +510,6 @@
                 <li>{{ $property->rooms ?: '—' }} комн.</li>
                 <li>{{ $property->square ? number_format((float) $property->square, 1, ',', ' ') . ' м²' : 'Площадь уточняется' }}</li>
             </ul>
-            @if ($property->latitude && $property->longitude)
-            <div class="property-card-map" data-card-lat="{{ $property->latitude }}" data-card-lng="{{ $property->longitude }}">
-                <div class="property-card-map-overlay">
-                    <i class="fas fa-map-marker-alt"></i> На карте
-                </div>
-            </div>
-            @endif
             <div class="admin-actions">
                 @if ($property->latitude && $property->longitude)
                 <a href="{{ route('properties.show', $property->slug) }}#map" class="btn btn-sm" style="background:#43b3dd;color:#fff;width:100%;margin-bottom:6px;">

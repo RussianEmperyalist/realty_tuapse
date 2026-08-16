@@ -579,19 +579,6 @@
                     </div>
                 </div>
 
-                @if ($similarProperties->isNotEmpty())
-                    <div class="similar_block padding-top-20">
-                        <div class="h3 fint l_fint">Похожие объявления</div>
-                        <div class="catalog">
-                            <div class="row">
-                                @foreach ($similarProperties as $similarProperty)
-                                    @include('partials.property-card', ['property' => $similarProperty])
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
                 {{-- Карта объекта --}}
                 <div class="property-map" style="margin-top: 24px; margin-bottom: 24px;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -682,6 +669,19 @@
                     })();
                 </script>
             </div>
+
+            @if ($similarProperties->isNotEmpty())
+                <div class="similar_block padding-top-20">
+                    <div class="h3 fint l_fint">Похожие объявления</div>
+                    <div class="catalog">
+                        <div class="row">
+                            @foreach ($similarProperties as $similarProperty)
+                                @include('partials.property-card', ['property' => $similarProperty])
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
