@@ -284,7 +284,7 @@
             <div class="h3 fint l_fint">Популярные направления</div>
             <div class="city-slick slick-initialized slick-slider">
                 <div class="slick-list draggable">
-                    <div class="slick-track" style="opacity: 1; width: 1920px; transform: translate3d(-444px, 0px, 0px);">
+                    <div class="slick-track">
                         @foreach ($directionCards as $directionCard)
                             <div class="item-city slick-slide" data-slick-index="{{ $loop->index }}" aria-hidden="{{ $loop->index === 1 ? 'false' : 'true' }}">
                                 <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
