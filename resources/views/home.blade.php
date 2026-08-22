@@ -68,12 +68,14 @@
             overflow: hidden;
         }
 
-        .city-slick .slick-track {
-            transition: transform 1s;
+        .city-slick .slick-slide {
+            display: block;
+            float: left;
+            transition: width .5s;
         }
 
-        .city-slick .slick-slide {
-            transition: width .5s;
+        .city-slick .slick-track {
+            transition: transform 1s;
         }
 
         .item-city {
@@ -261,8 +263,6 @@
                 arrows: true,
                 infinite: false,
                 adaptiveHeight: false,
-                prevArrow: $slider.querySelector('.slick-prev'),
-                nextArrow: $slider.querySelector('.slick-next'),
                 responsive: [
                     {
                         breakpoint: 768,
@@ -283,7 +283,6 @@
         <div class="city_module home-directions">
             <div class="h3 fint l_fint">Популярные направления</div>
             <div class="city-slick">
-                <div class="city-slick-inner">
                 @foreach ($directionCards as $directionCard)
                     <div class="item-city">
                         <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
@@ -304,7 +303,6 @@
                         </div>
                     </div>
                 @endforeach
-                </div>
             </div>
             <div class="home-directions__banner">
                 <div class="home-directions__banner-title">Если счастье, то надолго, если недвижимость, то на берегу Чёрного моря!</div>
