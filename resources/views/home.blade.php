@@ -66,8 +66,6 @@
 
         .city-slick {
             overflow: hidden;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
 
         .city-slick .slick-track {
@@ -83,6 +81,7 @@
             width: 444px;
             height: 400px;
             overflow: hidden;
+            display: block;
         }
 
         .item-city.slick-center {
@@ -250,9 +249,9 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var $slider = document.querySelector('.city-slick');
-            if (!$slider) return;
+        jQuery(document).ready(function ($) {
+            var $slider = $('.city-slick');
+            if (!$slider.length) return;
 
             $slider.slick({
                 centerMode: true,
@@ -274,8 +273,6 @@
                     }
                 ]
             });
-
-            $slider.css('opacity', 1);
         });
     </script>
 @endpush
