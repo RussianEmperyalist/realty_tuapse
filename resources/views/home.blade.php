@@ -283,32 +283,28 @@
         <div class="city_module home-directions">
             <div class="h3 fint l_fint">Популярные направления</div>
             <div class="city-slick">
-                <div class="slick-list draggable">
-                    <div class="slick-track">
-                        @foreach ($directionCards as $directionCard)
-                            <div class="item-city slick-slide" data-slick-index="{{ $loop->index }}" aria-hidden="{{ $loop->index === 1 ? 'false' : 'true' }}">
-                                <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
-                                <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
-                                    <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
-                                    <ul class="list-inline">
-                                        @foreach ($directionCard['types'] as $type)
-                                            <li>
-                                                <a class="{{ $type['is_active'] ? 'active-obj-type-url' : 'inactive-obj-type-url' }}" href="{{ $type['url'] }}">
-                                                    {{ $type['label'] }}
-                                                    @if ($type['count'] > 0)
-                                                        <span class="obj-type-count">({{ $type['count'] }})</span>
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        @endforeach
+                <div class="city-slick-inner">
+                @foreach ($directionCards as $directionCard)
+                    <div class="item-city">
+                        <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
+                        <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
+                            <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
+                            <ul class="list-inline">
+                                @foreach ($directionCard['types'] as $type)
+                                    <li>
+                                        <a class="{{ $type['is_active'] ? 'active-obj-type-url' : 'inactive-obj-type-url' }}" href="{{ $type['url'] }}">
+                                            {{ $type['label'] }}
+                                            @if ($type['count'] > 0)
+                                                <span class="obj-type-count">({{ $type['count'] }})</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
+                @endforeach
                 </div>
-                <button type="button" class="slick-prev slick-arrow slow" style="display: block;"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="slick-next slick-arrow slow" style="display: block;"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="home-directions__banner">
                 <div class="home-directions__banner-title">Если счастье, то надолго, если недвижимость, то на берегу Чёрного моря!</div>
