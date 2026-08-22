@@ -270,23 +270,25 @@
             if (!$slider.length) return;
 
             $slider.slick({
-                centerMode: true,
-                centerPadding: '40px',
-                slidesToShow: 3,
+                slidesToShow: 1,
                 slidesToScroll: 1,
                 dots: false,
                 arrows: true,
-                infinite: false,
+                infinite: true,
                 adaptiveHeight: false,
-                prevArrow: $slider.find('.slick-prev'),
-                nextArrow: $slider.find('.slick-next'),
+                variableWidth: true,
+                centerMode: true,
+                centerPadding: '40px',
+                prevArrow: '<button type="button" class="slick-prev slick-arrow"><i class="fas fa-chevron-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next slick-arrow"><i class="fas fa-chevron-right"></i></button>',
                 responsive: [
                     {
                         breakpoint: 768,
                         settings: {
                             slidesToShow: 1,
                             centerMode: false,
-                            centerPadding: '40px'
+                            centerPadding: '0',
+                            arrows: false
                         }
                     }
                 ]
