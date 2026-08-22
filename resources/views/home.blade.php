@@ -66,16 +66,16 @@
 
         .city-slick {
             overflow: hidden;
-        }
-
-        .city-slick .slick-slide {
-            display: block;
-            float: left;
-            transition: width .5s;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .city-slick .slick-track {
             transition: transform 1s;
+        }
+
+        .city-slick .slick-slide {
+            transition: width .5s;
         }
 
         .item-city {
@@ -274,6 +274,8 @@
                     }
                 ]
             });
+
+            $slider.css('opacity', 1);
         });
     </script>
 @endpush
