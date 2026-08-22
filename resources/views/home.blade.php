@@ -172,7 +172,7 @@
             border: 0px;
             padding: 0;
             border-radius: 50%;
-            z-index: 10;
+            z-index: 20;
             cursor: pointer;
             width: 44px;
             height: 44px;
@@ -320,8 +320,6 @@
                         </div>
                     </div>
                 @endforeach
-                <button type="button" class="slick-prev slick-arrow"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="slick-next slick-arrow"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="home-directions__banner">
                 <div class="home-directions__banner-title">Если счастье, то надолго, если недвижимость, то на берегу Чёрного моря!</div>
