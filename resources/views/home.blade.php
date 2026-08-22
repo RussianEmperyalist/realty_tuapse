@@ -66,10 +66,12 @@
 
         .city-slick {
             overflow: hidden;
+            position: relative;
         }
 
         .city-slick .slick-slide {
             transition: width .5s;
+            float: left;
             padding: 0;
         }
 
@@ -87,7 +89,6 @@
             width: 444px;
             height: 400px;
             overflow: hidden;
-            display: block;
         }
 
         .item-city.slick-center {
@@ -165,24 +166,25 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, .8);
-            color: #4f6288;
-            font-size: 20px;
+            background: rgba(255, 255, 255, .88);
+            color: #143045;
+            font-size: 22px;
             border: 0px;
-            padding: 10px 14px;
-            border-radius: 5px;
-            z-index: 9;
+            padding: 0;
+            border-radius: 50%;
+            z-index: 10;
             cursor: pointer;
             width: 44px;
             height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,.3);
             transition: background .2s, transform .15s;
         }
 
         .city-slick .slick-arrow:hover {
-            background: rgba(255, 255, 255, 1);
+            background: #fff;
             transform: translateY(-50%) scale(1.07);
         }
 
@@ -269,7 +271,7 @@
 
             $slider.slick({
                 centerMode: true,
-                centerPadding: '0',
+                centerPadding: '40px',
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 dots: false,
@@ -284,7 +286,7 @@
                         settings: {
                             slidesToShow: 1,
                             centerMode: false,
-                            centerPadding: '0'
+                            centerPadding: '40px'
                         }
                     }
                 ]
