@@ -68,12 +68,18 @@
             overflow: hidden;
         }
 
+        .city-slick .slick-slide {
+            transition: width .5s;
+            padding: 0;
+        }
+
         .city-slick .slick-track {
             transition: transform 1s;
         }
 
-        .city-slick .slick-slide {
-            transition: width .5s;
+        .city-slick .slick-list {
+            margin: 0;
+            padding: 0;
         }
 
         .item-city {
@@ -155,9 +161,10 @@
             text-shadow: 0px 0px 40px #000;
         }
 
-        .city-slick .slick-arrow, .city-object-slick .slick-arrow {
+        .city-slick .slick-arrow {
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             background: rgba(255, 255, 255, .8);
             color: #4f6288;
             font-size: 20px;
@@ -166,18 +173,25 @@
             border-radius: 5px;
             z-index: 9;
             cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, transform .15s;
         }
 
         .city-slick .slick-arrow:hover {
             background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.07);
         }
 
-        .city-slick .slick-arrow.slick-next {
-            right: 20px;
+        .city-slick .slick-prev {
+            left: 12px;
         }
 
-        .city-slick .slick-arrow.slick-prev {
-            left: 20px;
+        .city-slick .slick-next {
+            right: 12px;
         }
 
         .home-direction-card .inactive-obj-type-url { opacity: 0.72; }
@@ -262,6 +276,8 @@
                 arrows: true,
                 infinite: false,
                 adaptiveHeight: false,
+                prevArrow: $slider.find('.slick-prev'),
+                nextArrow: $slider.find('.slick-next'),
                 responsive: [
                     {
                         breakpoint: 768,
@@ -302,6 +318,8 @@
                         </div>
                     </div>
                 @endforeach
+                <button type="button" class="slick-prev slick-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button type="button" class="slick-next slick-arrow"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="home-directions__banner">
                 <div class="home-directions__banner-title">Если счастье, то надолго, если недвижимость, то на берегу Чёрного моря!</div>
