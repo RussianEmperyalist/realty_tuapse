@@ -58,140 +58,133 @@
             font-size: clamp(20px, 2.4vw, 26px);
         }
 
-        .home-city-slider {
+        .city_module {
             position: relative;
-        }
-
-        .home-city-track {
-            display: block;
-        }
-
-        .home-city-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-            overflow: hidden;
-        }
-
-        .home-direction-card {
-            position: relative;
-            width: 100% !important;
-            height: 320px;
-            min-height: 320px;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #0f2233;
-            transition: filter .45s ease;
-        }
-
-        .home-direction-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(5, 18, 31, 0.05), rgba(5, 18, 31, 0.55));
-            pointer-events: none;
-        }
-
-        .home-direction-card img {
             width: 100%;
+            margin: 30px 0px;
+        }
+
+        .city-slick {
+            overflow: hidden;
+        }
+
+        .city-slick .slick-track {
+            transition: transform 1s;
+        }
+
+        .city-slick .slick-slide {
+            transition: width .5s;
+        }
+
+        .item-city {
+            position: relative;
+            width: 444px;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .item-city.slick-center {
+            width: 640px;
+        }
+
+        .item-city img {
             height: 100%;
-            min-height: 320px;
-            object-fit: cover;
-            object-position: center center;
+            width: 100%;
             display: block;
-            transition: transform 2s ease;
         }
 
-        .home-direction-card.is-center img {
-            transform: scale(1.06);
+        .item-city.slick-center {
+            overflow: hidden;
         }
 
-        .home-direction-card:hover img {
-            transform: scale(1.12);
-        }
-
-        .home-direction-card.is-center {
-            border: 3px solid #fff;
-            box-shadow: 0 18px 42px rgba(20, 48, 69, 0.35);
-        }
-
-        .home-direction-card.is-side {
-            filter: grayscale(60%) brightness(0.75);
-            transform: scale(0.94);
-        }
-
-        .home-direction-card.is-side .text {
-            opacity: 0.85;
-        }
-
-        .home-direction-card.is-side .text a {
-            pointer-events: none;
-        }
-
-        .home-direction-card .text {
+        .item-city:after, .item_obj:after {
+            display: inline-block;
+            content: '';
             position: absolute;
-            left: 22px;
-            right: 22px;
-            bottom: 28px;
-            z-index: 2;
-            color: #fff;
-            transition: opacity .35s ease;
+            width: 100%;
+            left: 0px;
+            top: 0px;
+            height: 100%;
+            background: rgba(45, 66, 107, .4);
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
         }
 
-        .home-direction-card .h3 {
-            font-size: 24px;
-            line-height: 1.2;
+        .item-city.slick-center:after {
+            background: rgba(45, 66, 107, 0);
+        }
+
+        .item-city .text {
+            position: absolute;
+            width: 100%;
+            color: #fff;
+            bottom: 0px;
+            left: 0px;
+            padding: 30px;
+        }
+
+        .item-city .text a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            border-bottom: 1px solid;
+            font-weight: 400;
+            text-shadow: 0px 0px 40px #000;
+        }
+
+        .item-city .text a:hover {
+            border-color: transparent;
+        }
+
+        .item-city.slick-center .text {
+            bottom: 30px;
+            z-index: 9;
+        }
+
+        .item-city .h3 {
+            font-size: 32px;
             font-weight: 900;
-            margin-top: 0;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+            margin: 0 0 10px;
         }
 
-        .home-direction-card a {
-            color: #fff;
-            font-size: 15px;
-            font-weight: 700;
-            text-decoration: underline;
-            text-decoration-color: rgba(255, 255, 255, 0.55);
-            text-underline-offset: 3px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+        .item-city.slick-center .h3 {
+            font-size: 45px;
+            text-shadow: 0px 0px 40px #000;
         }
 
-        .home-direction-card .h3 a { font-size: inherit; text-decoration: none; text-shadow: inherit; }
+        .city-slick .slick-arrow, .city-object-slick .slick-arrow {
+            position: absolute;
+            top: 50%;
+            background: rgba(255, 255, 255, .8);
+            color: #4f6288;
+            font-size: 20px;
+            border: 0px;
+            padding: 10px 14px;
+            border-radius: 5px;
+            z-index: 9;
+            cursor: pointer;
+        }
+
+        .city-slick .slick-arrow:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .city-slick .slick-arrow.slick-next {
+            right: 20px;
+        }
+
+        .city-slick .slick-arrow.slick-prev {
+            left: 20px;
+        }
+
         .home-direction-card .inactive-obj-type-url { opacity: 0.72; }
         .home-direction-card .list-inline { margin-bottom: 0; line-height: 1.55; }
 
-        .home-city-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border: none;
-            border-radius: 50%;
-            background: rgba(255,255,255,.88);
-            color: #172033;
-            font-size: 22px;
-            line-height: 1;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0,0,0,.3);
-            transition: background .2s, transform .15s;
-        }
-
-        .home-city-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.07); }
-        .home-city-arrow--prev { left: 12px; }
-        .home-city-arrow--next { right: 12px; }
-
-        .home-directions .slick-arrow,
-        .home-directions .slick-dots,
+        .home-directions .slick-dots { display: none !important; }
         .home-directions #result_city,
-        .home-directions .city-object-slick {
-            display: none !important;
-        }
+        .home-directions .city-object-slick { display: none !important; }
 
         .home-news-card__body,
         .home-employee-card__body {
@@ -232,23 +225,6 @@
         }
 
         @media (min-width: 768px) {
-            .home-city-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-
-            .home-direction-card {
-                height: 380px;
-                min-height: 380px;
-            }
-
-            .home-direction-card img {
-                min-height: 380px;
-            }
-
-            .home-direction-card .h3 {
-                font-size: 28px;
-            }
-
             .home-news-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -273,41 +249,30 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var slider = document.querySelector('.home-city-slider');
-            if (!slider) return;
-            var cards = Array.from(slider.querySelectorAll('.home-direction-card'));
-            var total = cards.length;
-            if (total < 2) return;
+            var $slider = document.querySelector('.city-slick');
+            if (!$slider) return;
 
-            var current = 1; // стартуем с центральной
-
-            function apply() {
-                cards.forEach(function (card, i) {
-                    card.classList.remove('is-center', 'is-side');
-                    card.classList.add(i === current ? 'is-center' : 'is-side');
-                });
-            }
-
-            apply();
-
-            cards.forEach(function (card, i) {
-                card.addEventListener('click', function (event) {
-                    if (event.target.closest('a')) return;
-                    if (i !== current) {
-                        current = i;
-                        apply();
+            $slider.slick({
+                centerMode: true,
+                centerPadding: '0',
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                dots: false,
+                arrows: true,
+                infinite: false,
+                adaptiveHeight: false,
+                prevArrow: $slider.querySelector('.slick-prev'),
+                nextArrow: $slider.querySelector('.slick-next'),
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1,
+                            centerMode: false,
+                            centerPadding: '0'
+                        }
                     }
-                });
-            });
-
-            slider.querySelector('.home-city-arrow--prev').addEventListener('click', function () {
-                current = (current - 1 + total) % total;
-                apply();
-            });
-
-            slider.querySelector('.home-city-arrow--next').addEventListener('click', function () {
-                current = (current + 1) % total;
-                apply();
+                ]
             });
         });
     </script>
@@ -317,13 +282,11 @@
     <div class="content main_content">
         <div class="city_module home-directions">
             <div class="h3 fint l_fint">Популярные направления</div>
-            <div class="home-city-slider">
-                <button class="home-city-arrow home-city-arrow--prev" type="button" aria-label="Назад">&lsaquo;</button>
-                <button class="home-city-arrow home-city-arrow--next" type="button" aria-label="Вперёд">&rsaquo;</button>
-                <div class="home-city-track">
-                    <div class="home-city-grid">
+            <div class="city-slick slick-initialized slick-slider">
+                <div class="slick-list draggable">
+                    <div class="slick-track" style="opacity: 1; width: 1920px; transform: translate3d(-444px, 0px, 0px);">
                         @foreach ($directionCards as $directionCard)
-                            <div class="item-city home-direction-card">
+                            <div class="item-city slick-slide" data-slick-index="{{ $loop->index }}" aria-hidden="{{ $loop->index === 1 ? 'false' : 'true' }}">
                                 <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
                                 <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
                                     <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
@@ -344,10 +307,12 @@
                         @endforeach
                     </div>
                 </div>
+                <button type="button" class="slick-prev slick-arrow slow" style="display: block;"><i class="fas fa-chevron-left"></i></button>
+                <button type="button" class="slick-next slick-arrow slow" style="display: block;"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="home-directions__banner">
                 <div class="home-directions__banner-title">Если счастье, то надолго, если недвижимость, то на берегу Чёрного моря!</div>
-                <div class="home-directions__banner-text">С апреля 1997 года мы успешно работаем на рынке недвижимости города Туапсе и Туапсинского района. За это время мы накопили обширный опыт в сфере любых операций с объектами самых разных категорий, в том числе элитной курортной недвижимости, земельных участков, производственных помещений. Нас выгодно отличает от конкурентов оперативность и широкая форма наших услуг. Оперативность в работе, умение понять индивидуальные запросы клиента, чистота и конфиденциальность сделок – всё это привлекает в наше агентство как жителей Черноморского побережья Краснодарского края, так и клиентов из других регионов нашей страны. В нашем офисе Вас всегда ждёт тёплый приём и радушная атмосфера. Своей главной задачей мы считаем помощь клиенту в удовлетворении его потребностей и желаний. Соблюдение интересов клиента – это основной принцип нашей работы. Для всех желающих получить бесплатную консультацию наш офис открыт ежедневно.</div>
+                <div class="home-directions__banner-text">С апреля 1997 года мы успешно работаем на рынке недвижимости города Туапсе и Туапсинского района. За это время мы накопили обширный опыт в сфере любых операций с объектами самых разных категорий, в том числе элитной курортной недвижимости, земельных участков, производственных помещений. Нас выгодно отличает от конкурентов оперативность и широкая форма наших услуг. Оперативность в работе, умение понять индивидуальные запросы клиента, чистота и конфиденциальность сделок – всё это привлекает в наше агентство как жителей Черноморского побережья Краснодарского края, так и клиентов из других регионов нашей страны. В нашем офисе Вас всегда ждёт тёплый приём и радушная атмосфера. Своей главной задачей мы считаем помощь клиенту в удовлетворении его потребностей и желаний. Соблюдение интересов клиента – это основной принцип нашей работы. Для всех желающих получить бесплатную консультацию наш офис открыт для Вас!</div>
             </div>
         </div>
 

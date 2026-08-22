@@ -55,7 +55,7 @@
         </div>
         <ul class="nav nav-pills" id="main_menu_nav_3">
             <li class="dropdown">
-                <a class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript: void(0);">Поиск<span class="caret"></span></a>
+                <a class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript: void(0);">Меню<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a class="slow" href="{{ route('pages.show', 'poisk-na-karte') }}">Поиск на карте</a></li>
                     <li><a class="slow" href="{{ route('pages.show', 'prodazha') }}">Продажа</a></li>
@@ -68,18 +68,12 @@
             <li class="depth_zero depth_item_numb_2"><a class="slow" href="{{ route('contacts') }}">Контакты</a></li>
             <li class="depth_zero depth_item_numb_3"><a class="slow" href="{{ route('news.index') }}">Новости</a></li>
             <li class="depth_zero depth_item_numb_4"><a class="slow" href="{{ route('favorites') }}">Избранное</a></li>
-            <li class="dropdown">
-                <a class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript: void(0);">Информация<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="slow" href="{{ route('gallery.index') }}">Фотогалерея</a></li>
-                    <li><a class="slow" href="{{ route('news.index') }}">Новости</a></li>
-                </ul>
-            </li>
+            <li class="depth_zero depth_item_numb_5"><a class="slow" href="{{ route('gallery.index') }}">Фотогалерея</a></li>
             <li class="dropdown">
                 <a class="slow dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript: void(0);">Дополнительно<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="slow" href="{{ route('pages.show', 'politika-konfidencialnosti') }}">Политика конфиденциальности</a></li>
-                    <li><a class="slow" href="{{ route('pages.show', 'polzovatelskoe-soglashenie') }}">Пользовательское соглашение</a></li>
+                    <li class="depth_zero depth_item_numb_6"><a class="slow" href="{{ route('pages.show', 'politika-konfidencialnosti') }}">Политика конфиденциальности</a></li>
+                    <li class="depth_zero depth_item_numb_7"><a class="slow" href="{{ route('pages.show', 'polzovatelskoe-soglashenie') }}">Пользовательское соглашение</a></li>
                 </ul>
             </li>
         </ul>

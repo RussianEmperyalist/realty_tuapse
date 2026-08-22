@@ -187,6 +187,7 @@ class PropertyController extends Controller
             'is_featured' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
             'images.*' => ['nullable', 'image', 'max:8192'],
+            'images' => ['required_without:delete_images', 'array', 'max:10'],
             'delete_images' => ['nullable', 'array'],
             'delete_images.*' => ['integer', 'exists:property_images,id'],
             'cover_image_id' => ['nullable', 'integer', 'exists:property_images,id'],

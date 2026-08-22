@@ -17,54 +17,54 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Порядок</th>
-                    <th>Сотрудник</th>
-                    <th>Должность</th>
-                    <th>Контакты</th>
-                    <th>Личный кабинет</th>
-                    <th>Статус</th>
+                    <th style="width: 80px;">Порядок</th>
+                    <th style="width: 200px;">Сотрудник</th>
+                    <th style="width: 160px;">Должность</th>
+                    <th style="width: 200px;">Контакты</th>
+                    <th style="width: 180px;">Личный кабинет</th>
+                    <th style="width: 100px;">Статус</th>
                     <th style="width: 220px;">Действия</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($employees as $employee)
-                    <tr>
-                        <td>{{ $employee->sort_order }}</td>
-                        <td>
-                            <strong>{{ $employee->full_name }}</strong><br>
-                            <span style="color:#667085;">ID: {{ $employee->legacy_id }}</span>
-                        </td>
-                        <td>{{ $employee->position }}</td>
-                        <td>
-                            {{ $employee->phone_primary }}<br>
-                            <span style="color:#667085;">{{ $employee->email }}</span>
-                        </td>
-                        <td>
-                            @if ($employee->user)
-                                {{ $employee->user->email }}<br>
-                                <span class="label label-info">{{ $employee->user->role === 'admin' ? 'Администратор' : 'Сотрудник' }}</span>
-                            @else
-                                <span class="label label-default">Нет доступа</span>
-                            @endif
-                        </td>
-                        <td>
-                            @if ($employee->is_active)
-                                <span class="label label-success">Активен</span>
-                            @else
-                                <span class="label label-default">Скрыт</span>
-                            @endif
-                        </td>
-                        <td>
-                            <div class="admin-actions">
-                                <a class="btn btn-xs btn-default" href="{{ route('employees.show', ['id' => $employee->legacy_id]) }}" target="_blank">Открыть</a>
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.edit', $employee) }}">Редактировать</a>
-                                <form method="post" action="{{ route('admin.employees.destroy', $employee) }}" onsubmit="return confirm('Удалить сотрудника?');">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-xs btn-danger" type="submit">Удалить</button>
-                                </form>
-                            </div>
-                        </td>
+                <tr>
+                    <td style="white-space: nowrap;">{{ $employee->sort_order }}</td>
+                    <td>
+                        <strong>{{ $employee->full_name }}</strong><br>
+                        <span style="color:#667085;">ID: {{ $employee->legacy_id }}</span>
+                    </td>
+                    <td style="white-space: nowrap;">{{ $employee->position }}</td>
+                    <td>
+                        {{ $employee->phone_primary }}<br>
+                        <span style="color:#667085;">{{ $employee->email }}</span>
+                    </td>
+                    <td>
+                        @if ($employee->user)
+                            {{ $employee->user->email }}<br>
+                            <span class="label label-info">{{ $employee->user->role === 'admin' ? 'Администратор' : 'Сотрудник' }}</span>
+                        @else
+                            <span class="label label-default">Нет доступа</span>
+                        @endif
+                    </td>
+                    <td style="white-space: nowrap;">
+                        @if ($employee->is_active)
+                            <span class="label label-success">Активен</span>
+                        @else
+                            <span class="label label-default">Скрыт</span>
+                        @endif
+                    </td>
+                    <td>
+                        <div class="admin-actions">
+                            <a class="btn btn-xs btn-default" href="{{ route('employees.show', ['id' => $employee->legacy_id]) }}" target="_blank">Открыть</a>
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.edit', $employee) }}">Редактировать</a>
+                            <form method="post" action="{{ route('admin.employees.destroy', $employee) }}" onsubmit="return confirm('Удалить сотрудника?');">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-xs btn-danger" type="submit">Удалить</button>
+                            </form>
+                        </div>
+                    </td>
                     </tr>
                 @empty
                     <tr>

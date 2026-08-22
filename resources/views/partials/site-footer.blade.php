@@ -59,7 +59,7 @@
 
     <div class="footer_bottom">
         <div class="row">
-            <div class="col-md-6 col-sm-6">&copy; {{ config('realty.company_display_name') }}, 2011&mdash;{{ now()->year }}</div>
+            <div class="col-md-6 col-sm-6">&copy; {{ config('realty.company_display_name') }}, 1997&mdash;{{ now()->year }}</div>
             <div class="col-md-6 col-sm-6 text-right"></div>
         </div>
     </div>

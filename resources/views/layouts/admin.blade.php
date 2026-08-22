@@ -50,7 +50,7 @@
             gap: 8px;
         }
         .admin-brand__inner img {
-            width: 150px;
+            width: 120px;
             max-width: 100%;
         }
         .admin-brand__name {
@@ -117,6 +117,7 @@
         }
         .admin-table table {
             margin: 0;
+            table-layout: fixed;
         }
         .admin-table .table > thead > tr > th,
         .admin-table .table > tbody > tr > td {

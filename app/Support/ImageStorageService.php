@@ -9,9 +9,13 @@ use Illuminate\Support\Str;
 
 class ImageStorageService
 {
-    /**
-     * Store a public file and return its browser path.
-     */
+    /** Maximum width/height for stored originals. Images larger than this are resized. */
+    private const MAX_ORIGINAL_DIMENSION = 2000;
+
+    /** JPEG quality for stored originals (0-100). */
+    private const ORIGINAL_JPEG_QUALITY = 82;
+
+    /** Store a public file and return its browser path. */
     public function storePublicFile(UploadedFile $file, string $directory): string
     {
         $directory = trim($directory, '/');
@@ -39,8 +43,11 @@ class ImageStorageService
         $extension = $this->resolveOriginalExtension($file);
         $filename = (string) Str::uuid() . '.' . $extension;
 
-        $storedPath = $file->storeAs($directory, $filename, 'public');
-        $path = 'storage/' . ltrim($storedPath, '/');
+        // 1) Optimize (resize if needed) and store the original
+        $optimizedPath = $this->optimizeAndStore($file, $directory, $filename);
+        $path = 'storage/' . ltrim($directory, '/') . '/' . $filename;
+
+        // 2) Generate thumbnail from the same file (GD will work on a manageable size)
         $thumbPath = $this->createThumbnail(
             $file,
             $thumbDirectory,
@@ -53,6 +60,66 @@ class ImageStorageService
             'path' => $path,
             'thumb_path' => $thumbPath,
         ];
+    }
+
+    /**
+     * If the uploaded image is larger than MAX_ORIGINAL_DIMENSION,
+     * resize it down and save. Otherwise store as-is.
+     */
+    private function optimizeAndStore(UploadedFile $file, string $directory, string $filename): ?string
+    {
+        $sourcePath = $file->getRealPath();
+        if (!is_string($sourcePath) || $sourcePath === '') {
+            return null;
+        }
+
+        $imageInfo = @getimagesize($sourcePath);
+        if ($imageInfo === false) {
+            return null;
+        }
+
+        $width = (int) ($imageInfo[0] ?? 0);
+        $height = (int) ($imageInfo[1] ?? 0);
+        $mimeType = $imageInfo['mime'] ?? null;
+
+        // If within limits, just return (file already stored by storeAs)
+        if ($width <= self::MAX_ORIGINAL_DIMENSION && $height <= self::MAX_ORIGINAL_DIMENSION) {
+            return null;
+        }
+
+        // Resize down proportionally
+        $sourceImage = $this->createImageResource($sourcePath, $mimeType);
+        if ($sourceImage === null) {
+            return null;
+        }
+
+        $scale = self::MAX_ORIGINAL_DIMENSION / max($width, $height);
+        $newWidth = (int) round($width * $scale);
+        $newHeight = (int) round($height * $scale);
+
+        $resized = imagecreatetruecolor($newWidth, $newHeight);
+        if ($resized !== false) {
+            $this->prepareTargetCanvas($resized, $mimeType);
+            imagecopyresampled($resized, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        }
+
+        imagedestroy($sourceImage);
+
+        if ($resized === false) {
+            return null;
+        }
+
+        // Replace the stored file
+        $absolutePath = Storage::disk('public')->path($directory . '/' . $filename);
+        $saved = $this->saveImageResource($resized, $absolutePath, $mimeType, self::ORIGINAL_JPEG_QUALITY);
+        imagedestroy($resized);
+
+        if (!$saved) {
+            @unlink($absolutePath);
+            return null;
+        }
+
+        return $absolutePath;
     }
 
     /**
@@ -204,15 +271,15 @@ class ImageStorageService
     /**
      * Save the generated GD image using the source mime type.
      */
-    private function saveImageResource(\GdImage $image, string $path, ?string $mimeType): bool
+    private function saveImageResource(\GdImage $image, string $path, ?string $mimeType, int $quality = 88): bool
     {
         return match ($mimeType) {
             'image/png' => imagepng($image, $path, 6),
             'image/gif' => imagegif($image, $path),
             'image/webp' => function_exists('imagewebp')
-                ? imagewebp($image, $path, 88)
-                : imagejpeg($image, $path, 88),
-            default => imagejpeg($image, $path, 88),
+                ? imagewebp($image, $path, min($quality, 92))
+                : imagejpeg($image, $path, $quality),
+            default => imagejpeg($image, $path, $quality),
         };
     }
 }
