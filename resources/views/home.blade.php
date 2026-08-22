@@ -282,7 +282,7 @@
     <div class="content main_content">
         <div class="city_module home-directions">
             <div class="h3 fint l_fint">Популярные направления</div>
-            <div class="city-slick slick-initialized slick-slider">
+            <div class="city-slick">
                 <div class="slick-list draggable">
                     <div class="slick-track">
                         @foreach ($directionCards as $directionCard)
