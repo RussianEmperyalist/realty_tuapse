@@ -43,6 +43,10 @@ class ImageStorageService
         $extension = $this->resolveOriginalExtension($file);
         $filename = (string) Str::uuid() . '.' . $extension;
 
+        // Store the original first; optimizeAndStore() overwrites it with a
+        // resized copy when the image exceeds MAX_ORIGINAL_DIMENSION.
+        $file->storeAs($directory, $filename, 'public');
+
         // 1) Optimize (resize if needed) and store the original
         $optimizedPath = $this->optimizeAndStore($file, $directory, $filename);
         $path = 'storage/' . ltrim($directory, '/') . '/' . $filename;
