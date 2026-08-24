@@ -10,6 +10,7 @@ use App\Support\ImageStorageService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -215,17 +216,27 @@ class PropertyController extends Controller
         if ($request->hasFile('images')) {
             $sortOrder = ((int) PropertyImage::query()->where('property_id', $property->id)->max('sort_order')) + 1;
             foreach ($request->file('images', []) as $file) {
-                if ($file === null) {
+                if ($file === null || !$file->isValid()) {
                     continue;
                 }
 
-                $storedImage = $this->imageStorage->storePublicImageWithThumbnail(
-                    $file,
-                    'properties',
-                    'properties/thumbs',
-                    820,
-                    428,
-                );
+                try {
+                    $storedImage = $this->imageStorage->storePublicImageWithThumbnail(
+                        $file,
+                        'properties',
+                        'properties/thumbs',
+                        820,
+                        428,
+                    );
+                } catch (\Throwable $exception) {
+                    Log::error('Property image processing failed.', [
+                        'property_id' => $property->id,
+                        'original_name' => $file->getClientOriginalName(),
+                        'error' => $exception->getMessage(),
+                    ]);
+
+                    continue;
+                }
 
                 PropertyImage::query()->create([
                     'property_id' => $property->id,
