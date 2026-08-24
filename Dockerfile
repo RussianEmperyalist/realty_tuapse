@@ -42,6 +42,9 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # php-fpm listens on a unix socket (no TCP 9000)
 COPY docker/zz-php-fpm-socket.conf /usr/local/etc/php-fpm.d/zz-php-fpm-socket.conf
 
+# PHP upload/memory limits (see docker/php/uploads.ini)
+COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/zz-uploads.ini
+
 # Ensure the runtime dir for the php-fpm socket exists
 RUN mkdir -p /run/php && chown -R www-data:www-data /run/php
 
