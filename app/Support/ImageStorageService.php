@@ -4,7 +4,6 @@ namespace App\Support;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ImageStorageService
@@ -19,11 +18,11 @@ class ImageStorageService
     public function storePublicFile(UploadedFile $file, string $directory): string
     {
         $directory = trim($directory, '/');
-        $extension = $this->resolveOriginalExtension($file);
-        $filename = (string) Str::uuid() . '.' . $extension;
-        $storedPath = $file->storeAs($directory, $filename, 'public');
+        [$filename] = $this->managedFilename($file);
 
-        return 'storage/' . ltrim($storedPath, '/');
+        MediaStorage::disk()->putFileAs($directory, $file, $filename);
+
+        return 'storage/' . $directory . '/' . $filename;
     }
 
     /**
@@ -40,18 +39,13 @@ class ImageStorageService
     ): array {
         $directory = trim($directory, '/');
         $thumbDirectory = trim($thumbDirectory, '/');
-        $extension = $this->resolveOriginalExtension($file);
-        $filename = (string) Str::uuid() . '.' . $extension;
+        [$filename] = $this->managedFilename($file);
 
-        // Store the original first; optimizeAndStore() overwrites it with a
-        // resized copy when the image exceeds MAX_ORIGINAL_DIMENSION.
-        $file->storeAs($directory, $filename, 'public');
+        // 1) Store the original (resized down when it exceeds the dimension limit)
+        $this->storeOriginal($file, $directory, $filename);
+        $path = 'storage/' . $directory . '/' . $filename;
 
-        // 1) Optimize (resize if needed) and store the original
-        $optimizedPath = $this->optimizeAndStore($file, $directory, $filename);
-        $path = 'storage/' . ltrim($directory, '/') . '/' . $filename;
-
-        // 2) Generate thumbnail from the same file (GD will work on a manageable size)
+        // 2) Generate a thumbnail; fall back to the original on failure
         $thumbPath = $this->createThumbnail(
             $file,
             $thumbDirectory,
@@ -67,41 +61,62 @@ class ImageStorageService
     }
 
     /**
-     * If the uploaded image is larger than MAX_ORIGINAL_DIMENSION,
-     * resize it down and save. Otherwise store as-is.
+     * Build a collision-free managed filename from an upload.
+     *
+     * @return array{0: string, 1: string} [extension, filename]
      */
-    private function optimizeAndStore(UploadedFile $file, string $directory, string $filename): ?string
+    private function managedFilename(UploadedFile $file): array
+    {
+        $extension = $this->resolveOriginalExtension($file);
+
+        return [$extension, (string) Str::uuid() . '.' . $extension];
+    }
+
+    /**
+     * Store the original upload on the media disk, resizing it first when needed.
+     */
+    private function storeOriginal(UploadedFile $file, string $directory, string $filename): void
     {
         $sourcePath = $file->getRealPath();
-        if (!is_string($sourcePath) || $sourcePath === '') {
-            return null;
+
+        if (! is_string($sourcePath) || $sourcePath === '') {
+            MediaStorage::disk()->putFileAs($directory, $file, $filename);
+
+            return;
         }
 
         $imageInfo = @getimagesize($sourcePath);
+
         if ($imageInfo === false) {
-            return null;
+            MediaStorage::disk()->putFileAs($directory, $file, $filename);
+
+            return;
         }
 
         $width = (int) ($imageInfo[0] ?? 0);
         $height = (int) ($imageInfo[1] ?? 0);
         $mimeType = $imageInfo['mime'] ?? null;
 
-        // If within limits, just return (file already stored by storeAs)
         if ($width <= self::MAX_ORIGINAL_DIMENSION && $height <= self::MAX_ORIGINAL_DIMENSION) {
-            return null;
+            MediaStorage::disk()->putFileAs($directory, $file, $filename);
+
+            return;
         }
 
-        // Resize down proportionally
         $sourceImage = $this->createImageResource($sourcePath, $mimeType);
+
         if ($sourceImage === null) {
-            return null;
+            MediaStorage::disk()->putFileAs($directory, $file, $filename);
+
+            return;
         }
 
         $scale = self::MAX_ORIGINAL_DIMENSION / max($width, $height);
-        $newWidth = (int) round($width * $scale);
-        $newHeight = (int) round($height * $scale);
+        $newWidth = max((int) round($width * $scale), 1);
+        $newHeight = max((int) round($height * $scale), 1);
 
         $resized = imagecreatetruecolor($newWidth, $newHeight);
+
         if ($resized !== false) {
             $this->prepareTargetCanvas($resized, $mimeType);
             imagecopyresampled($resized, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
@@ -110,24 +125,24 @@ class ImageStorageService
         imagedestroy($sourceImage);
 
         if ($resized === false) {
-            return null;
+            MediaStorage::disk()->putFileAs($directory, $file, $filename);
+
+            return;
         }
 
-        // Replace the stored file
-        $absolutePath = Storage::disk('public')->path($directory . '/' . $filename);
-        $saved = $this->saveImageResource($resized, $absolutePath, $mimeType, self::ORIGINAL_JPEG_QUALITY);
+        $bytes = $this->imageToString($resized, $mimeType, self::ORIGINAL_JPEG_QUALITY);
         imagedestroy($resized);
 
-        if (!$saved) {
-            @unlink($absolutePath);
-            return null;
+        if ($bytes === null || ! MediaStorage::disk()->put($directory . '/' . $filename, $bytes)) {
+            Log::warning('Resized original could not be stored; keeping raw upload instead.', [
+                'key' => $directory . '/' . $filename,
+            ]);
+            MediaStorage::disk()->putFileAs($directory, $file, $filename);
         }
-
-        return $absolutePath;
     }
 
     /**
-     * Generate a thumbnail when GD is available.
+     * Generate a thumbnail and store it on the media disk.
      */
     private function createThumbnail(
         UploadedFile $file,
@@ -199,32 +214,23 @@ class ImageStorageService
             $cropHeight,
         );
 
-        $absolutePath = Storage::disk('public')->path(trim($directory, '/') . '/' . $filename);
-        $absoluteDirectory = dirname($absolutePath);
-
-        if (! is_dir($absoluteDirectory) && ! @mkdir($absoluteDirectory, 0775, true) && ! is_dir($absoluteDirectory)) {
-            imagedestroy($sourceImage);
-            imagedestroy($targetImage);
-
-            return null;
-        }
-
-        $saved = $this->saveImageResource($targetImage, $absolutePath, $mimeType);
-
         imagedestroy($sourceImage);
+
+        $bytes = $this->imageToString($targetImage, $mimeType);
         imagedestroy($targetImage);
 
-        if (! $saved) {
-            @unlink($absolutePath);
+        $key = trim($directory, '/') . '/' . $filename;
+
+        if ($bytes === null || ! MediaStorage::disk()->put($key, $bytes)) {
             Log::warning('Thumbnail generation failed for uploaded image.', [
-                'path' => $absolutePath,
+                'key' => $key,
                 'mime' => $mimeType,
             ]);
 
             return null;
         }
 
-        return 'storage/' . trim($directory, '/') . '/' . $filename;
+        return 'storage/' . $key;
     }
 
     /**
@@ -273,17 +279,29 @@ class ImageStorageService
     }
 
     /**
-     * Save the generated GD image using the source mime type.
+     * Encode a GD image into binary data using the source mime type.
      */
-    private function saveImageResource(\GdImage $image, string $path, ?string $mimeType, int $quality = 88): bool
+    private function imageToString(\GdImage $image, ?string $mimeType, int $quality = 88): ?string
     {
-        return match ($mimeType) {
-            'image/png' => imagepng($image, $path, 6),
-            'image/gif' => imagegif($image, $path),
-            'image/webp' => function_exists('imagewebp')
-                ? imagewebp($image, $path, min($quality, 92))
-                : imagejpeg($image, $path, $quality),
-            default => imagejpeg($image, $path, $quality),
-        };
+        ob_start();
+
+        try {
+            $saved = match ($mimeType) {
+                'image/png' => imagepng($image, null, 6),
+                'image/gif' => imagegif($image),
+                'image/webp' => function_exists('imagewebp')
+                    ? imagewebp($image, null, min($quality, 92))
+                    : imagejpeg($image, null, $quality),
+                default => imagejpeg($image, null, $quality),
+            };
+        } catch (\Throwable) {
+            ob_end_clean();
+
+            return null;
+        }
+
+        $data = ob_get_clean();
+
+        return ($saved && $data !== false && $data !== '') ? $data : null;
     }
 }

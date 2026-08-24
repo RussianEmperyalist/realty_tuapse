@@ -352,7 +352,7 @@
                         <div class="home-employee-grid__item">
                             <div class="home-employee-card text-center">
                                 <a href="{{ route('employees.show', ['id' => $employee->legacy_id]) }}">
-                                    <img class="home-employee-card__image" src="{{ asset($employee->photo_path) }}" alt="{{ $employee->full_name }}">
+                                    <img class="home-employee-card__image" src="{{ \App\Support\MediaPath::url($employee->photo_path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $employee->full_name }}">
                                 </a>
                                 <div class="home-employee-card__body">
                                     <h4 style="margin-top: 0;">{{ $employee->full_name }}</h4>
@@ -372,7 +372,7 @@
                             <div class="home-news-card">
                                 @if ($newsPost->image_path)
                                     <a href="{{ route('news.show', $newsPost->slug) }}">
-                                        <img class="home-news-card__image" src="{{ asset($newsPost->image_path) }}" alt="{{ $newsPost->title }}">
+                                        <img class="home-news-card__image" src="{{ \App\Support\MediaPath::url($newsPost->image_path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $newsPost->title }}">
                                     </a>
                                 @endif
                                 <div class="home-news-card__body">

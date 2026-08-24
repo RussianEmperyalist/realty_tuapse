@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GalleryAlbum;
 use App\Models\GalleryItem;
 use App\Support\ImageStorageService;
+use App\Support\MediaStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -222,14 +223,10 @@ class GalleryAlbumController extends Controller
     }
 
     /**
-     * Delete file from public disk.
+     * Delete file from the media disk.
      */
     private function deletePublicPath(?string $path): void
     {
-        if ($path === null || !str_starts_with($path, 'storage/')) {
-            return;
-        }
-
-        Storage::disk('public')->delete(Str::after($path, 'storage/'));
+        MediaStorage::deleteFromPath($path);
     }
 }

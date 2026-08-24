@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use App\Support\ImageStorageService;
+use App\Support\MediaStorage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -365,14 +366,10 @@ class PropertyController extends Controller
     }
 
     /**
-     * Delete a file if it belongs to the public storage disk.
+     * Delete a file if it belongs to managed media storage.
      */
     private function deletePublicPath(?string $path): void
     {
-        if ($path === null || !str_starts_with($path, 'storage/')) {
-            return;
-        }
-
-        Storage::disk('public')->delete(Str::after($path, 'storage/'));
+        MediaStorage::deleteFromPath($path);
     }
 }

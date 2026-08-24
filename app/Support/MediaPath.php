@@ -17,16 +17,11 @@ class MediaPath
             return $path;
         }
 
-        if (! self::exists($path)) {
+        if (! MediaStorage::exists($path)) {
             return $fallback !== null ? self::url($fallback) : null;
         }
 
-        $segments = array_map(
-            static fn (string $segment): string => rawurlencode(rawurldecode($segment)),
-            explode('/', ltrim($path, '/')),
-        );
-
-        return asset(implode('/', $segments));
+        return MediaStorage::url($path);
     }
 
     /**
@@ -34,17 +29,6 @@ class MediaPath
      */
     public static function exists(?string $path): bool
     {
-        if ($path === null || $path === '') {
-            return false;
-        }
-
-        if (preg_match('~^https?://~i', $path) === 1) {
-            return true;
-        }
-
-        $rawPath = public_path(ltrim($path, '/'));
-        $decodedPath = public_path(ltrim(rawurldecode($path), '/'));
-
-        return is_file($rawPath) || is_file($decodedPath);
+        return MediaStorage::exists($path);
     }
 }

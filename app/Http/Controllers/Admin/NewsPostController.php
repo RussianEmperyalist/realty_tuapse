@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\NewsPost;
 use App\Support\ImageStorageService;
+use App\Support\MediaStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -56,7 +57,7 @@ class NewsPostController extends Controller
 
         return redirect()
             ->route('admin.news.edit', $newsPost)
-            ->with('status', 'Новость создана.');
+            ->with('status', 'РќРѕРІРѕСЃС‚СЊ СЃРѕР·РґР°РЅР°.');
     }
 
     /**
@@ -93,7 +94,7 @@ class NewsPostController extends Controller
 
         return redirect()
             ->route('admin.news.edit', $news)
-            ->with('status', 'Новость обновлена.');
+            ->with('status', 'РќРѕРІРѕСЃС‚СЊ РѕР±РЅРѕРІР»РµРЅР°.');
     }
 
     /**
@@ -106,7 +107,7 @@ class NewsPostController extends Controller
 
         return redirect()
             ->route('admin.news.index')
-            ->with('status', 'Новость удалена.');
+            ->with('status', 'РќРѕРІРѕСЃС‚СЊ СѓРґР°Р»РµРЅР°.');
     }
 
     /**
@@ -145,14 +146,10 @@ class NewsPostController extends Controller
     }
 
     /**
-     * Delete file from the public disk.
+     * Delete file from the media disk.
      */
     private function deletePublicPath(?string $path): void
     {
-        if ($path === null || !str_starts_with($path, 'storage/')) {
-            return;
-        }
-
-        Storage::disk('public')->delete(Str::after($path, 'storage/'));
+        MediaStorage::deleteFromPath($path);
     }
 }

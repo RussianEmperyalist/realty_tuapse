@@ -77,7 +77,7 @@
             <h2 style="margin-top: 0;">Фото</h2>
             @if ($employee->photo_path)
                 <div style="margin-bottom: 20px; max-width: 240px;">
-                    <img src="{{ asset($employee->photo_path) }}" alt="{{ $employee->full_name }}" style="width: 100%; border-radius: 8px;">
+                    <img src="{{ \App\Support\MediaPath::url($employee->photo_path) }}" alt="{{ $employee->full_name }}" style="width: 100%; border-radius: 8px;">
                     <div class="checkbox" style="margin-top: 12px;">
                         <label><input type="checkbox" name="delete_photo" value="1"> Удалить текущее фото</label>
                     </div>

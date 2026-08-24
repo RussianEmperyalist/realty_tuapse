@@ -51,7 +51,7 @@
             <h2 style="margin-top: 0;">Обложка</h2>
             @if ($album->cover_image_path)
                 <div style="margin-bottom: 20px; max-width: 280px;">
-                    <img src="{{ asset($album->cover_image_path) }}" alt="{{ $album->title }}" style="width: 100%; border-radius: 8px;">
+                    <img src="{{ \App\Support\MediaPath::url($album->cover_image_path) }}" alt="{{ $album->title }}" style="width: 100%; border-radius: 8px;">
                     <div class="checkbox" style="margin-top: 12px;">
                         <label><input type="checkbox" name="delete_cover_image" value="1"> Удалить обложку</label>
                     </div>
@@ -69,7 +69,7 @@
                 <div class="admin-media-grid" style="margin-bottom: 20px;">
                     @foreach ($album->items as $item)
                         <div class="admin-media-card">
-                            <img src="{{ asset($item->thumb_path ?: $item->image_path) }}" alt="{{ $item->title ?: $album->title }}">
+                            <img src="{{ \App\Support\MediaPath::url($item->thumb_path ?: $item->image_path) }}" alt="{{ $item->title ?: $album->title }}">
                             <div class="form-group">
                                 <label for="item-title-{{ $item->id }}">Название</label>
                                 <input class="form-control" id="item-title-{{ $item->id }}" name="item_titles[{{ $item->id }}]" type="text" value="{{ old('item_titles.' . $item->id, $item->title) }}">

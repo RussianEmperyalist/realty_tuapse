@@ -158,7 +158,7 @@
                 <div class="admin-media-grid" style="margin-bottom: 20px;">
                     @foreach ($property->images as $image)
                         <div class="admin-media-card">
-                            <img src="{{ asset($image->thumb_path ?: $image->path) }}" alt="{{ $image->alt ?: $property->title }}">
+                            <img src="{{ \App\Support\MediaPath::url($image->thumb_path ?: $image->path) }}" alt="{{ $image->alt ?: $property->title }}">
                             <div class="radio" style="margin-top: 0;">
                                 <label>
                                     <input type="radio" name="cover_image_id" value="{{ $image->id }}" @checked((int) old('cover_image_id', optional($property->images->firstWhere('is_cover', true))->id) === $image->id)> Обложка

@@ -62,7 +62,7 @@
             <h2 style="margin-top: 0;">Изображение</h2>
             @if ($newsPost->image_path)
                 <div style="margin-bottom: 20px; max-width: 280px;">
-                    <img src="{{ asset($newsPost->image_path) }}" alt="{{ $newsPost->title }}" style="width: 100%; border-radius: 8px;">
+                    <img src="{{ \App\Support\MediaPath::url($newsPost->image_path) }}" alt="{{ $newsPost->title }}" style="width: 100%; border-radius: 8px;">
                     <div class="checkbox" style="margin-top: 12px;">
                         <label><input type="checkbox" name="delete_image" value="1"> Удалить текущее изображение</label>
                     </div>

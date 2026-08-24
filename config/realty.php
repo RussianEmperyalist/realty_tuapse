@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'media_disk' => env('MEDIA_DISK', 'public'),
     'company_name' => env('APP_NAME', 'АН Туапсе'),
     'company_display_name' => env('REALTY_COMPANY_DISPLAY_NAME', 'Агентство недвижимости "Туапсе"'),
     'operator_name' => env('REALTY_OPERATOR_NAME', 'ИП Шляхов Александр Владимирович'),

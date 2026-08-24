@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\User;
 use App\Support\ImageStorageService;
+use App\Support\MediaStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -68,7 +69,7 @@ class EmployeeController extends Controller
 
         return redirect()
             ->route('admin.employees.index')
-            ->with('status', 'Сотрудник создан.');
+            ->with('status', 'РЎРѕС‚СЂСѓРґРЅРёРє СЃРѕР·РґР°РЅ.');
     }
 
     /**
@@ -114,7 +115,7 @@ class EmployeeController extends Controller
 
         return redirect()
             ->route('admin.employees.edit', $employee)
-            ->with('status', 'Сотрудник обновлен.');
+            ->with('status', 'РЎРѕС‚СЂСѓРґРЅРёРє РѕР±РЅРѕРІР»РµРЅ.');
     }
 
     /**
@@ -133,7 +134,7 @@ class EmployeeController extends Controller
 
         return redirect()
             ->route('admin.employees.index')
-            ->with('status', 'Сотрудник удален.');
+            ->with('status', 'РЎРѕС‚СЂСѓРґРЅРёРє СѓРґР°Р»РµРЅ.');
     }
 
     /**
@@ -215,14 +216,10 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Delete files from the public disk.
+     * Delete files from the media disk.
      */
     private function deletePublicPath(?string $path): void
     {
-        if ($path === null || !str_starts_with($path, 'storage/')) {
-            return;
-        }
-
-        Storage::disk('public')->delete(Str::after($path, 'storage/'));
+        MediaStorage::deleteFromPath($path);
     }
 }
