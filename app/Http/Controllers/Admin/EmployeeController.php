@@ -163,6 +163,13 @@ class EmployeeController extends Controller
                 'max:255',
                 Rule::unique('users', 'email')->ignore($employee?->user?->id),
             ],
+            'login_name' => [
+                'nullable',
+                'string',
+                'min:5',
+                'max:255',
+                Rule::unique('users', 'login')->ignore($employee?->user?->id),
+            ],
             'login_password' => ['nullable', 'string', 'min:8'],
             'login_role' => ['nullable', 'in:admin,employee'],
         ]);
@@ -184,6 +191,11 @@ class EmployeeController extends Controller
             'role' => $request->input('login_role', $request->boolean('is_admin') ? 'admin' : 'employee'),
             'is_active' => $request->boolean('is_active', true),
         ];
+
+        $loginName = trim((string) $request->input('login_name'));
+        if ($loginName !== '') {
+            $data['login'] = $loginName;
+        }
 
         if ($request->filled('login_password')) {
             $data['password'] = Hash::make((string) $request->input('login_password'));

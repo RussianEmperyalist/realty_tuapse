@@ -31,15 +31,19 @@ class AuthController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'string', 'min:5', 'max:255'],
             'password' => ['required', 'string'],
         ]);
 
-        if (! Auth::attempt($credentials, $request->boolean('remember'))) {
+        // Allow signing in with either an email address or a short login word.
+        $identifier = trim((string) $credentials['email']);
+        $idField = filter_var($identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+
+        if (! Auth::attempt([$idField => $identifier, 'password' => $credentials['password']], $request->boolean('remember'))) {
             return back()
                 ->withInput($request->except('password'))
                 ->withErrors([
-                    'email' => 'Не удалось войти. Проверьте email и пароль.',
+                    'email' => 'Не удалось войти. Проверьте логин (email) и пароль.',
                 ]);
         }
 

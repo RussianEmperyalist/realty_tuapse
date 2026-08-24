@@ -97,6 +97,11 @@
                     <input class="form-control" id="login_email" name="login_email" type="email" value="{{ old('login_email', $employee->user?->email) }}">
                 </div>
                 <div>
+                    <label for="login_name">Логин (вход без email)</label>
+                    <input class="form-control" id="login_name" name="login_name" type="text" value="{{ old('login_name', $employee->user?->login) }}">
+                    <p style="margin-top: 8px; color: #667085;">Слово от 5 символов. Можно входить по нему вместо email.</p>
+                </div>
+                <div>
                     <label for="login_role">Роль в системе</label>
                     <select class="form-control" id="login_role" name="login_role">
                         <option value="">Не создавать доступ</option>

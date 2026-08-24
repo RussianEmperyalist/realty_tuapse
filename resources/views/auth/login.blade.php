@@ -10,8 +10,8 @@
             <form method="post" action="{{ route('login.store') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" id="email" name="email" type="email" value="{{ old('email') }}" required>
+                    <label for="email">Email или логин</label>
+                    <input class="form-control" id="email" name="email" type="text" autocomplete="username" value="{{ old('email') }}" required>
                     @error('email')
                         <div class="text-danger" style="margin-top: 8px;">{{ $message }}</div>
                     @enderror
