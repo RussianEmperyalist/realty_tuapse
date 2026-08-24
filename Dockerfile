@@ -61,8 +61,9 @@ COPY . .
 # Install Node dependencies and build frontend
 RUN npm install && npm run build
 
-# Install PHP dependencies (production only)
-RUN composer install --no-dev --no-interaction --optimize-autoloader
+# Install PHP dependencies (resolved from composer.json at build time;
+# no local tooling to maintain composer.lock)
+RUN composer update --no-dev --no-interaction --no-progress --optimize-autoloader
 
 # Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
