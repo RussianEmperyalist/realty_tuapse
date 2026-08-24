@@ -18,7 +18,7 @@ class ImageStorageService
     public function storePublicFile(UploadedFile $file, string $directory): string
     {
         $directory = trim($directory, '/');
-        [$filename] = $this->managedFilename($file);
+        $filename = $this->managedFilename($file);
 
         MediaStorage::disk()->putFileAs($directory, $file, $filename);
 
@@ -39,7 +39,7 @@ class ImageStorageService
     ): array {
         $directory = trim($directory, '/');
         $thumbDirectory = trim($thumbDirectory, '/');
-        [$filename] = $this->managedFilename($file);
+        $filename = $this->managedFilename($file);
 
         // 1) Store the original (resized down when it exceeds the dimension limit)
         $this->storeOriginal($file, $directory, $filename);
@@ -62,14 +62,12 @@ class ImageStorageService
 
     /**
      * Build a collision-free managed filename from an upload.
-     *
-     * @return array{0: string, 1: string} [extension, filename]
      */
-    private function managedFilename(UploadedFile $file): array
+    private function managedFilename(UploadedFile $file): string
     {
         $extension = $this->resolveOriginalExtension($file);
 
-        return [$extension, (string) Str::uuid() . '.' . $extension];
+        return (string) Str::uuid() . '.' . $extension;
     }
 
     /**
