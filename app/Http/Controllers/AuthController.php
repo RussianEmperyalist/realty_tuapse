@@ -36,10 +36,27 @@ class AuthController extends Controller
         ]);
 
         // Allow signing in with either an email address or a short login word.
+        // Try the email column first (when the value looks like an email), then
+        // fall back to the login column so both identifiers work reliably.
         $identifier = trim((string) $credentials['email']);
-        $idField = filter_var($identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+        $remember = $request->boolean('remember');
+        $authenticated = false;
 
-        if (! Auth::attempt([$idField => $identifier, 'password' => $credentials['password']], $request->boolean('remember'))) {
+        if (str_contains($identifier, '@')) {
+            $authenticated = Auth::attempt(
+                ['email' => $identifier, 'password' => $credentials['password']],
+                $remember,
+            );
+        }
+
+        if (! $authenticated) {
+            $authenticated = Auth::attempt(
+                ['login' => $identifier, 'password' => $credentials['password']],
+                $remember,
+            );
+        }
+
+        if (! $authenticated) {
             return back()
                 ->withInput($request->except('password'))
                 ->withErrors([

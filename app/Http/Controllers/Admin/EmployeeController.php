@@ -181,23 +181,29 @@ class EmployeeController extends Controller
     private function upsertUser(?User $user, Request $request): ?User
     {
         $loginEmail = trim((string) $request->input('login_email'));
-        if ($loginEmail === '') {
-            return $user;
+        $loginName = trim((string) $request->input('login_name'));
+        $passwordProvided = $request->filled('login_password');
+
+        // No account requested at all: nothing to do.
+        if ($user === null && $loginEmail === '' && $loginName === '' && ! $passwordProvided) {
+            return null;
         }
 
         $data = [
             'name' => $request->input('full_name'),
-            'email' => $loginEmail,
             'role' => $request->input('login_role', $request->boolean('is_admin') ? 'admin' : 'employee'),
             'is_active' => $request->boolean('is_active', true),
         ];
 
-        $loginName = trim((string) $request->input('login_name'));
+        if ($loginEmail !== '') {
+            $data['email'] = $loginEmail;
+        }
+
         if ($loginName !== '') {
             $data['login'] = $loginName;
         }
 
-        if ($request->filled('login_password')) {
+        if ($passwordProvided) {
             $data['password'] = Hash::make((string) $request->input('login_password'));
         } elseif ($user === null) {
             $data['password'] = Hash::make((string) env('REALTY_DEMO_PASSWORD', 'RealtyDemo2026!'));
@@ -206,6 +212,11 @@ class EmployeeController extends Controller
         if ($user !== null) {
             $user->update($data);
             return $user;
+        }
+
+        // Creating a brand-new account still requires an email address.
+        if ($loginEmail === '') {
+            return null;
         }
 
         return User::query()->create($data);
