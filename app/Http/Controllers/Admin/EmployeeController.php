@@ -272,6 +272,72 @@ class EmployeeController extends Controller
     }
 
     /**
+     * Grant cabinet access to several employees at once (login-only accounts).
+     */
+    public function bulkGrantAccess(Request $request): View
+    {
+        abort_unless($request->user()?->isAdmin(), 403);
+
+        $validated = $request->validate([
+            'employee_ids' => ['required', 'array', 'min:1'],
+            'employee_ids.*' => ['integer', 'exists:employees,id'],
+            'role' => ['required', 'in:admin,employee'],
+        ]);
+
+        $results = [];
+
+        foreach ($validated['employee_ids'] as $id) {
+            $employee = Employee::findOrFail($id);
+
+            if ($employee->user !== null) {
+                continue;
+            }
+
+            $base = $employee->slug ?: ('emp-' . ($employee->legacy_id ?? $employee->id));
+            $login = $this->uniqueLogin($base);
+            $password = Str::password(12);
+
+            $user = User::query()->create([
+                'name' => $employee->full_name,
+                'login' => $login,
+                'email' => null,
+                'role' => $validated['role'],
+                'is_active' => true,
+                'password' => Hash::make($password),
+            ]);
+
+            $employee->update(['user_id' => $user->id]);
+
+            $results[] = [
+                'employee' => $employee->full_name,
+                'login' => $login,
+                'password' => $password,
+            ];
+        }
+
+        return view('admin.employees.bulk-access-result', [
+            'results' => $results,
+            'role' => $validated['role'],
+        ]);
+    }
+
+    /**
+     * Build a unique login word (used for login-only accounts).
+     */
+    private function uniqueLogin(string $base): string
+    {
+        $base = $base !== '' ? $base : 'employee';
+        $login = $base;
+        $counter = 1;
+
+        while (User::query()->where('login', $login)->exists()) {
+            $login = $base . '-' . $counter++;
+        }
+
+        return $login;
+    }
+
+    /**
      * Generate unique employee slug.
      */
     private function uniqueSlug(string $value, ?int $ignoreId = null): string

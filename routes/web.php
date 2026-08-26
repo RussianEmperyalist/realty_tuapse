@@ -168,6 +168,8 @@ Route::middleware('role:admin,employee')->prefix('admin')->name('admin.')->group
         Route::resource('gallery', AdminGalleryAlbumController::class)->except(['show']);
         Route::post('/employees/{employee}/revoke-access', [AdminEmployeeController::class, 'revokeAccess'])
             ->name('employees.revoke-access');
+        Route::post('/employees/bulk-grant-access', [AdminEmployeeController::class, 'bulkGrantAccess'])
+            ->name('employees.bulk-grant-access');
     });
 });
 

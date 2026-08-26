@@ -13,11 +13,26 @@
         </div>
     </div>
 
+    <form method="post" action="{{ route('admin.employees.bulk-grant-access') }}" id="bulk-access-form">
+        @csrf
+        <div style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+            <div>
+                <label for="bulk_role" style="display: block; margin-bottom: 4px;">Роль для выбранных</label>
+                <select class="form-control" id="bulk_role" name="role" style="min-width: 200px;">
+                    <option value="employee">Сотрудник</option>
+                    <option value="admin">Администратор</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Выдать доступ выбранным</button>
+        </div>
+    </form>
+
     <div class="admin-table">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th style="width: 36px;"><input id="select-all" type="checkbox" title="Выбрать всех"></th>
                         <th>Порядок</th>
                         <th>Сотрудник</th>
                         <th>Должность</th>
@@ -27,52 +42,59 @@
                         <th>Действия</th>
                     </tr>
                 </thead>
-            <tbody>
-                @forelse ($employees as $employee)
-                <tr>
-                    <td style="white-space: nowrap;">{{ $employee->sort_order }}</td>
-                    <td>
-                        <strong>{{ $employee->full_name }}</strong><br>
-                        <span style="color:#667085;">ID: {{ $employee->legacy_id }}</span>
-                    </td>
-                    <td style="white-space: nowrap;">{{ $employee->position }}</td>
-                    <td>
-                        {{ $employee->phone_primary }}<br>
-                        <span style="color:#667085;">{{ $employee->email }}</span>
-                    </td>
-                    <td>
-                        @if ($employee->user)
-                            {{ $employee->user->email }}<br>
-                            <span class="label label-info">{{ $employee->user->role === 'admin' ? 'Администратор' : 'Сотрудник' }}</span>
-                        @else
-                            <span class="label label-default">Нет доступа</span>
-                        @endif
-                    </td>
-                    <td style="white-space: nowrap;">
-                        @if ($employee->is_active)
-                            <span class="label label-success">Активен</span>
-                        @else
-                            <span class="label label-default">Скрыт</span>
-                        @endif
-                    </td>
-                    <td>
-                        <div class="admin-actions">
-                            <a class="btn btn-xs btn-default" href="{{ route('employees.show', ['id' => $employee->legacy_id]) }}" target="_blank">Открыть</a>
-                            <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.edit', $employee) }}">Редактировать</a>
-                            <form method="post" action="{{ route('admin.employees.destroy', $employee) }}" onsubmit="return confirm('Удалить сотрудника?');">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-xs btn-danger" type="submit">Удалить</button>
-                            </form>
-                        </div>
-                    </td>
-                    </tr>
-                @empty
+                <tbody>
+                    @forelse ($employees as $employee)
                     <tr>
-                        <td colspan="7">Сотрудники пока не найдены.</td>
+                        <td>
+                            @if ($employee->user)
+                                <input type="checkbox" disabled title="Доступ уже есть" checked>
+                            @else
+                                <input type="checkbox" name="employee_ids[]" value="{{ $employee->id }}" class="row-select">
+                            @endif
+                        </td>
+                        <td style="white-space: nowrap;">{{ $employee->sort_order }}</td>
+                        <td>
+                            <strong>{{ $employee->full_name }}</strong><br>
+                            <span style="color:#667085;">ID: {{ $employee->legacy_id }}</span>
+                        </td>
+                        <td style="white-space: nowrap;">{{ $employee->position }}</td>
+                        <td>
+                            {{ $employee->phone_primary }}<br>
+                            <span style="color:#667085;">{{ $employee->email }}</span>
+                        </td>
+                        <td>
+                            @if ($employee->user)
+                                {{ $employee->user->email }}<br>
+                                <span class="label label-info">{{ $employee->user->role === 'admin' ? 'Администратор' : 'Сотрудник' }}</span>
+                            @else
+                                <span class="label label-default">Нет доступа</span>
+                            @endif
+                        </td>
+                        <td style="white-space: nowrap;">
+                            @if ($employee->is_active)
+                                <span class="label label-success">Активен</span>
+                            @else
+                                <span class="label label-default">Скрыт</span>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="admin-actions">
+                                <a class="btn btn-xs btn-default" href="{{ route('employees.show', ['id' => $employee->legacy_id]) }}" target="_blank">Открыть</a>
+                                <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.edit', $employee) }}">Редактировать</a>
+                                <form method="post" action="{{ route('admin.employees.destroy', $employee) }}" onsubmit="return confirm('Удалить сотрудника?');">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-xs btn-danger" type="submit">Удалить</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
-                @endforelse
-            </tbody>
+                    @empty
+                    <tr>
+                        <td colspan="8">Сотрудники пока не найдены.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
     </div>
@@ -80,4 +102,40 @@
     <div style="margin-top: 20px;">
         {{ $employees->links() }}
     </div>
+
+    <script>
+        document.getElementById('select-all')?.addEventListener('change', function () {
+            document.querySelectorAll('.row-select').forEach((el) => {
+                el.checked = this.checked;
+            });
+        });
+
+        document.getElementById('bulk-access-form')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const checked = Array.from(document.querySelectorAll('.row-select:checked')).map((el) => el.value);
+            if (checked.length === 0) {
+                alert('Выберите хотя бы одного сотрудника без доступа.');
+                return;
+            }
+            if (! confirm('Выдать доступ выбранным сотрудникам? Будут созданы логины и пароли.')) {
+                return;
+            }
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = this.action;
+            form.style.display = 'none';
+            const add = (name, value) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = value;
+                form.appendChild(input);
+            };
+            add('_token', document.querySelector('input[name="_token"]').value);
+            add('role', document.getElementById('bulk_role').value);
+            checked.forEach((value) => add('employee_ids[]', value));
+            document.body.appendChild(form);
+            form.submit();
+        });
+    </script>
 @endsection
