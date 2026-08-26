@@ -166,6 +166,8 @@ Route::middleware('role:admin,employee')->prefix('admin')->name('admin.')->group
         Route::post('/mail-test', [DashboardController::class, 'sendMailTest'])->name('mail-test');
         Route::resource('news', AdminNewsPostController::class)->except(['show']);
         Route::resource('gallery', AdminGalleryAlbumController::class)->except(['show']);
+        Route::post('/employees/{employee}/revoke-access', [AdminEmployeeController::class, 'revokeAccess'])
+            ->name('employees.revoke-access');
     });
 });
 

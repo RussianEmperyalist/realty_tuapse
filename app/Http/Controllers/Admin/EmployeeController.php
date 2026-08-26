@@ -56,6 +56,7 @@ class EmployeeController extends Controller
         abort_unless($request->user()?->isAdmin(), 403);
 
         $data = $this->validatedData($request);
+        $this->validateAccessInput($request, null);
         $data['slug'] = $this->uniqueSlug(($data['slug'] ?? '') ?: $data['full_name']);
 
         $user = $this->upsertUser(null, $request);
@@ -96,6 +97,7 @@ class EmployeeController extends Controller
         abort_unless($request->user()?->isAdmin(), 403);
 
         $data = $this->validatedData($request, $employee);
+        $this->validateAccessInput($request, $employee);
         $data['slug'] = $this->uniqueSlug(($data['slug'] ?? '') ?: $data['full_name'], $employee->id);
 
         $user = $this->upsertUser($employee->user, $request);
@@ -176,23 +178,57 @@ class EmployeeController extends Controller
     }
 
     /**
+     * Ensure the requested cabinet access is valid.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    private function validateAccessInput(Request $request, ?Employee $employee): void
+    {
+        if (! $request->input('login_role')) {
+            return;
+        }
+
+        $errors = [];
+
+        if (! $request->input('login_email') && ! $request->input('login_name')) {
+            $errors['login_email'] = 'Для доступа укажите email или логин.';
+        }
+
+        $isNewAccess = $employee === null || $employee->user === null;
+        if ($isNewAccess && ! $request->filled('login_password')) {
+            $errors['login_password'] = 'Для нового доступа укажите пароль (от 8 символов).';
+        }
+
+        if ($errors !== []) {
+            throw \Illuminate\Validation\ValidationException::withMessages($errors);
+        }
+    }
+
+    /**
      * Create or update the linked login.
      */
     private function upsertUser(?User $user, Request $request): ?User
     {
+        $role = $request->input('login_role');
+
+        // No access requested: leave any existing account untouched, never create one.
+        if ($role !== 'admin' && $role !== 'employee') {
+            return $user;
+        }
+
         $loginEmail = trim((string) $request->input('login_email'));
         $loginName = trim((string) $request->input('login_name'));
         $passwordProvided = $request->filled('login_password');
 
-        // No account requested at all: nothing to do.
-        if ($user === null && $loginEmail === '' && $loginName === '' && ! $passwordProvided) {
-            return null;
+        // Role chosen but nothing identifies the account.
+        if ($loginEmail === '' && $loginName === '' && ! $passwordProvided) {
+            return $user;
         }
 
         $data = [
             'name' => $request->input('full_name'),
-            'role' => $request->input('login_role', $request->boolean('is_admin') ? 'admin' : 'employee'),
-            'is_active' => $request->boolean('is_active', true),
+            'role' => $role,
+            'is_active' => true,
         ];
 
         if ($loginEmail !== '') {
@@ -211,15 +247,28 @@ class EmployeeController extends Controller
 
         if ($user !== null) {
             $user->update($data);
+
             return $user;
         }
 
-        // Creating a brand-new account still requires an email address.
-        if ($loginEmail === '') {
-            return null;
+        // Email is nullable now, so a login-only account is allowed.
+        return User::query()->create($data);
+    }
+
+    /**
+     * Revoke the employee's cabinet access without deleting the employee.
+     */
+    public function revokeAccess(Request $request, Employee $employee): RedirectResponse
+    {
+        abort_unless($request->user()?->isAdmin(), 403);
+
+        if ($employee->user !== null) {
+            $employee->user->delete();
         }
 
-        return User::query()->create($data);
+        return redirect()
+            ->route('admin.employees.edit', $employee)
+            ->with('status', 'Доступ в кабинет отозван.');
     }
 
     /**

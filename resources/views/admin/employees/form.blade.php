@@ -91,10 +91,29 @@
 
         <div class="admin-form-card">
             <h2 style="margin-top: 0;">Доступ в кабинет</h2>
+
+            @if ($employee->exists && $employee->user)
+                <div style="margin-bottom: 16px; padding: 12px 14px; border: 1px solid #d0ebff; background: #e7f5ff; border-radius: 8px;">
+                    Доступ выдан:
+                    <strong>{{ $employee->user->email ?: $employee->user->login }}</strong>
+                    ({{ $employee->user->role === 'admin' ? 'Администратор' : 'Сотрудник' }})
+                </div>
+                <form method="post" action="{{ route('admin.employees.revoke-access', $employee) }}" style="margin-bottom: 20px;">
+                    @csrf
+                    <button class="btn btn-danger btn-sm" type="submit"
+                            onclick="return confirm('Отозвать доступ сотрудника к кабинету? Сам сотрудник и его данные останутся.');">
+                        Отозвать доступ
+                    </button>
+                </form>
+            @else
+                <p style="margin-bottom: 16px; color: #667085;">Доступ пока не выдан. Заполните поля ниже и выберите роль, чтобы выдать его.</p>
+            @endif
+
             <div class="admin-grid">
                 <div>
                     <label for="login_email">Email для входа</label>
                     <input class="form-control" id="login_email" name="login_email" type="email" value="{{ old('login_email', $employee->user?->email) }}">
+                    <p style="margin-top: 8px; color: #667085;">Необязателен, если указан логин.</p>
                 </div>
                 <div>
                     <label for="login_name">Логин (вход без email)</label>
@@ -104,7 +123,7 @@
                 <div>
                     <label for="login_role">Роль в системе</label>
                     <select class="form-control" id="login_role" name="login_role">
-                        <option value="">Не создавать доступ</option>
+                        <option value="">Без доступа (не менять)</option>
                         <option value="employee" @selected(old('login_role', $employee->user?->role) === 'employee')>Сотрудник</option>
                         <option value="admin" @selected(old('login_role', $employee->user?->role) === 'admin')>Администратор</option>
                     </select>
@@ -112,7 +131,9 @@
                 <div class="admin-grid--full">
                     <label for="login_password">Пароль</label>
                     <input class="form-control" id="login_password" name="login_password" type="text" value="">
-                    <p style="margin-top: 8px; color: #667085;">Оставьте пустым, если менять пароль не нужно.</p>
+                    <p style="margin-top: 8px; color: #667085;">
+                        Обязателен при выдаче нового доступа (от 8 символов). Оставьте пустым, чтобы не менять существующий.
+                    </p>
                 </div>
             </div>
         </div>
