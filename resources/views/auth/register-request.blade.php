@@ -14,8 +14,8 @@
                     <input class="form-control" id="register-name" name="name" type="text" value="{{ old('name') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input class="form-control" id="register-email" name="email" type="email" value="{{ old('email') }}" required>
+                    <label for="register-login">Логин (любые буквы, от 5 символов)</label>
+                    <input class="form-control" id="register-login" name="login" type="text" value="{{ old('login') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="register-phone">Телефон</label>

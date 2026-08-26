@@ -7,6 +7,7 @@ use App\Support\InquiryDeliveryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -115,7 +116,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'login' => ['required', 'string', 'min:5', 'max:255', Rule::unique('users', 'login')],
             'phone' => ['nullable', 'string', 'max:255'],
             'message' => ['nullable', 'string', 'max:4000'],
         ]);
@@ -123,7 +124,7 @@ class AuthController extends Controller
         $accessRequest = AccessRequest::query()->create([
             'type' => 'register',
             'name' => $validated['name'],
-            'email' => $validated['email'],
+            'login' => $validated['login'],
             'phone' => $validated['phone'] ?? null,
             'message' => $validated['message'] ?? null,
             'recipient_email' => config('realty.contact_email'),
@@ -139,7 +140,7 @@ class AuthController extends Controller
             fields: [
                 ['label' => 'Тип заявки', 'value' => 'Регистрация'],
                 ['label' => 'Имя', 'value' => $accessRequest->name],
-                ['label' => 'Email', 'value' => $accessRequest->email],
+                ['label' => 'Логин', 'value' => $accessRequest->login],
                 ['label' => 'Телефон', 'value' => $accessRequest->phone],
             ],
             messageBody: $accessRequest->message,

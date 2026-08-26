@@ -17,6 +17,7 @@ class AccessRequest extends Model
     protected $fillable = [
         'type',
         'name',
+        'login',
         'email',
         'phone',
         'message',
