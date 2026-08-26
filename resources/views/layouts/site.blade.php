@@ -51,6 +51,7 @@
         body {
             background: var(--rt-page-bg);
             color: var(--rt-text);
+            margin-bottom: 0;
         }
 
         img {
@@ -760,6 +761,18 @@
 
             .mobile-button {
                 display: none !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar,
+            body::before {
+                transition: none !important;
+            }
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>

@@ -19,6 +19,16 @@
             width: calc(33.33% - 20px);
             box-sizing: border-box;
         }
+        @media (max-width: 991px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 768px) {
+            .card {
+                width: calc(100% - 20px);
+            }
+        }
         .card img {
             width: 100%;
             height: 300px;
@@ -40,11 +50,6 @@
         .contact-info p {
             margin: 2px 0;
             font-size: 14px;
-        }
-        @media (max-width: 768px) {
-            .card {
-                width: calc(100% - 20px);
-            }
         }
     </style>
 @endpush

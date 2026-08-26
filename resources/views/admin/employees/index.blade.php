@@ -14,18 +14,19 @@
     </div>
 
     <div class="admin-table">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 80px;">Порядок</th>
-                    <th style="width: 200px;">Сотрудник</th>
-                    <th style="width: 160px;">Должность</th>
-                    <th style="width: 200px;">Контакты</th>
-                    <th style="width: 180px;">Личный кабинет</th>
-                    <th style="width: 100px;">Статус</th>
-                    <th style="width: 220px;">Действия</th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Порядок</th>
+                        <th>Сотрудник</th>
+                        <th>Должность</th>
+                        <th>Контакты</th>
+                        <th>Личный кабинет</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
             <tbody>
                 @forelse ($employees as $employee)
                 <tr>
@@ -72,7 +73,8 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>
+            </table>
+        </div>
     </div>
 
     <div style="margin-top: 20px;">

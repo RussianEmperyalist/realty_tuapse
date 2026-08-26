@@ -9,7 +9,7 @@
             <div class="row">
                 @foreach ($entries as $entry)
                     <div class="col-md-6">
-                        <div class="box" style="min-height: 260px;">
+                        <div class="box">
                             <p><strong>{{ $entry['date'] }}</strong></p>
                             <h3><a href="{{ route('faq.show', $entry['slug']) }}">{{ $entry['title'] }}</a></h3>
                             <p>{{ $entry['excerpt'] }}</p>

@@ -38,19 +38,20 @@
     </div>
 
     <div class="admin-table">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Объект</th>
-                    <th>Сотрудник</th>
-                    <th>Сделка</th>
-                    <th>Тип</th>
-                    <th>Цена</th>
-                    <th>Статус</th>
-                    <th style="width: 220px;">Действия</th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Объект</th>
+                        <th>Сотрудник</th>
+                        <th>Сделка</th>
+                        <th>Тип</th>
+                        <th>Цена</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
             <tbody>
                 @forelse ($properties as $property)
                     <tr>
@@ -88,7 +89,8 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>
+            </table>
+        </div>
     </div>
 
     <div style="margin-top: 20px;">

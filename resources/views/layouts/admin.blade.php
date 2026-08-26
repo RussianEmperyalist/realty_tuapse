@@ -20,6 +20,7 @@
             background: #143045;
             color: #fff;
             padding: 24px 20px;
+            overflow-y: auto;
         }
         .admin-sidebar a {
             color: #fff;
@@ -117,7 +118,6 @@
         }
         .admin-table table {
             margin: 0;
-            table-layout: fixed;
         }
         .admin-table .table > thead > tr > th,
         .admin-table .table > tbody > tr > td {
@@ -137,9 +137,79 @@
         .admin-sidebar .btn {
             margin-top: 10px;
         }
+        .admin-topbar {
+            display: none;
+        }
+        .admin-overlay {
+            display: none;
+        }
         @media (max-width: 991px) {
             .admin-shell {
                 grid-template-columns: 1fr;
+            }
+            .admin-topbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 16px;
+                background: #143045;
+                color: #fff;
+                position: sticky;
+                top: 0;
+                z-index: 1010;
+                gap: 12px;
+            }
+            .admin-topbar__brand {
+                font-size: 14px;
+                font-weight: 700;
+                color: #fff;
+            }
+            .admin-topbar__toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.15);
+                color: #fff;
+                cursor: pointer;
+                font-size: 20px;
+            }
+            .admin-topbar__toggle:hover {
+                background: rgba(255, 255, 255, 0.25);
+            }
+            .admin-sidebar {
+                position: fixed;
+                top: 0;
+                left: -280px;
+                width: 280px;
+                height: 100dvh;
+                z-index: 1020;
+                transition: left .25s ease;
+                box-shadow: none;
+            }
+            .admin-sidebar.open {
+                left: 0;
+                box-shadow: 8px 0 30px rgba(0, 0, 0, 0.3);
+            }
+            .admin-overlay {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 1015;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity .25s ease;
+            }
+            .admin-overlay.visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .admin-content {
+                padding: 16px;
             }
             .admin-grid {
                 grid-template-columns: 1fr;
@@ -147,12 +217,31 @@
             .admin-page-header {
                 flex-direction: column;
             }
+            .admin-form-card {
+                padding: 16px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .admin-sidebar {
+                transition: none;
+            }
+            .admin-overlay {
+                transition: none;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="admin-overlay" id="admin-overlay"></div>
     <div class="admin-shell">
-        <aside class="admin-sidebar">
+        <header class="admin-topbar" id="admin-topbar">
+            <button type="button" class="admin-topbar__toggle" id="admin-menu-btn" aria-label="Меню">
+                <i class="fa fa-bars"></i>
+            </button>
+            <span class="admin-topbar__brand">{{ config('realty.company_display_name') }}</span>
+            <div></div>
+        </header>
+        <aside class="admin-sidebar" id="admin-sidebar">
             <div class="admin-brand" style="margin-bottom: 24px;">
                 <span class="admin-brand__label">Личный кабинет</span>
                 <div class="admin-brand__inner">
@@ -210,5 +299,35 @@
         </main>
     </div>
     @stack('scripts')
+    <script>
+        (function () {
+            var btn = document.getElementById('admin-menu-btn');
+            var sidebar = document.getElementById('admin-sidebar');
+            var overlay = document.getElementById('admin-overlay');
+            if (!btn || !sidebar || !overlay) return;
+
+            function open() {
+                sidebar.classList.add('open');
+                overlay.classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            }
+            function close() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+
+            btn.addEventListener('click', open);
+            overlay.addEventListener('click', close);
+
+            sidebar.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', close);
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') close();
+            });
+        })();
+    </script>
 </body>
 </html>

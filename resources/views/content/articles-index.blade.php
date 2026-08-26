@@ -12,7 +12,7 @@
                         $articleImageUrl = !empty($entry['image']) ? \App\Support\MediaPath::url($entry['image']) : null;
                     @endphp
                     <div class="col-md-6">
-                        <div class="box" style="min-height: 430px;">
+                        <div class="box">
                             @if ($articleImageUrl)
                                 <div style="margin-bottom: 15px;">
                                     <a href="{{ route('articles.show', $entry['slug']) }}">

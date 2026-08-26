@@ -14,16 +14,17 @@
     </div>
 
     <div class="admin-table">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Порядок</th>
-                    <th>Альбом</th>
-                    <th>Фото</th>
-                    <th>Статус</th>
-                    <th style="width: 220px;">Действия</th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Порядок</th>
+                        <th>Альбом</th>
+                        <th>Фото</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
             <tbody>
                 @forelse ($albums as $album)
                     <tr>
@@ -58,7 +59,8 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>
+            </table>
+        </div>
     </div>
 
     <div style="margin-top: 20px;">
