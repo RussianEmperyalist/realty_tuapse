@@ -193,6 +193,8 @@ class PropertyController extends Controller
             'delete_images' => ['nullable', 'array'],
             'delete_images.*' => ['integer', 'exists:property_images,id'],
             'cover_image_id' => ['nullable', 'integer', 'exists:property_images,id'],
+            'image_order' => ['nullable', 'array'],
+            'image_order.*' => ['integer', 'exists:property_images,id'],
         ]);
     }
 
@@ -247,6 +249,15 @@ class PropertyController extends Controller
                     'sort_order' => $sortOrder++,
                     'is_cover' => false,
                 ]);
+            }
+        }
+
+        $imageOrder = $request->input('image_order');
+        if (is_array($imageOrder)) {
+            $orderMap = array_flip($imageOrder);
+            $images = PropertyImage::query()->where('property_id', $property->id)->get();
+            foreach ($images as $image) {
+                $image->forceFill(['sort_order' => $orderMap[$image->id] ?? 0])->save();
             }
         }
 

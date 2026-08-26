@@ -155,10 +155,13 @@
         <div class="admin-form-card">
             <h2 style="margin-top: 0;">Изображения</h2>
             @if ($property->exists && $property->images->isNotEmpty())
-                <div class="admin-media-grid" style="margin-bottom: 20px;">
+                <p style="color:#667085;margin:0 0 12px;">Перетаскивайте фото за иконку ≡ чтобы изменить порядок.</p>
+                <div id="admin-media-sortable" class="admin-media-grid" style="margin-bottom: 20px;">
                     @foreach ($property->images as $image)
-                        <div class="admin-media-card">
+                        <div class="admin-media-card" data-id="{{ $image->id }}" style="cursor:grab;">
+                            <div style="color:#999;font-size:18px;cursor:grab;padding:0 0 4px;" title="Перетащить">☰</div>
                             <img src="{{ \App\Support\MediaPath::url($image->thumb_path ?: $image->path) }}" alt="{{ $image->alt ?: $property->title }}">
+                            <input type="hidden" name="image_order[]" value="{{ $image->id }}">
                             <div class="radio" style="margin-top: 0;">
                                 <label>
                                     <input type="radio" name="cover_image_id" value="{{ $image->id }}" @checked((int) old('cover_image_id', optional($property->images->firstWhere('is_cover', true))->id) === $image->id)> Обложка
@@ -296,5 +299,26 @@
         #admin-map {
             cursor: crosshair;
         }
+        #admin-media-sortable .admin-media-card.sortable-ghost {
+            opacity: 0.4;
+            background: #e8f0fe;
+        }
+        #admin-media-sortable .admin-media-card.sortable-drag {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('admin-media-sortable');
+            if (el) {
+                Sortable.create(el, {
+                    handle: '[title="Перетащить"]',
+                    animation: 150,
+                    ghostClass: 'sortable-ghost',
+                    dragClass: 'sortable-drag',
+                });
+            }
+        });
+    </script>
 @endpush
