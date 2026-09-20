@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('legacy/assets/a6b31464/src/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('legacy/assets/e0d915dc/style.css') }}">
     <link rel="stylesheet" href="{{ asset('legacy/assets/8dcfd5a5/jquery.fancybox-1.3.4.css') }}">
+    @vite(['resources/css/app.css'])
     <style>
         :root {
             --rt-sidebar-width: clamp(300px, 21vw, 380px);

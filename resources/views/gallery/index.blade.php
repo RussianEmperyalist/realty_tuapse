@@ -4,9 +4,17 @@
 
 @push('styles')
     <style>
-        .gallery-page { width: 100%; }
+        .gallery-page {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+        }
 
-        .gallery-section { margin-bottom: 34px; }
+        .gallery-section {
+            margin-bottom: 34px;
+            max-width: 100%;
+            min-width: 0;
+        }
 
         .gallery-section__description {
             max-width: 820px;
@@ -19,6 +27,8 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 12px;
+            max-width: 100%;
+            min-width: 0;
         }
 
         .gallery-grid__item {
@@ -31,6 +41,8 @@
             cursor: zoom-in;
             border: 0;
             padding: 0;
+            max-width: 100%;
+            min-width: 0;
         }
 
         .gallery-grid__item img {

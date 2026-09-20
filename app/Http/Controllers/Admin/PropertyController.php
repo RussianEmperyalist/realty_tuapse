@@ -158,6 +158,57 @@ class PropertyController extends Controller
     }
 
     /**
+     * Upload a single property image immediately and report progress.
+     */
+    public function uploadImage(Request $request, Property $property): \Illuminate\Http\JsonResponse
+    {
+        $this->authorizeProperty($request, $property);
+
+        $request->validate([
+            'file' => ['required', 'image', 'max:8192'],
+        ]);
+
+        $file = $request->file('file');
+        if ($file === null || !$file->isValid()) {
+            return response()->json(['error' => 'Invalid file.'], 422);
+        }
+
+        try {
+            $storedImage = $this->imageStorage->storePublicImageWithThumbnail(
+                $file,
+                'properties',
+                'properties/thumbs',
+                820,
+                428,
+            );
+        } catch (\Throwable $exception) {
+            Log::error('Property image processing failed.', [
+                'property_id' => $property->id,
+                'original_name' => $file->getClientOriginalName(),
+                'error' => $exception->getMessage(),
+            ]);
+
+            return response()->json(['error' => 'Processing failed.'], 500);
+        }
+
+        $image = PropertyImage::query()->create([
+            'property_id' => $property->id,
+            'path' => $storedImage['path'],
+            'thumb_path' => $storedImage['thumb_path'],
+            'alt' => $property->title,
+            'sort_order' => (int) PropertyImage::query()->where('property_id', $property->id)->max('sort_order') + 1,
+            'is_cover' => false,
+            'rotation' => 0,
+        ]);
+
+        return response()->json([
+            'id' => $image->id,
+            'path' => $image->path,
+            'thumb' => \App\Support\MediaPath::url($image->thumb_path ?: $image->path),
+        ]);
+    }
+
+    /**
      * Validation rules for property data.
      *
      * @return array<string, mixed>
@@ -185,6 +236,7 @@ class PropertyController extends Controller
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
             'phone_override' => ['nullable', 'string', 'max:255'],
+            'owner_phone' => ['nullable', 'string', 'max:64'],
             'is_published' => ['nullable', 'boolean'],
             'is_featured' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
@@ -195,6 +247,10 @@ class PropertyController extends Controller
             'cover_image_id' => ['nullable', 'integer', 'exists:property_images,id'],
             'image_order' => ['nullable', 'array'],
             'image_order.*' => ['integer', 'exists:property_images,id'],
+            'image_rotations' => ['nullable', 'array'],
+            'image_rotations.*' => ['integer', 'min:0', 'max:270'],
+            'image_rotations_file' => ['nullable', 'array'],
+            'image_rotations_file.*' => ['integer', 'min:0', 'max:270'],
         ]);
     }
 
@@ -218,8 +274,11 @@ class PropertyController extends Controller
 
         if ($request->hasFile('images')) {
             $sortOrder = ((int) PropertyImage::query()->where('property_id', $property->id)->max('sort_order')) + 1;
+            $fileIndex = 0;
+            $rotationsFile = (array) $request->input('image_rotations_file', []);
             foreach ($request->file('images', []) as $file) {
                 if ($file === null || !$file->isValid()) {
+                    $fileIndex++;
                     continue;
                 }
 
@@ -238,6 +297,7 @@ class PropertyController extends Controller
                         'error' => $exception->getMessage(),
                     ]);
 
+                    $fileIndex++;
                     continue;
                 }
 
@@ -248,7 +308,10 @@ class PropertyController extends Controller
                     'alt' => $property->title,
                     'sort_order' => $sortOrder++,
                     'is_cover' => false,
+                    'rotation' => $this->normalizeRotation((int) ($rotationsFile[$fileIndex] ?? 0)),
                 ]);
+
+                $fileIndex++;
             }
         }
 
@@ -258,6 +321,16 @@ class PropertyController extends Controller
             $images = PropertyImage::query()->where('property_id', $property->id)->get();
             foreach ($images as $image) {
                 $image->forceFill(['sort_order' => $orderMap[$image->id] ?? 0])->save();
+            }
+        }
+
+        $rotations = (array) $request->input('image_rotations', []);
+        if (! empty($rotations)) {
+            foreach ($rotations as $imageId => $angle) {
+                $image = PropertyImage::query()->find((int) $imageId);
+                if ($image !== null && $image->property_id === $property->id) {
+                    $image->forceFill(['rotation' => $this->normalizeRotation((int) $angle)])->save();
+                }
             }
         }
 
@@ -271,6 +344,19 @@ class PropertyController extends Controller
         foreach ($images as $image) {
             $image->forceFill(['is_cover' => $image->id === $resolvedCoverId])->save();
         }
+    }
+
+    /**
+     * Normalize a rotation value into the range 0-270.
+     */
+    private function normalizeRotation(int $angle): int
+    {
+        $angle = $angle % 360;
+        if ($angle < 0) {
+            $angle += 360;
+        }
+
+        return $angle;
     }
 
     /**

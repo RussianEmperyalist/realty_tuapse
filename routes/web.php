@@ -159,6 +159,7 @@ Route::middleware('role:admin,employee')->prefix('admin')->name('admin.')->group
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/employee-mode', [DashboardController::class, 'setEmployeeMode'])->name('employee-mode');
     Route::resource('properties', AdminPropertyController::class)->except(['show']);
+    Route::post('/properties/{property}/image-upload', [AdminPropertyController::class, 'uploadImage'])->name('properties.image-upload');
     Route::resource('employees', AdminEmployeeController::class)->except(['show']);
 
     Route::middleware('role:admin')->group(function (): void {

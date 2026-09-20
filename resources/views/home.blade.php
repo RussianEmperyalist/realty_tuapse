@@ -12,10 +12,15 @@
             border: 1px solid #e3ebf3;
             box-shadow: 0 16px 32px rgba(20, 48, 69, 0.08);
             overflow: hidden;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .home-directions {
             margin-bottom: 28px;
+            max-width: 100%;
+            width: 100%;
         }
 
         .home-directions__banner {
@@ -26,6 +31,10 @@
             margin-top: 26px;
             box-shadow: 0 16px 32px rgba(20, 48, 69, 0.08);
             text-align: center;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: anywhere;
         }
 
         .home-directions__banner-title {
@@ -38,6 +47,8 @@
             font-family: 'Bancodi', sans-serif;
             letter-spacing: 0.05em;
             line-height: 1.25;
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         .home-directions__banner-text {
@@ -46,6 +57,9 @@
             line-height: 1.7;
             margin: 0;
             text-align: justify;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            max-width: 100%;
         }
 
         .home-directions > .h3 {
@@ -61,12 +75,15 @@
         .city_module {
             position: relative;
             width: 100%;
+            max-width: 100%;
             margin: 30px 0px;
+            overflow: hidden;
         }
 
         .city-slick {
             overflow: hidden;
             position: relative;
+            max-width: 100%;
         }
 
         .city-slick .slick-slide {
@@ -75,24 +92,30 @@
             padding: 0;
         }
 
+        .city-slick .slick-list {
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
         .city-slick .slick-track {
             transition: transform 1s;
         }
 
-        .city-slick .slick-list {
-            margin: 0;
-            padding: 0;
-        }
-
         .item-city {
             position: relative;
-            width: 444px;
-            height: 400px;
+            width: 100%;
+            max-width: 444px;
+            height: auto;
+            aspect-ratio: 444 / 400;
             overflow: hidden;
+            box-sizing: border-box;
+            margin: 0 auto;
         }
 
         .item-city.slick-center {
-            width: 640px;
+            max-width: 640px;
         }
 
         .item-city img {
@@ -206,6 +229,16 @@
         .home-news-card__body,
         .home-employee-card__body {
             padding: 18px 18px 20px;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .home-news-card__body h4,
+        .home-employee-card__body h4,
+        .home-news-card__body p,
+        .home-employee-card__body p {
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         .home-news-card__image,
@@ -229,6 +262,9 @@
             grid-template-columns: 1fr;
             align-items: start;
             gap: 18px;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
         }
 
         .home-news-grid__item,
@@ -236,7 +272,8 @@
             display: block;
             float: none !important;
             margin-bottom: 0;
-            width: auto !important;
+            width: 100% !important;
+            max-width: 100%;
             padding: 0;
             min-width: 0;
         }
@@ -260,6 +297,48 @@
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
         }
+
+        /* Слайдер направлений — защита от обрезки на всех экранах */
+        @media (max-width: 1280px) {
+            .city-slick .slick-arrow {
+                display: none !important;
+            }
+
+            .item-city {
+                max-width: 330px;
+            }
+
+            .item-city.slick-center {
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .item-city {
+                max-width: 100%;
+                aspect-ratio: 16 / 9;
+            }
+
+            .item-city .text {
+                padding: 12px;
+            }
+
+            .item-city .text a {
+                font-size: 15px;
+            }
+
+            .item-city .h3 {
+                font-size: 22px;
+            }
+
+            .home-directions__banner {
+                padding: 18px 16px 20px;
+            }
+
+            .home-directions__banner-title {
+                font-size: 22px;
+            }
+        }
     </style>
 @endpush
 
@@ -277,15 +356,36 @@
                 infinite: true,
                 adaptiveHeight: false,
                 variableWidth: true,
-                centerMode: true,
-                centerPadding: '40px',
+                centerMode: false,
+                centerPadding: '0',
                 prevArrow: '<button type="button" class="slick-prev slick-arrow"><i class="fas fa-chevron-left"></i></button>',
                 nextArrow: '<button type="button" class="slick-next slick-arrow"><i class="fas fa-chevron-right"></i></button>',
                 responsive: [
                     {
+                        breakpoint: 1280,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            centerMode: true,
+                            centerPadding: '20px',
+                            arrows: false
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            centerMode: false,
+                            centerPadding: '0',
+                            arrows: false
+                        }
+                    },
+                    {
                         breakpoint: 768,
                         settings: {
                             slidesToShow: 1,
+                            slidesToScroll: 1,
                             centerMode: false,
                             centerPadding: '0',
                             arrows: false

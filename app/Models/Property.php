@@ -37,6 +37,7 @@ class Property extends Model
         'latitude',
         'longitude',
         'phone_override',
+        'owner_phone',
         'is_published',
         'is_featured',
         'published_at',

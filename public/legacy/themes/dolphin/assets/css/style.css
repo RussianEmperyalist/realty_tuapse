@@ -755,13 +755,17 @@ background-color: #43b3dd;
 
 .item-city {
     position: relative;
-    width: 444px;
-    height: 400px;
+    width: 100%;
+    max-width: 444px;
+    height: auto;
+    aspect-ratio: 444 / 400;
     overflow: hidden;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .item-city.slick-center {
-    width: 640px;
+    max-width: 640px;
 }
 
 .item-city img {

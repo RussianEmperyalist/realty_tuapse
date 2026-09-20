@@ -41,11 +41,12 @@
     }
 
     .item-city {
-        width: 330px
+        width: 100%;
+        max-width: 330px;
     }
 
     .item-city.slick-center {
-        width: 500px;
+        max-width: 500px;
     }
 }
 
@@ -544,7 +545,10 @@
     }
 
     .item-city, .item-city.slick-center {
-        width: 355px;
+        width: 100%;
+        max-width: 355px;
+        aspect-ratio: 16 / 9;
+        height: auto;
     }
 
     .sidebar .logo {

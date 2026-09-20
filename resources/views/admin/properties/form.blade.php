@@ -110,6 +110,11 @@
                     <label for="phone_override">Телефон на карточке</label>
                     <input class="form-control" id="phone_override" name="phone_override" type="text" value="{{ old('phone_override', $property->phone_override) }}">
                 </div>
+                <div>
+                    <label for="owner_phone" style="color:#667085;">Телефон собственника (только для администраторов)</label>
+                    <input class="form-control" id="owner_phone" name="owner_phone" type="text" value="{{ old('owner_phone', $property->owner_phone) }}" style="border-color:#999;">
+                    <small style="color:#999;">Внутреннее поле — скрыто от посетителей сайта.</small>
+                </div>
                 <div class="admin-grid--full">
                     <label>Координаты на карте</label>
                     <div id="admin-map" style="width:100%;height:400px;border-radius:8px;border:1px solid #dfe5ee;margin-bottom:8px;"></div>
@@ -155,13 +160,20 @@
         <div class="admin-form-card">
             <h2 style="margin-top: 0;">Изображения</h2>
             @if ($property->exists && $property->images->isNotEmpty())
-                <p style="color:#667085;margin:0 0 12px;">Перетаскивайте фото за иконку ≡ чтобы изменить порядок.</p>
+                <p style="color:#667085;margin:0 0 12px;">Перетаскивайте фото за иконку ≡ чтобы изменить порядок. Кнопка ↻ поворачивает миниатюру на 90° по часовой стрелке.</p>
                 <div id="admin-media-sortable" class="admin-media-grid" style="margin-bottom: 20px;">
                     @foreach ($property->images as $image)
+                        @php($rotation = (int) old('image_rotations.' . $image->id, $image->rotation ?? 0))
                         <div class="admin-media-card" data-id="{{ $image->id }}" style="cursor:grab;">
                             <div style="color:#999;font-size:18px;cursor:grab;padding:0 0 4px;" title="Перетащить">☰</div>
-                            <img src="{{ \App\Support\MediaPath::url($image->thumb_path ?: $image->path) }}" alt="{{ $image->alt ?: $property->title }}">
+                            <img src="{{ \App\Support\MediaPath::url($image->thumb_path ?: $image->path) }}" alt="{{ $image->alt ?: $property->title }}" data-rotation="{{ $rotation }}" style="transform:rotate({{ $rotation }}deg);">
                             <input type="hidden" name="image_order[]" value="{{ $image->id }}">
+                            <input type="hidden" name="image_rotations[{{ $image->id }}]" value="{{ $rotation }}">
+                            <div class="admin-media-card__actions" style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+                                <button type="button" class="btn btn-default btn-sm admin-rotate-btn" data-id="{{ $image->id }}" title="Повернуть на 90°">↻</button>
+                                <span class="admin-media-status" style="display:none;font-size:11px;color:#667085;">готово</span>
+                                <span style="font-size:11px;color:#999;">{{ $rotation }}°</span>
+                            </div>
                             <div class="radio" style="margin-top: 0;">
                                 <label>
                                     <input type="radio" name="cover_image_id" value="{{ $image->id }}" @checked((int) old('cover_image_id', optional($property->images->firstWhere('is_cover', true))->id) === $image->id)> Обложка
@@ -178,8 +190,9 @@
             @endif
             <div class="form-group">
                 <label for="images">Добавить фото</label>
-                <input id="images" name="images[]" type="file" multiple>
+                <input id="images" name="images[]" type="file" multiple accept="image/*">
             </div>
+            <div id="admin-media-preview" class="admin-media-grid" style="margin-top:12px;"></div>
         </div>
 
         <div class="admin-actions">
@@ -309,6 +322,9 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
     <script>
+        window.propertyId = {{ $property->id ?? 0 }};
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             var el = document.getElementById('admin-media-sortable');
             if (el) {
@@ -317,6 +333,171 @@
                     animation: 150,
                     ghostClass: 'sortable-ghost',
                     dragClass: 'sortable-drag',
+                });
+            }
+
+            var filesInput = document.getElementById('images');
+            var previewBox = document.getElementById('admin-media-preview');
+            if (filesInput && previewBox) {
+                var uploadCounter = 0;
+                var newFileIndex = 0;
+                filesInput.addEventListener('change', function () {
+                    var files = Array.prototype.slice.call(this.files || []);
+                    if (files.length === 0) {
+                        return;
+                    }
+                    this.value = '';
+                    files.forEach(function (file) {
+                        uploadCounter += 1;
+                        var idx = newFileIndex++;
+                        var tmpKey = 'tmp_' + Date.now() + '_' + uploadCounter;
+                        var card = document.createElement('div');
+                        card.className = 'admin-media-card';
+                        card.dataset.tmpKey = tmpKey;
+                        card.innerHTML =
+                            '<div style="color:#999;font-size:18px;cursor:grab;padding:0 0 4px;" title="Перетащить">☰</div>' +
+                            '<img src="" alt="' + (file.name || '') + '" data-rotation="0" style="transform:rotate(0deg);">' +
+                            '<input type="hidden" name="image_rotations_file[' + idx + ']" value="0">' +
+                            '<div class="admin-media-card__actions" style="display:flex;gap:8px;align-items:center;margin-top:8px;">' +
+                                '<button type="button" class="btn btn-default btn-sm admin-rotate-btn" title="Повернуть на 90°">↻</button>' +
+                                '<span class="admin-media-status" style="display:inline-block;font-size:11px;color:#f59e0b;">ожидает загрузки</span>' +
+                            '</div>' +
+                            '<div class="admin-media-card__progress" style="margin-top:8px;">' +
+                                '<div class="admin-media-progress-bar" style="height:4px;background:#e5e7eb;border-radius:2px;overflow:hidden;">' +
+                                    '<div class="admin-media-progress" style="height:100%;width:0%;background:#3b82f6;"></div>' +
+                                '</div>' +
+                            '</div>';
+                        previewBox.appendChild(card);
+
+                        var cardImg = card.querySelector('img');
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            if (e && e.target) {
+                                cardImg.src = e.target.result;
+                            }
+                        };
+                        reader.readAsDataURL(file);
+
+                        if (window.propertyId && window.propertyId > 0) {
+                            uploadFile(file, tmpKey, card);
+                        } else {
+                            var status = card.querySelector('.admin-media-status');
+                            if (status) {
+                                status.textContent = 'будет загружено при сохранении';
+                            }
+                            if (card.querySelector('.admin-media-progress-bar')) {
+                                card.querySelector('.admin-media-progress-bar').style.display = 'none';
+                            }
+                        }
+                    });
+                });
+
+                function uploadFile(file, tmpKey, card) {
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
+                    formData.append('file', file);
+
+                    var token = document.querySelector('meta[name="csrf-token"]')
+                        ? document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        : (document.querySelector('input[name="_token"]') ? document.querySelector('input[name="_token"]').value : '');
+
+                    xhr.open('POST', '/admin/properties/' + (window.propertyId || 0) + '/image-upload', true);
+                    if (token) {
+                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+
+                    xhr.upload.addEventListener('progress', function (e) {
+                        if (e.lengthComputable) {
+                            var percent = Math.round((e.loaded / e.total) * 100);
+                            var bar = card.querySelector('.admin-media-progress');
+                            if (bar) {
+                                bar.style.width = percent + '%';
+                            }
+                        }
+                    });
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+                        var status = card.querySelector('.admin-media-status');
+                        var bar = card.querySelector('.admin-media-progress');
+                        if (xhr.status === 200) {
+                            var response = null;
+                            try {
+                                response = JSON.parse(xhr.responseText);
+                            } catch (err) {
+                                response = null;
+                            }
+                            if (response && response.id) {
+                                card.dataset.id = response.id;
+                                var imgEl = card.querySelector('img');
+                                if (response.thumb) {
+                                    imgEl.src = response.thumb;
+                                }
+                                var input = card.querySelector('input[type="hidden"]');
+                                if (input) {
+                                    var preserved = parseInt(imgEl.getAttribute('data-rotation') || input.value || '0', 10);
+                                    input.name = 'image_rotations[' + response.id + ']';
+                                    input.value = String(preserved);
+                                    imgEl.setAttribute('data-rotation', preserved);
+                                }
+                                if (status) {
+                                    status.textContent = 'загружено';
+                                    status.style.color = '#16a34a';
+                                }
+                                if (bar) {
+                                    bar.parentElement.style.display = 'none';
+                                }
+                            } else {
+                                if (status) {
+                                    status.textContent = 'ошибка загрузки';
+                                    status.style.color = '#dc2626';
+                                }
+                            }
+                        } else {
+                            if (status) {
+                                status.textContent = 'ошибка загрузки';
+                                status.style.color = '#dc2626';
+                            }
+                        }
+                    };
+
+                    xhr.onerror = function () {
+                        var status = card.querySelector('.admin-media-status');
+                        if (status) {
+                            status.textContent = 'ошибка загрузки';
+                            status.style.color = '#dc2626';
+                        }
+                    };
+
+                    xhr.send(formData);
+                }
+
+                previewBox.addEventListener('click', function (e) {
+                    var btn = e.target.closest('.admin-rotate-btn');
+                    if (!btn) {
+                        return;
+                    }
+                    var card = btn.closest('.admin-media-card');
+                    if (!card) {
+                        return;
+                    }
+                    var img = card.querySelector('img');
+                    var hidden = card.querySelector('input[type="hidden"]');
+                    if (!img || !hidden) {
+                        return;
+                    }
+                    var current = parseInt(img.getAttribute('data-rotation') || hidden.value || '0', 10);
+                    var next = (current + 90) % 360;
+                    img.setAttribute('data-rotation', next);
+                    img.style.transform = 'rotate(' + next + 'deg)';
+                    hidden.value = String(next);
+                    var span = card.querySelector('.admin-media-status');
+                    if (span) {
+                        span.textContent = 'готово';
+                        span.style.color = '#16a34a';
+                    }
                 });
             }
         });

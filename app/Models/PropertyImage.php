@@ -22,17 +22,14 @@ class PropertyImage extends Model
         'alt',
         'sort_order',
         'is_cover',
+        'rotation',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'is_cover' => 'boolean',
+            'rotation' => 'integer',
         ];
     }
 

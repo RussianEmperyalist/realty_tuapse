@@ -50,6 +50,7 @@
             grid-template-columns: minmax(0, 2fr) minmax(280px, 360px);
             gap: 30px;
             align-items: start;
+            max-width: 100%;
         }
 
         .property-main,
@@ -57,6 +58,7 @@
         .full_property,
         .content_center.main-content-wrapper {
             min-width: 0;
+            max-width: 100%;
         }
 
         .title_property {
