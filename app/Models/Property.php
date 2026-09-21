@@ -44,6 +44,15 @@ class Property extends Model
     ];
 
     /**
+     * Internal staff-only attributes that must never appear in public JSON/HTML dumps.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'owner_phone',
+    ];
+
+    /**
      * The attributes that should be cast.
      *
      * @return array<string, string>

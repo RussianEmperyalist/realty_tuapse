@@ -131,6 +131,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            min-width: 0;
             min-height: 100dvh;
             padding: 12px;
             overflow: visible;
@@ -325,8 +326,10 @@
         .main-content-wrapper {
             display: flex;
             flex-direction: column;
-            flex: 1 0 auto;
+            flex: 1 1 auto;
             gap: 12px;
+            min-width: 0;
+            max-width: 100%;
         }
 
         .header-wrapper,
@@ -734,6 +737,8 @@
             .col_right {
                 left: var(--rt-sidebar-width);
                 width: calc(100% - var(--rt-sidebar-width));
+                max-width: calc(100% - var(--rt-sidebar-width));
+                min-width: 0;
                 height: 100vh;
                 padding-left: var(--rt-gutter);
                 padding-right: var(--rt-gutter);

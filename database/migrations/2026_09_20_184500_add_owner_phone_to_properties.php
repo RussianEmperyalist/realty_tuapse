@@ -8,13 +8,21 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasColumn('properties', 'owner_phone')) {
+            return;
+        }
+
         Schema::table('properties', function (Blueprint $table) {
-            $table->string('owner_phone')->nullable()->after('phone_override');
+            $table->string('owner_phone', 64)->nullable()->after('phone_override');
         });
     }
 
     public function down(): void
     {
+        if (! Schema::hasColumn('properties', 'owner_phone')) {
+            return;
+        }
+
         Schema::table('properties', function (Blueprint $table) {
             $table->dropColumn('owner_phone');
         });

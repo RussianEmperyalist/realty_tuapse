@@ -8,6 +8,8 @@
     ]]);
 
     $primaryImage = $galleryImages->first();
+    $primaryRotation = $primaryImage instanceof \App\Models\PropertyImage ? $primaryImage->rotationCss() : '';
+    $primaryRotationDeg = $primaryImage instanceof \App\Models\PropertyImage ? $primaryImage->rotationDegrees() : 0;
     $favoritePayload = [
         'slug' => $property->slug,
         'title' => $property->title,
@@ -440,6 +442,8 @@
                                             id="property-gallery-image"
                                             src="{{ $primaryImageUrl }}"
                                             alt="{{ $primaryImage->alt ?: $property->title }}"
+                                            data-rotation="{{ $primaryRotationDeg }}"
+                                            style="{{ $primaryRotation }}"
                                         >
                                     </a>
                                 </div>
@@ -452,9 +456,10 @@
                                                 class="property-gallery-thumb {{ $loop->first ? 'is-active' : '' }}"
                                                 data-gallery-full="{{ \App\Support\MediaPath::url($image->path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}"
                                                 data-gallery-alt="{{ $image->alt ?: $property->title }}"
+                                                data-gallery-rotation="{{ $image instanceof \App\Models\PropertyImage ? $image->rotationDegrees() : 0 }}"
                                                 aria-label="Показать фото {{ $loop->iteration }}"
                                             >
-                                                <img src="{{ \App\Support\MediaPath::url($image->thumb_path ?: $image->path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $image->alt ?: $property->title }}">
+                                                <img src="{{ \App\Support\MediaPath::url($image->thumb_path ?: $image->path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $image->alt ?: $property->title }}" style="{{ $image instanceof \App\Models\PropertyImage ? $image->rotationCss() : '' }}">
                                             </button>
                                         @endforeach
                                     </div>
@@ -720,14 +725,19 @@
                 var mainSrc = galleryLink ? galleryLink.getAttribute('href') : '';
                 var mainAlt = mainImage ? mainImage.getAttribute('alt') : '';
                 if (mainSrc) {
-                    galleryItems.push({ src: mainSrc, alt: mainAlt });
+                    galleryItems.push({
+                        src: mainSrc,
+                        alt: mainAlt,
+                        rotation: parseInt(mainImage ? (mainImage.getAttribute('data-rotation') || '0') : '0', 10) || 0
+                    });
                 }
 
                 thumbnails.forEach(function (thumb) {
                     var src = thumb.getAttribute('data-gallery-full');
                     var alt = thumb.getAttribute('data-gallery-alt');
+                    var rotation = parseInt(thumb.getAttribute('data-gallery-rotation') || '0', 10) || 0;
                     if (src) {
-                        galleryItems.push({ src: src, alt: alt });
+                        galleryItems.push({ src: src, alt: alt, rotation: rotation });
                     }
                 });
             }
@@ -740,6 +750,7 @@
                 var item = galleryItems[currentIndex];
                 lightboxImg.setAttribute('src', item.src);
                 lightboxImg.setAttribute('alt', item.alt);
+                lightboxImg.style.transform = item.rotation ? 'rotate(' + item.rotation + 'deg)' : '';
                 if (lightboxCaption) {
                     lightboxCaption.textContent = item.alt || '';
                 }
@@ -783,6 +794,9 @@
                     if (fullSrc && mainImage) {
                         mainImage.setAttribute('src', fullSrc);
                         mainImage.setAttribute('alt', altText || '');
+                        var rotation = parseInt(thumb.getAttribute('data-gallery-rotation') || '0', 10) || 0;
+                        mainImage.setAttribute('data-rotation', String(rotation));
+                        mainImage.style.transform = rotation ? 'rotate(' + rotation + 'deg)' : '';
                     }
 
                     buildGallery();

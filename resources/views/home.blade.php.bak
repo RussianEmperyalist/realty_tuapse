@@ -21,46 +21,44 @@
             margin-bottom: 28px;
             max-width: 100%;
             width: 100%;
-            min-width: 0;
         }
 
         .home-directions__banner {
             background: #fff;
             border: 1px solid #e3ebf3;
             border-radius: 12px;
-            padding: clamp(16px, 2.4vw, 32px);
+            padding: 28px 30px 32px;
             margin-top: 26px;
             box-shadow: 0 16px 32px rgba(20, 48, 69, 0.08);
             text-align: center;
             max-width: 100%;
             width: 100%;
             box-sizing: border-box;
-            overflow: visible;
+            overflow-wrap: anywhere;
         }
 
         .home-directions__banner-title {
             color: #ff0000;
-            font-size: clamp(18px, 2.1vw, 28px);
+            font-size: 30px;
             font-weight: 400;
             text-transform: uppercase;
             text-align: center;
             margin: 0 0 20px;
             font-family: 'Bancodi', sans-serif;
-            letter-spacing: 0.04em;
-            line-height: 1.3;
-            word-break: normal;
-            overflow-wrap: break-word;
-            max-width: 100%;
+            letter-spacing: 0.05em;
+            line-height: 1.25;
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         .home-directions__banner-text {
             color: #333;
-            font-size: clamp(14px, 1.15vw, 16px);
+            font-size: 16px;
             line-height: 1.7;
-            margin: 0 auto;
+            margin: 0;
             text-align: justify;
-            word-break: normal;
-            overflow-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: anywhere;
             max-width: 100%;
         }
 
@@ -78,185 +76,150 @@
             position: relative;
             width: 100%;
             max-width: 100%;
-            min-width: 0;
-            margin: 30px 0;
-            overflow: visible;
+            margin: 30px 0px;
+            overflow: hidden;
         }
 
-        .home-directions .city-slick {
-            display: block;
+        .city-slick {
+            overflow: hidden;
+            position: relative;
+            max-width: 100%;
+        }
+
+        .city-slick .slick-slide {
+            transition: width .5s;
+            float: left;
+            padding: 0;
+        }
+
+        .city-slick .slick-list {
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .city-slick .slick-track {
+            transition: transform 1s;
+        }
+
+        .item-city {
             position: relative;
             width: 100%;
-            max-width: 100%;
-            min-width: 0;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
-
-        .home-directions .city-slick .slick-list {
-            width: 100%;
-            max-width: 100%;
-            margin: 0;
-            padding: 12px 0 16px;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
-
-        .home-directions .city-slick .slick-track {
-            transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .home-directions .city-slick .slick-slide {
+            max-width: 444px;
             height: auto;
-            padding: 0 8px;
-            box-sizing: border-box;
-            min-width: 0;
-        }
-
-        .home-directions .city-slick__slide {
-            min-width: 0;
-            max-width: 100%;
-        }
-
-        .home-directions .item-city {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 11;
+            aspect-ratio: 444 / 400;
             overflow: hidden;
             box-sizing: border-box;
-            margin: 0;
-            border-radius: 4px;
-            transform: scale(0.9);
-            transform-origin: center center;
-            transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1);
+            margin: 0 auto;
         }
 
-        .home-directions .slick-center .item-city,
-        .home-directions .item-city.slick-center {
-            transform: scale(1);
-            z-index: 2;
+        .item-city.slick-center {
+            max-width: 640px;
         }
 
-        .home-directions .item-city img {
+        .item-city img {
             height: 100%;
             width: 100%;
-            max-width: none;
             display: block;
-            object-fit: cover;
-            transform: scale(1);
-            transition: transform .7s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .home-directions .slick-center .item-city img,
-        .home-directions .item-city.slick-center img {
-            transform: scale(1.08);
+        .item-city.slick-center {
+            overflow: hidden;
         }
 
-        .home-directions .item-city:after {
-            display: block;
+        .item-city:after, .item_obj:after {
+            display: inline-block;
             content: '';
             position: absolute;
-            inset: 0;
+            width: 100%;
+            left: 0px;
+            top: 0px;
+            height: 100%;
             background: rgba(45, 66, 107, .4);
-            transition: background-color .45s ease;
-            pointer-events: none;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
         }
 
-        .home-directions .slick-center .item-city:after,
-        .home-directions .item-city.slick-center:after {
+        .item-city.slick-center:after {
             background: rgba(45, 66, 107, 0);
         }
 
-        .home-directions .item-city .text {
+        .item-city .text {
             position: absolute;
             width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
             color: #fff;
-            bottom: 0;
-            left: 0;
-            padding: clamp(12px, 2vw, 28px);
-            z-index: 3;
-            transition: bottom .55s cubic-bezier(0.22, 1, 0.36, 1);
+            bottom: 0px;
+            left: 0px;
+            padding: 30px;
         }
 
-        .home-directions .item-city .text a {
+        .item-city .text a {
             color: #fff;
-            font-size: clamp(13px, 1.15vw, 18px);
+            font-size: 18px;
             text-decoration: none;
             border-bottom: 1px solid;
             font-weight: 400;
-            text-shadow: 0 0 40px #000;
-            overflow-wrap: break-word;
+            text-shadow: 0px 0px 40px #000;
         }
 
-        .home-directions .item-city .text a:hover {
+        .item-city .text a:hover {
             border-color: transparent;
         }
 
-        .home-directions .slick-center .item-city .text,
-        .home-directions .item-city.slick-center .text {
-            bottom: 12px;
+        .item-city.slick-center .text {
+            bottom: 30px;
+            z-index: 9;
         }
 
-        .home-directions .item-city .h3 {
-            font-size: clamp(20px, 2.2vw, 32px);
+        .item-city .h3 {
+            font-size: 32px;
             font-weight: 900;
             margin: 0 0 10px;
-            overflow-wrap: break-word;
-            transition: font-size .55s cubic-bezier(0.22, 1, 0.36, 1), text-shadow .45s ease;
         }
 
-        .home-directions .slick-center .item-city .h3,
-        .home-directions .item-city.slick-center .h3 {
-            font-size: clamp(22px, 2.8vw, 40px);
-            text-shadow: 0 0 40px #000;
+        .item-city.slick-center .h3 {
+            font-size: 45px;
+            text-shadow: 0px 0px 40px #000;
         }
 
-        .home-directions .city-slick .slick-arrow {
+        .city-slick .slick-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(255, 255, 255, .88);
             color: #143045;
             font-size: 22px;
-            border: 0;
+            border: 0px;
             padding: 0;
             border-radius: 50%;
             z-index: 20;
             cursor: pointer;
             width: 44px;
             height: 44px;
-            display: flex !important;
+            display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 16px rgba(0,0,0,.3);
             transition: background .2s, transform .15s;
         }
 
-        .home-directions .city-slick .slick-arrow:hover {
+        .city-slick .slick-arrow:hover {
             background: #fff;
             transform: translateY(-50%) scale(1.07);
         }
 
-        .home-directions .city-slick .slick-prev {
-            left: 8px;
+        .city-slick .slick-prev {
+            left: 12px;
         }
 
-        .home-directions .city-slick .slick-next {
-            right: 8px;
+        .city-slick .slick-next {
+            right: 12px;
         }
 
-        .home-directions .item-city .list-inline {
-            margin: 0;
-            max-width: 100%;
-        }
-
-        .home-directions .item-city .list-inline > li {
-            white-space: normal;
-        }
+        .home-direction-card .inactive-obj-type-url { opacity: 0.72; }
         .home-direction-card .list-inline { margin-bottom: 0; line-height: 1.55; }
 
         .home-directions .slick-dots { display: none !important; }
@@ -335,19 +298,45 @@
             }
         }
 
-        @media (max-width: 767px) {
-            .home-directions .item-city {
-                aspect-ratio: 16 / 10;
+        /* Слайдер направлений — защита от обрезки на всех экранах */
+        @media (max-width: 1280px) {
+            .city-slick .slick-arrow {
+                display: none !important;
             }
 
-            .home-directions .item-city .text {
+            .item-city {
+                max-width: 330px;
+            }
+
+            .item-city.slick-center {
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .item-city {
+                max-width: 100%;
+                aspect-ratio: 16 / 9;
+            }
+
+            .item-city .text {
                 padding: 12px;
             }
 
-            .home-directions .city-slick .slick-arrow {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
+            .item-city .text a {
+                font-size: 15px;
+            }
+
+            .item-city .h3 {
+                font-size: 22px;
+            }
+
+            .home-directions__banner {
+                padding: 18px 16px 20px;
+            }
+
+            .home-directions__banner-title {
+                font-size: 22px;
             }
         }
     </style>
@@ -356,25 +345,21 @@
 @push('scripts')
     <script>
         jQuery(document).ready(function ($) {
-            var $slider = $('.home-directions .city-slick');
+            var $slider = $('.city-slick');
             if (!$slider.length) return;
 
             $slider.slick({
-                slidesToShow: 3,
+                slidesToShow: 1,
                 slidesToScroll: 1,
                 dots: false,
                 arrows: true,
                 infinite: true,
                 adaptiveHeight: false,
-                speed: 550,
-                cssEase: 'cubic-bezier(0.22, 1, 0.36, 1)',
-                variableWidth: false,
-                centerMode: true,
-                centerPadding: '0px',
-                waitForAnimate: true,
-                focusOnSelect: true,
-                prevArrow: '<button type="button" class="slick-prev slick-arrow" aria-label="Назад"><i class="fas fa-chevron-left"></i></button>',
-                nextArrow: '<button type="button" class="slick-next slick-arrow" aria-label="Вперёд"><i class="fas fa-chevron-right"></i></button>',
+                variableWidth: true,
+                centerMode: false,
+                centerPadding: '0',
+                prevArrow: '<button type="button" class="slick-prev slick-arrow"><i class="fas fa-chevron-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next slick-arrow"><i class="fas fa-chevron-right"></i></button>',
                 responsive: [
                     {
                         breakpoint: 1280,
@@ -382,8 +367,18 @@
                             slidesToShow: 2,
                             slidesToScroll: 1,
                             centerMode: true,
-                            centerPadding: '0px',
-                            arrows: true
+                            centerPadding: '20px',
+                            arrows: false
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            centerMode: false,
+                            centerPadding: '0',
+                            arrows: false
                         }
                     },
                     {
@@ -391,9 +386,9 @@
                         settings: {
                             slidesToShow: 1,
                             slidesToScroll: 1,
-                            centerMode: true,
-                            centerPadding: '28px',
-                            arrows: true
+                            centerMode: false,
+                            centerPadding: '0',
+                            arrows: false
                         }
                     }
                 ]
@@ -408,24 +403,22 @@
             <div class="h3 fint l_fint">Популярные направления</div>
             <div class="city-slick">
                 @foreach ($directionCards as $directionCard)
-                    <div class="city-slick__slide">
-                        <div class="item-city">
-                            <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
-                            <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
-                                <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
-                                <ul class="list-inline">
-                                    @foreach ($directionCard['types'] as $type)
-                                        <li>
-                                            <a class="{{ $type['is_active'] ? 'active-obj-type-url' : 'inactive-obj-type-url' }}" href="{{ $type['url'] }}">
-                                                {{ $type['label'] }}
-                                                @if ($type['count'] > 0)
-                                                    <span class="obj-type-count">({{ $type['count'] }})</span>
-                                                @endif
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                    <div class="item-city">
+                        <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
+                        <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
+                            <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
+                            <ul class="list-inline">
+                                @foreach ($directionCard['types'] as $type)
+                                    <li>
+                                        <a class="{{ $type['is_active'] ? 'active-obj-type-url' : 'inactive-obj-type-url' }}" href="{{ $type['url'] }}">
+                                            {{ $type['label'] }}
+                                            @if ($type['count'] > 0)
+                                                <span class="obj-type-count">({{ $type['count'] }})</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 @endforeach

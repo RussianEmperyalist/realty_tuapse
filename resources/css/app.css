@@ -21,16 +21,12 @@ img {
 .catalog .row,
 .content_center .box,
 .main-content-wrapper,
-.col_right {
+.col_right,
+.city_module,
+.home-directions {
     max-width: 100%;
     width: 100%;
     box-sizing: border-box;
-}
-
-/* Prevent flex/grid children from overflowing */
-.content_center,
-.content,
-.box {
     min-width: 0;
 }
 

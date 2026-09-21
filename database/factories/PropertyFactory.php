@@ -39,6 +39,7 @@ class PropertyFactory extends Factory
             'latitude' => fake()->latitude(43.5, 44.5),
             'longitude' => fake()->longitude(38.5, 40.5),
             'phone_override' => null,
+            'owner_phone' => null,
             'is_published' => true,
             'is_featured' => false,
             'published_at' => now(),

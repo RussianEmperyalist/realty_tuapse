@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>{{ trim($__env->yieldContent('title', 'Личный кабинет')) }} | {{ config('realty.company_name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('legacy/themes/dolphin/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('legacy/themes/dolphin/assets/css/fontawesome-all.min.css') }}">
     <style>
@@ -91,6 +92,22 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
             margin-bottom: 24px;
         }
+        .admin-internal-field {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 16px 18px;
+        }
+        .admin-internal-field label {
+            color: #334155;
+            font-weight: 700;
+        }
+        .admin-internal-field p {
+            margin: 4px 0 12px;
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.45;
+        }
         .admin-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -109,12 +126,137 @@
             border-radius: 10px;
             padding: 12px;
         }
-        .admin-media-card img {
+        .admin-media-card > img,
+        .admin-media-card__thumb img {
             width: 100%;
             height: 130px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 12px;
+        }
+        .admin-media-card__drag {
+            color: #999;
+            font-size: 18px;
+            cursor: grab;
+            padding: 0 0 6px;
+            user-select: none;
+        }
+        .admin-media-card__thumb {
+            position: relative;
+            height: 130px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #eef2f7;
+            margin-bottom: 12px;
+        }
+        .admin-media-card__thumb img {
+            height: 100%;
+            margin-bottom: 0;
+            border-radius: 0;
+            display: block;
+            transition: transform .2s ease;
+        }
+        .admin-rotate-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            z-index: 3;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border: 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .95);
+            box-shadow: 0 1px 4px rgba(16, 24, 40, .18);
+            color: #143045;
+            font-size: 18px;
+            line-height: 32px;
+            cursor: pointer;
+        }
+        .admin-rotate-btn:hover,
+        .admin-rotate-btn:focus {
+            background: #fff;
+            outline: none;
+        }
+        .admin-rotate-btn:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
+        .admin-media-card__overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(16, 24, 40, .48);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .admin-media-card.is-uploading .admin-media-card__overlay {
+            display: flex;
+        }
+        .admin-media-spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: admin-media-spin .7s linear infinite;
+        }
+        @keyframes admin-media-spin {
+            to { transform: rotate(360deg); }
+        }
+        .admin-media-progress-bar {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 3;
+            height: 5px;
+            background: rgba(255, 255, 255, .35);
+        }
+        .admin-media-card.is-uploading .admin-media-progress-bar {
+            display: block;
+        }
+        .admin-media-progress {
+            height: 100%;
+            width: 0;
+            background: #3b82f6;
+            transition: width .15s linear;
+        }
+        .admin-media-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 999px;
+            line-height: 1.3;
+        }
+        .admin-media-status-badge.is-done {
+            background: #ecfdf3;
+            color: #15803d;
+        }
+        .admin-media-status-badge.is-pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+        .admin-media-status-badge.is-uploading {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+        .admin-media-status-badge.is-error {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        .admin-media-card__meta {
+            margin: 0 0 8px;
         }
         .admin-table table {
             margin: 0;

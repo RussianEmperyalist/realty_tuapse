@@ -66,4 +66,12 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    /**
+     * Company staff who may see internal listing fields (admins and managers).
+     */
+    public function isStaff(): bool
+    {
+        return $this->is_active && in_array($this->role, ['admin', 'employee'], true);
+    }
 }

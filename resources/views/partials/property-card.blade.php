@@ -15,6 +15,7 @@
             'src' => \App\Support\MediaPath::url($image->path ?: $image->thumb_path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png'),
             'thumb' => \App\Support\MediaPath::url($image->thumb_path ?: $image->path, 'legacy/themes/dolphin/assets/images/no_photo_entry.png'),
             'alt' => $image->alt ?: $property->title,
+            'rotation' => $image->rotationDegrees(),
         ])
         ->values();
 
@@ -394,6 +395,8 @@
 
                 imageEl.src = item.src;
                 imageEl.alt = item.alt || '';
+                var rotation = parseInt(item.rotation || 0, 10) || 0;
+                imageEl.style.transform = rotation ? 'rotate(' + rotation + 'deg)' : '';
                 titleEl.textContent = item.alt || '';
                 counterEl.textContent = (index + 1) + ' / ' + items.length;
                 prevBtn.disabled = items.length < 2;
@@ -408,6 +411,10 @@
                     var img = document.createElement('img');
                     img.src = thumbItem.thumb || thumbItem.src;
                     img.alt = '';
+                    var thumbRotation = parseInt(thumbItem.rotation || 0, 10) || 0;
+                    if (thumbRotation) {
+                        img.style.transform = 'rotate(' + thumbRotation + 'deg)';
+                    }
                     btn.appendChild(img);
                     btn.addEventListener('click', function () { index = thumbIndex; render(); });
                     thumbsEl.appendChild(btn);
@@ -486,7 +493,7 @@
                     data-property-gallery='@json($galleryItems->all())'
                     aria-label="Открыть фотографии объявления {{ $property->title }}"
                 >
-                    <img src="{{ $imageUrl }}" alt="{{ $property->title }}">
+                    <img src="{{ $imageUrl }}" alt="{{ $property->title }}" style="{{ $coverImage instanceof \App\Models\PropertyImage ? $coverImage->rotationCss() : '' }}">
                 </button>
             </div>
             <div class="bl_wrapper">

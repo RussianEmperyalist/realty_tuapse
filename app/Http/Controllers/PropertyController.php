@@ -13,6 +13,7 @@ class PropertyController extends Controller
     public function show(Property $property): View
     {
         $property->load(['employee', 'images']);
+        $property->makeHidden('owner_phone');
 
         $similarProperties = Property::query()
             ->with(['employee', 'images'])
@@ -21,7 +22,8 @@ class PropertyController extends Controller
             ->where('property_type', $property->property_type)
             ->when($property->city, fn ($query) => $query->where('city', $property->city))
             ->limit(4)
-            ->get();
+            ->get()
+            ->makeHidden('owner_phone');
 
         return view('properties.show', [
             'bodyClass' => 'inner_page',

@@ -40,4 +40,27 @@ class PropertyImage extends Model
     {
         return $this->belongsTo(Property::class);
     }
+
+    /**
+     * Normalized clockwise rotation in degrees (0, 90, 180, 270).
+     */
+    public function rotationDegrees(): int
+    {
+        $angle = ((int) $this->rotation) % 360;
+        if ($angle < 0) {
+            $angle += 360;
+        }
+
+        return $angle;
+    }
+
+    /**
+     * Inline CSS transform for the stored orientation.
+     */
+    public function rotationCss(): string
+    {
+        $angle = $this->rotationDegrees();
+
+        return $angle === 0 ? '' : 'transform:rotate(' . $angle . 'deg)';
+    }
 }
