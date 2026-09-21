@@ -142,6 +142,8 @@
             max-width: none;
             display: block;
             object-fit: cover;
+            transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center center;
         }
 
         .home-directions .slick-center .item-city,
@@ -152,10 +154,18 @@
             transform: scale(1.02);
         }
 
-        /* Hover dimming for non-center slides */
+        .home-directions .slick-center .item-city img,
+        .home-directions .item-city.slick-center img {
+            transform: scale(1);
+        }
+
+        /* Hover dimming + zoom for non-center slides */
         .home-directions .slick-slide:not(.slick-center) .item-city:hover {
             filter: brightness(0.5);
             opacity: 0.85;
+        }
+        .home-directions .slick-slide:not(.slick-center) .item-city:hover img {
+            transform: scale(1.08);
         }
 
         .home-directions .item-city .text {
