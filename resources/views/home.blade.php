@@ -113,7 +113,7 @@
 
         .home-directions .city-slick .slick-slide {
             height: auto;
-            padding: 0 8px;
+            padding: 0;
             box-sizing: border-box;
             min-width: 0;
         }
@@ -133,9 +133,7 @@
             box-sizing: border-box;
             margin: 0;
             border-radius: 12px;
-            filter: brightness(0.5);
-            opacity: 0.85;
-            transition: filter 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+            transition: filter 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .home-directions .item-city img {
@@ -151,6 +149,13 @@
             filter: brightness(1);
             opacity: 1;
             z-index: 5;
+            transform: scale(1.02);
+        }
+
+        /* Hover dimming for non-center slides */
+        .home-directions .slick-slide:not(.slick-center) .item-city:hover {
+            filter: brightness(0.5);
+            opacity: 0.85;
         }
 
         .home-directions .item-city .text {
