@@ -89,6 +89,7 @@
             max-width: 100%;
             min-width: 0;
             overflow: visible;
+            padding: 0 52px;
         }
 
         .home-directions .city-slick {
@@ -108,10 +109,6 @@
             padding: 12px 0 16px;
             overflow: hidden;
             box-sizing: border-box;
-        }
-
-        .home-directions .city-slick .slick-track {
-            transition: transform .9s ease-in-out;
         }
 
         .home-directions .city-slick .slick-slide {
@@ -135,6 +132,10 @@
             overflow: hidden;
             box-sizing: border-box;
             margin: 0;
+            border-radius: 12px;
+            filter: brightness(0.5);
+            opacity: 0.85;
+            transition: filter 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .home-directions .item-city img {
@@ -143,30 +144,13 @@
             max-width: none;
             display: block;
             object-fit: cover;
-            transform: scale(1);
-            transform-origin: center center;
-            transition: transform .95s ease-in-out;
         }
 
-        .home-directions .slick-center .item-city img,
-        .home-directions .item-city.slick-center img {
-            transform: scale(1.16);
-        }
-
-        .home-directions .item-city:after {
-            display: block;
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(20, 32, 54, .52);
-            transition: background-color .9s ease-in-out;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .home-directions .slick-center .item-city:after,
-        .home-directions .item-city.slick-center:after {
-            background: rgba(20, 32, 54, 0);
+        .home-directions .slick-center .item-city,
+        .home-directions .item-city.slick-center {
+            filter: brightness(1);
+            opacity: 1;
+            z-index: 5;
         }
 
         .home-directions .item-city .text {
@@ -179,8 +163,8 @@
             left: 0;
             padding: clamp(12px, 2vw, 28px);
             z-index: 3;
-            opacity: .82;
-            transition: opacity .9s ease-in-out, bottom .9s ease-in-out;
+            opacity: 0.82;
+            transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), bottom 600ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .home-directions .item-city .text a {
@@ -208,7 +192,7 @@
             font-weight: 900;
             margin: 0 0 10px;
             overflow-wrap: break-word;
-            transition: font-size .9s ease-in-out, text-shadow .6s ease;
+            transition: font-size 600ms cubic-bezier(0.4, 0, 0.2, 1), text-shadow 600ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .home-directions .slick-center .item-city .h3,
@@ -218,29 +202,29 @@
         }
 
         .city-slick-wrap > .slick-arrow,
-        .home-directions .city-slick .slick-arrow,
-        .home-directions .slick-arrow.slick-hidden {
+        .home-directions .city-slick .slick-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, .94) !important;
-            color: #143045 !important;
-            font-size: 20px !important;
-            line-height: 1 !important;
+            background: rgba(255, 255, 255, 0.94);
+            color: #143045;
+            font-size: 20px;
+            line-height: 1;
             border: 0;
             padding: 0;
             border-radius: 50%;
-            z-index: 40;
+            z-index: 50;
             cursor: pointer;
-            width: 48px;
-            height: 48px;
-            display: flex !important;
+            width: 42px;
+            height: 42px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            visibility: visible !important;
-            opacity: 1 !important;
+            visibility: visible;
+            opacity: 1;
             box-shadow: 0 4px 16px rgba(0,0,0,.28);
-            transition: background .2s, transform .15s;
+            transition: background 200ms, transform 150ms;
+            pointer-events: auto;
         }
 
         .city-slick-wrap > .slick-arrow i,
@@ -252,7 +236,7 @@
 
         .city-slick-wrap > .slick-arrow:hover,
         .home-directions .city-slick .slick-arrow:hover {
-            background: #fff !important;
+            background: #fff;
             transform: translateY(-50%) scale(1.06);
         }
 
@@ -264,6 +248,28 @@
         .city-slick-wrap > .slick-next,
         .home-directions .city-slick .slick-next {
             right: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .home-directions .item-city {
+                aspect-ratio: 16 / 10;
+            }
+            .home-directions .item-city .text {
+                padding: 12px;
+            }
+            .city-slick-wrap {
+                padding: 0 42px;
+            }
+            .city-slick-wrap > .slick-arrow,
+            .home-directions .city-slick .slick-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .city-slick-wrap > .slick-arrow i,
+            .home-directions .slick-arrow i {
+                font-size: 14px;
+            }
         }
 
         .home-directions .item-city .list-inline {
@@ -353,18 +359,11 @@
         }
 
         @media (max-width: 767px) {
-            .home-directions .item-city {
-                aspect-ratio: 16 / 10;
+            .home-news-grid {
+                grid-template-columns: 1fr;
             }
-
-            .home-directions .item-city .text {
-                padding: 12px;
-            }
-
-            .home-directions .city-slick .slick-arrow {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
+            .home-employee-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -384,11 +383,11 @@
                 arrows: true,
                 infinite: true,
                 adaptiveHeight: false,
-                speed: 900,
-                cssEase: 'ease-in-out',
+                speed: 600,
+                cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
                 variableWidth: false,
                 centerMode: true,
-                centerPadding: '18%',
+                centerPadding: '27.6%',
                 waitForAnimate: true,
                 focusOnSelect: true,
                 appendArrows: $wrap.length ? $wrap : $slider,
@@ -396,21 +395,33 @@
                 nextArrow: '<button type="button" class="slick-next slick-arrow" aria-label="Вперёд"><i class="fas fa-chevron-right"></i></button>',
                 responsive: [
                     {
+                        breakpoint: 1440,
+                        settings: {
+                            centerPadding: '27.6%'
+                        }
+                    },
+                    {
                         breakpoint: 1280,
                         settings: {
-                            slidesToShow: 1,
-                            centerMode: true,
-                            centerPadding: '12%',
-                            arrows: true
+                            centerPadding: '27%'
+                        }
+                    },
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            centerPadding: '24%'
                         }
                     },
                     {
                         breakpoint: 768,
                         settings: {
-                            slidesToShow: 1,
-                            centerMode: true,
-                            centerPadding: '36px',
-                            arrows: true
+                            centerPadding: '20%'
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            centerPadding: '36px'
                         }
                     }
                 ]
