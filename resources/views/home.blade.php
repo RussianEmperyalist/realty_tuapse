@@ -83,13 +83,21 @@
             overflow: visible;
         }
 
+        .city-slick-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            overflow: visible;
+        }
+
         .home-directions .city-slick {
             display: block;
             position: relative;
             width: 100%;
             max-width: 100%;
             min-width: 0;
-            overflow: hidden;
+            overflow: visible;
             box-sizing: border-box;
         }
 
@@ -103,7 +111,7 @@
         }
 
         .home-directions .city-slick .slick-track {
-            transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform .9s ease-in-out;
         }
 
         .home-directions .city-slick .slick-slide {
@@ -127,16 +135,6 @@
             overflow: hidden;
             box-sizing: border-box;
             margin: 0;
-            border-radius: 4px;
-            transform: scale(0.9);
-            transform-origin: center center;
-            transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .home-directions .slick-center .item-city,
-        .home-directions .item-city.slick-center {
-            transform: scale(1);
-            z-index: 2;
         }
 
         .home-directions .item-city img {
@@ -146,12 +144,13 @@
             display: block;
             object-fit: cover;
             transform: scale(1);
-            transition: transform .7s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-origin: center center;
+            transition: transform .95s ease-in-out;
         }
 
         .home-directions .slick-center .item-city img,
         .home-directions .item-city.slick-center img {
-            transform: scale(1.08);
+            transform: scale(1.16);
         }
 
         .home-directions .item-city:after {
@@ -159,14 +158,15 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(45, 66, 107, .4);
-            transition: background-color .45s ease;
+            background: rgba(20, 32, 54, .52);
+            transition: background-color .9s ease-in-out;
             pointer-events: none;
+            z-index: 1;
         }
 
         .home-directions .slick-center .item-city:after,
         .home-directions .item-city.slick-center:after {
-            background: rgba(45, 66, 107, 0);
+            background: rgba(20, 32, 54, 0);
         }
 
         .home-directions .item-city .text {
@@ -179,7 +179,8 @@
             left: 0;
             padding: clamp(12px, 2vw, 28px);
             z-index: 3;
-            transition: bottom .55s cubic-bezier(0.22, 1, 0.36, 1);
+            opacity: .82;
+            transition: opacity .9s ease-in-out, bottom .9s ease-in-out;
         }
 
         .home-directions .item-city .text a {
@@ -198,7 +199,8 @@
 
         .home-directions .slick-center .item-city .text,
         .home-directions .item-city.slick-center .text {
-            bottom: 12px;
+            bottom: 10px;
+            opacity: 1;
         }
 
         .home-directions .item-city .h3 {
@@ -206,7 +208,7 @@
             font-weight: 900;
             margin: 0 0 10px;
             overflow-wrap: break-word;
-            transition: font-size .55s cubic-bezier(0.22, 1, 0.36, 1), text-shadow .45s ease;
+            transition: font-size .9s ease-in-out, text-shadow .6s ease;
         }
 
         .home-directions .slick-center .item-city .h3,
@@ -215,38 +217,53 @@
             text-shadow: 0 0 40px #000;
         }
 
-        .home-directions .city-slick .slick-arrow {
+        .city-slick-wrap > .slick-arrow,
+        .home-directions .city-slick .slick-arrow,
+        .home-directions .slick-arrow.slick-hidden {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, .88);
-            color: #143045;
-            font-size: 22px;
+            background: rgba(255, 255, 255, .94) !important;
+            color: #143045 !important;
+            font-size: 20px !important;
+            line-height: 1 !important;
             border: 0;
             padding: 0;
             border-radius: 50%;
-            z-index: 20;
+            z-index: 40;
             cursor: pointer;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             display: flex !important;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,.3);
+            visibility: visible !important;
+            opacity: 1 !important;
+            box-shadow: 0 4px 16px rgba(0,0,0,.28);
             transition: background .2s, transform .15s;
         }
 
+        .city-slick-wrap > .slick-arrow i,
+        .home-directions .slick-arrow i {
+            font-size: 18px;
+            color: #143045;
+            display: block;
+        }
+
+        .city-slick-wrap > .slick-arrow:hover,
         .home-directions .city-slick .slick-arrow:hover {
-            background: #fff;
-            transform: translateY(-50%) scale(1.07);
+            background: #fff !important;
+            transform: translateY(-50%) scale(1.06);
         }
 
+        .city-slick-wrap > .slick-prev,
         .home-directions .city-slick .slick-prev {
-            left: 8px;
+            left: 10px;
         }
 
+        .city-slick-wrap > .slick-next,
         .home-directions .city-slick .slick-next {
-            right: 8px;
+            right: 10px;
         }
 
         .home-directions .item-city .list-inline {
@@ -358,31 +375,32 @@
         jQuery(document).ready(function ($) {
             var $slider = $('.home-directions .city-slick');
             if (!$slider.length) return;
+            var $wrap = $slider.closest('.city-slick-wrap');
 
             $slider.slick({
-                slidesToShow: 3,
+                slidesToShow: 1,
                 slidesToScroll: 1,
                 dots: false,
                 arrows: true,
                 infinite: true,
                 adaptiveHeight: false,
-                speed: 550,
-                cssEase: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                speed: 900,
+                cssEase: 'ease-in-out',
                 variableWidth: false,
                 centerMode: true,
-                centerPadding: '0px',
+                centerPadding: '18%',
                 waitForAnimate: true,
                 focusOnSelect: true,
+                appendArrows: $wrap.length ? $wrap : $slider,
                 prevArrow: '<button type="button" class="slick-prev slick-arrow" aria-label="Назад"><i class="fas fa-chevron-left"></i></button>',
                 nextArrow: '<button type="button" class="slick-next slick-arrow" aria-label="Вперёд"><i class="fas fa-chevron-right"></i></button>',
                 responsive: [
                     {
                         breakpoint: 1280,
                         settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
+                            slidesToShow: 1,
                             centerMode: true,
-                            centerPadding: '0px',
+                            centerPadding: '12%',
                             arrows: true
                         }
                     },
@@ -390,9 +408,8 @@
                         breakpoint: 768,
                         settings: {
                             slidesToShow: 1,
-                            slidesToScroll: 1,
                             centerMode: true,
-                            centerPadding: '28px',
+                            centerPadding: '36px',
                             arrows: true
                         }
                     }
@@ -406,29 +423,29 @@
     <div class="content main_content">
         <div class="city_module home-directions">
             <div class="h3 fint l_fint">Популярные направления</div>
+            <div class="city-slick-wrap">
             <div class="city-slick">
                 @foreach ($directionCards as $directionCard)
-                    <div class="city-slick__slide">
-                        <div class="item-city">
-                            <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
-                            <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
-                                <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
-                                <ul class="list-inline">
-                                    @foreach ($directionCard['types'] as $type)
-                                        <li>
-                                            <a class="{{ $type['is_active'] ? 'active-obj-type-url' : 'inactive-obj-type-url' }}" href="{{ $type['url'] }}">
-                                                {{ $type['label'] }}
-                                                @if ($type['count'] > 0)
-                                                    <span class="obj-type-count">({{ $type['count'] }})</span>
-                                                @endif
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                    <div class="item-city">
+                        <img src="{{ \App\Support\MediaPath::url($directionCard['image'], 'legacy/themes/dolphin/assets/images/no_photo_entry.png') }}" alt="{{ $directionCard['title'] }}">
+                        <div class="text" data-id="{{ $directionCard['legacy_city_id'] }}">
+                            <div class="h3"><a href="{{ $directionCard['url'] }}">{{ $directionCard['title'] }}</a></div>
+                            <ul class="list-inline">
+                                @foreach ($directionCard['types'] as $type)
+                                    <li>
+                                        <a class="{{ $type['is_active'] ? 'active-obj-type-url' : 'inactive-obj-type-url' }}" href="{{ $type['url'] }}">
+                                            {{ $type['label'] }}
+                                            @if ($type['count'] > 0)
+                                                <span class="obj-type-count">({{ $type['count'] }})</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 @endforeach
+            </div>
             </div>
             <div class="home-directions__banner">
                 <div class="home-directions__banner-title">Если счастье, то надолго, если недвижимость, то на берегу Чёрного моря!</div>
